@@ -14,15 +14,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 设置宽度
 double sySetWidth(double width) {
-  return width.w;
+  return ScreenUtil().setWidth(width);
 }
 
 /// 设置宽度
 double sySetHeight(double height) {
-  return height.h;
+  return ScreenUtil().setHeight(height);;
 }
 
 /// 设置字体尺寸
 double sySetFontSize(double fontSize) {
-  return fontSize.ssp;
+  return ScreenUtil().setSp(fontSize);;
 }

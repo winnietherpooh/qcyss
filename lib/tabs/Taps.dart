@@ -19,7 +19,7 @@ class _TapsState extends State<Taps> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 750, height: 1334-40, allowFontScaling: true);
+    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: true);
     return Scaffold(
 
       body: this.pageList[this.currentIndexTemp],

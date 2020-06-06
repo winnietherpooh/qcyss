@@ -31,6 +31,7 @@ class _CenterPageState extends State<CenterPage> {
           _getHeadWidget(),
           _getBasyPayWidget('未确定发放工资明细'),
           _getBasyPayWidget('未确定发放奖金明细'),
+          _getSearchList(),
         ],
       ),
     );
@@ -156,7 +157,6 @@ class _CenterPageState extends State<CenterPage> {
   //未确定工资布局
   _getBasyPayWidget(String title) {
     return Container(
-      width: double.infinity,
       margin: EdgeInsets.only(top: sySetHeight(30)),
       child: Column(
         children: <Widget>[
@@ -233,6 +233,7 @@ class _CenterPageState extends State<CenterPage> {
     );
   }
 
+  //获取工资奖金列表
   _getBasePayAllItem() {
     return Container(
       height: sySetHeight(220),
@@ -251,6 +252,147 @@ class _CenterPageState extends State<CenterPage> {
           _getBasePayListItemWidget(),
           _getBasePayListItemWidget(),
           _getBasePayListItemWidget(),
+        ],
+      ),
+    );
+  }
+
+  //搜索布局
+  _getSearchList() {
+    return Container(
+//      width: double.infinity,
+//      height: sySetHeight(148),
+      child: Column(
+        children: <Widget>[
+          _getSearchTitleWidget(),
+          _getBasePayAllItem(),
+          _getBasePayAllItem(),
+        ],
+      ),
+    );
+  }
+
+  //搜索布局表头
+  _getSearchTitleWidget() {
+    return Container(
+      color: AppColors.mainFontColor,
+      height: sySetHeight(148),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(left: sySetWidth(26)),
+            width: sySetWidth(160),
+            height: sySetHeight(76),
+            child: TextField(
+              maxLines: 1,
+              textAlign: TextAlign.start,
+              textAlignVertical: TextAlignVertical.bottom,
+              style: TextStyle(
+                  fontSize: sySetFontSize(28),
+                  color: Color.fromRGBO(153, 153, 153, 1)),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromRGBO(232, 232, 232, 1),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(1),
+                  ),
+                ),
+                hintText: '2020-04',
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(1),
+                  ),
+                  borderSide: BorderSide(
+                    color: Color.fromRGBO(232, 232, 232, 1),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(
+                sySetWidth(12), sySetHeight(0), sySetWidth(12), 0),
+            width: sySetWidth(26),
+            height: sySetHeight(2),
+            child: Image.asset(
+              'images/line.png',
+              fit: BoxFit.fill,
+            ),
+          ),
+          Container(
+            width: sySetWidth(160),
+            height: sySetHeight(76),
+            child: TextField(
+              maxLines: 1,
+              textAlign: TextAlign.start,
+              textAlignVertical: TextAlignVertical.bottom,
+              style: TextStyle(
+                  fontSize: sySetFontSize(28),
+                  color: Color.fromRGBO(153, 153, 153, 1)),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromRGBO(232, 232, 232, 1),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(1),
+                  ),
+                ),
+                hintText: '2020-04',
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(1),
+                  ),
+                  borderSide: BorderSide(
+                    color: Color.fromRGBO(232, 232, 232, 1),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(right: sySetWidth(12)),
+                  child: Text(
+                    '类别',
+                    style: TextStyle(
+                      fontSize: sySetFontSize(28),
+                      color: Color.fromRGBO(153, 153, 153, 1)
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.only(right: 0),
+                  child: Image.asset(
+                    'images/select.png',
+                    width: sySetWidth(28),
+                    height: sySetHeight(28),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.fromLTRB(
+                      sySetWidth(40), sySetHeight(0), sySetWidth(20), 0),
+                  child: Image.asset(
+                    'images/search.png',
+                    fit: BoxFit.fill,
+                    width: sySetWidth(28),
+                    height: sySetHeight(28),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
