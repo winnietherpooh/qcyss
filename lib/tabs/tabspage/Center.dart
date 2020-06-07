@@ -40,7 +40,7 @@ class _CenterPageState extends State<CenterPage> {
   //顶部布局
   _getHeadWidget() {
     return Container(
-      height: sySetHeight(340),
+      height: sySetHeight(300),
       width: double.infinity,
       color: AppColors.primaryElement,
       child: Row(
