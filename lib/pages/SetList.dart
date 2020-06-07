@@ -63,8 +63,8 @@ class _SetListState extends State<SetList> {
                 )
               ],
             ),
-
-          ),Container(
+          ),
+          Container(
             height: sySetHeight(110),
             decoration: BoxDecoration(
               border: Border(
@@ -92,32 +92,52 @@ class _SetListState extends State<SetList> {
                   ),
                 ),
                 Container(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(right: sySetWidth(6)),
-                        child: OutlineButton(
-                          child: Text('设置密码'),
-                          borderSide:BorderSide(
-                            style: BorderStyle.none,
-                          ),
-                          onPressed: () {
-                              
-                          },
+                    child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: OutlineButton(
+                        child: Row(
+                          children: <Widget>[
+                            Text('设置密码'),
+                            Image.asset(
+                              'images/right.png',
+                              width: sySetWidth(24),
+                              height: sySetWidth(24),
+                            ),
+                          ],
                         ),
-
+                        borderSide: BorderSide(
+                          style: BorderStyle.none,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/setpasswd');
+                        },
                       ),
-                      Container(
-                        margin: EdgeInsets.only(right: sySetWidth(24)),
-                        child: Image.asset('images/right.png',width: sySetWidth(24),height: sySetWidth(24),),
-                      )
-                    ],
-                  )
-                )
+                    ),
+                  ],
+                ))
               ],
             ),
-
-          )
+          ),
+          SizedBox(height: sySetHeight(300),),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  height: sySetHeight(96),
+                  padding: EdgeInsets.fromLTRB(sySetWidth(32), 0, sySetWidth(32), 0),
+                  //因为有他,所以可以设置宽高
+                  child: FlatButton(
+                    child: Text('退出'),
+                    color: Color.fromRGBO(246, 159, 0, 1),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/login');
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
