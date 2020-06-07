@@ -40,7 +40,7 @@ class _BannerPageState extends State<BannerPage> {
   Widget build(BuildContext context) {
     if(this._dataList != null){
       return Container(
-        height: sySetWidth(370),
+        height: sySetWidth(330),
         child: new Swiper(
           itemBuilder: (BuildContext context, int index) {
             return new Image.network(

@@ -70,7 +70,7 @@ class _NewsPageState extends State<NewsPage> {
               children: <Widget>[
                 BannerPage(),
                 Container(
-                  height: sySetHeight(40),
+                  height: sySetWidth(40),
                 ),
                 Container(
                   color: Color.fromRGBO(240, 240, 240, 1),
@@ -97,14 +97,14 @@ class _NewsPageState extends State<NewsPage> {
     return Column(
       children: <Widget>[
         Container(
-          height: sySetHeight(290),
+          height: sySetWidth(270),
           color: Color.fromRGBO(255, 255, 255, 1),
-          padding: EdgeInsets.fromLTRB(12, 10, 12, 0),
+          padding: EdgeInsets.fromLTRB(sySetWidth(24), sySetHeight(0), sySetWidth(24), 0),
           child: Row(
             children: <Widget>[
               Container(
                 width: sySetWidth(270),
-                height: sySetHeight(180),
+                height: sySetWidth(180),
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   borderRadius: BorderRadius.circular(4),
@@ -117,7 +117,7 @@ class _NewsPageState extends State<NewsPage> {
                   children: <Widget>[
                     Container(
                       alignment: Alignment.topLeft,
-                      padding: EdgeInsets.fromLTRB(10, 20, 24, 0),
+                      padding: EdgeInsets.fromLTRB(sySetWidth(20), sySetWidth(60), 0, 0),
                       child: Text(
                         this._dataList[index].title,
                         maxLines: 1,
@@ -129,7 +129,7 @@ class _NewsPageState extends State<NewsPage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(10, 15, 24, 0),
+                      padding: EdgeInsets.fromLTRB(sySetWidth(20), sySetWidth(20), sySetWidth(24), 0),
                       child: Text(
                         this._dataList[index].content,
                         overflow: TextOverflow.ellipsis,
@@ -137,7 +137,7 @@ class _NewsPageState extends State<NewsPage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(0, 6, 40, 0),
+                      padding: EdgeInsets.fromLTRB(0, 0, sySetWidth(14), sySetWidth(24)),
                       alignment: Alignment.bottomRight,
                       child: Text(
                         this._dataList[index].addTime,
