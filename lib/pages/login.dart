@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                         icon: Image.asset(
                           'images/user.png',
                           width: sySetWidth(32),
-                          height: sySetHeight(36),
+                          height: sySetWidth(36),
                           fit: BoxFit.cover,
                         ),
                         hintText: '请输入用户名',
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                         icon: Image.asset(
                           'images/passwd.png',
                           width: sySetWidth(32),
-                          height: sySetHeight(36),
+                          height: sySetWidth(36),
                           fit: BoxFit.cover,
                         ),
                         hintText: '请输入密码',

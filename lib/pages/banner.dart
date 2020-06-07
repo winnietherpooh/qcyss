@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:dio/dio.dart';
+import 'package:yss/common/util/screen.dart';
 import 'package:yss/model/BannerModel.dart';
 import 'package:yss/Config.dart';
 import 'package:yss/model/FocusModel.dart';
@@ -39,7 +40,7 @@ class _BannerPageState extends State<BannerPage> {
   Widget build(BuildContext context) {
     if(this._dataList != null){
       return Container(
-        height: 185,
+        height: sySetWidth(370),
         child: new Swiper(
           itemBuilder: (BuildContext context, int index) {
             return new Image.network(

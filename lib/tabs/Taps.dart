@@ -19,7 +19,7 @@ class _TapsState extends State<Taps> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: true);
+    ScreenUtil.init(context, width: 750, height: 1334-40);
     return Scaffold(
 
       body: this.pageList[this.currentIndexTemp],
@@ -41,7 +41,7 @@ class _TapsState extends State<Taps> {
               icon: Image.asset(
                 'images/home.png',
                 width: sySetWidth(40),
-                height: sySetHeight(40),
+                height: sySetWidth(40),
                 fit: BoxFit.fill,
               ),
               title: Text(
@@ -51,14 +51,14 @@ class _TapsState extends State<Taps> {
               activeIcon: Image.asset(
                 'images/home-select.png',
                 width: sySetWidth(40),
-                height: sySetHeight(40),
+                height: sySetWidth(40),
                 fit: BoxFit.fill,
               )),
           BottomNavigationBarItem(
               icon: Image.asset(
                 'images/news.png',
                 width: sySetWidth(40),
-                height: sySetHeight(40),
+                height: sySetWidth(40),
                 fit: BoxFit.fill,
               ),
               title: Text(
@@ -68,14 +68,14 @@ class _TapsState extends State<Taps> {
               activeIcon: Image.asset(
                 'images/news-select.png',
                 width: sySetWidth(40),
-                height: sySetHeight(40),
+                height: sySetWidth(40),
                 fit: BoxFit.fill,
               )),
           BottomNavigationBarItem(
               icon: Image.asset(
                 'images/center.png',
                 width: sySetWidth(40),
-                height: sySetHeight(40),
+                height: sySetWidth(40),
                 fit: BoxFit.fill,
               ),
               title: Text(
@@ -85,7 +85,7 @@ class _TapsState extends State<Taps> {
               activeIcon: Image.asset(
                 'images/center-select.png',
                 width: sySetWidth(40),
-                height: sySetHeight(40),
+                height: sySetWidth(40),
                 fit: BoxFit.fill,
               )),
         ],

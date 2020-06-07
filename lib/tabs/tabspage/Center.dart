@@ -56,7 +56,7 @@ class _CenterPageState extends State<CenterPage> {
                   margin: EdgeInsets.fromLTRB(
                       sySetWidth(24), sySetHeight(80), 0, 0),
                   width: sySetWidth(110),
-                  height: sySetHeight(110),
+                  height: sySetWidth(110),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(sySetWidth(55)),
                     image: DecorationImage(
@@ -119,7 +119,7 @@ class _CenterPageState extends State<CenterPage> {
                         child: Image.asset(
                           'images/setting.png',
                           width: sySetWidth(40),
-                          height: sySetHeight(40),
+                          height: sySetWidth(40),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -129,7 +129,7 @@ class _CenterPageState extends State<CenterPage> {
                         child: Image.asset(
                           'images/notice.png',
                           width: sySetWidth(40),
-                          height: sySetHeight(40),
+                          height: sySetWidth(40),
                           fit: BoxFit.fill,
                         ),
                       )
@@ -236,7 +236,7 @@ class _CenterPageState extends State<CenterPage> {
   //获取工资奖金列表
   _getBasePayAllItem() {
     return Container(
-      height: sySetHeight(220),
+      height: sySetHeight(200),
       child: ListView(
         scrollDirection: Axis.horizontal,
         controller: this._controller,
