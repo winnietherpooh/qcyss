@@ -116,21 +116,37 @@ class _CenterPageState extends State<CenterPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Container(
-                        child: Image.asset(
-                          'images/setting.png',
-                          width: sySetWidth(40),
-                          height: sySetWidth(40),
-                          fit: BoxFit.fill,
+                        child: IconButton(
+                            padding:EdgeInsets.all(0),
+                          iconSize:sySetFontSize(40),
+                          icon: ClipOval(
+                            child: Image.asset(
+                              'images/setting.png',
+                              width: sySetWidth(40),
+                              height: sySetWidth(40),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/setlist');
+                          },
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(
-                            sySetWidth(60), sySetHeight(30), sySetWidth(30), 0),
-                        child: Image.asset(
-                          'images/notice.png',
-                          width: sySetWidth(40),
-                          height: sySetWidth(40),
-                          fit: BoxFit.fill,
+                            sySetWidth(0), sySetHeight(30), sySetWidth(30), 0),
+                        child: IconButton(
+                          icon: ClipOval(
+                            child: Image.asset(
+                              'images/notice.png',
+                              width: sySetWidth(40),
+                              height: sySetWidth(40),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/setlist');
+                          },
                         ),
                       )
                     ],
@@ -364,9 +380,8 @@ class _CenterPageState extends State<CenterPage> {
                   child: Text(
                     '类别',
                     style: TextStyle(
-                      fontSize: sySetFontSize(28),
-                      color: Color.fromRGBO(153, 153, 153, 1)
-                    ),
+                        fontSize: sySetFontSize(28),
+                        color: Color.fromRGBO(153, 153, 153, 1)),
                   ),
                 ),
                 Container(

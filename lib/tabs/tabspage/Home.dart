@@ -23,6 +23,11 @@ class _HomePageState extends State<HomePage> {
               child: Text('跳转到测试页'),
               onPressed: (){
                 Navigator.pushNamed(context, '/test2');
+              }),
+          RaisedButton(
+              child: Text('跳转到测试页'),
+              onPressed: (){
+                Navigator.pushNamed(context, '/setlist');
               })
         ],
       ),
