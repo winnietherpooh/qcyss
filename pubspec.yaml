@@ -31,6 +31,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   date_format:
   flutter_screenutil: ^1.0.2
+  flutter_html: ^1.0.0
   dio:
 dev_dependencies:
   flutter_test:

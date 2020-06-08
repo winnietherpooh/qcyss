@@ -28,7 +28,14 @@ class _HomePageState extends State<HomePage> {
               child: Text('跳转到测试页'),
               onPressed: (){
                 Navigator.pushNamed(context, '/setlist');
-              })
+              }), RaisedButton(
+              child: Text("跳转到商品详情"),
+              onPressed: () {
+                Navigator.pushNamed(context, '/newsinfo',arguments:{
+                  "pid":'111'
+                });
+              }
+          ),
         ],
       ),
     );

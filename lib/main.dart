@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false, //去掉debug的图标
       initialRoute: '/',  //设置初始化时,显示的页面路由
-      //onGenerateRoute: onGenerateRoute,
-      routes: route,
+      onGenerateRoute: onGenerateRoute,
+      //routes: routes,
     );
   }
 }
