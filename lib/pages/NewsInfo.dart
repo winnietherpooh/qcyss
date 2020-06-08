@@ -33,16 +33,18 @@ class _NewsInfoPagePageState extends State<NewsInfoPagePage> {
 
   _NewsInfoPagePageState({this.arguments});
   _getData() async {
-    var api = Config.domain +
-        'index.php?m=Home&c=Newapi&a=details&type=1&id=${arguments['id']}';
-    var result = await Dio().get(api);
-    var getData = json.decode(result.data);
-    var newsInfoContent = NewsInfoModel.fromJson(getData);
-    setState(() {
-      this._title = newsInfoContent.data.title;
-      this._createTime = newsInfoContent.data.time;
-      this._content = newsInfoContent.data.content;
-    });
+    if(arguments['id'] != null){
+      var api = Config.domain +
+          'index.php?m=Home&c=Newapi&a=details&type=1&id=${arguments['id']}';
+      var result = await Dio().get(api);
+      var getData = json.decode(result.data);
+      var newsInfoContent = NewsInfoModel.fromJson(getData);
+      setState(() {
+        this._title = newsInfoContent.data.title;
+        this._createTime = newsInfoContent.data.time;
+        this._content = newsInfoContent.data.content;
+      });
+    }
   }
 
   @override
