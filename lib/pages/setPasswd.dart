@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
 
 class SetPassWdPage extends StatefulWidget {
@@ -152,7 +154,7 @@ class _SetPassWdPageState extends State<SetPassWdPage> {
                             ),),
                             color: Color.fromRGBO(246, 159, 0, 1),
                             onPressed: () {
-                              Navigator.pushNamed(context, '/login');
+                              ExtendedNavigator.rootNavigator.pushNamed(Routes.loginPageRoute);
                             },
                           ),
                         ),

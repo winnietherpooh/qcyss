@@ -1,13 +1,13 @@
 import 'dart:convert';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/Config.dart';
 import 'package:yss/common/util/screen.dart';
-import 'package:yss/data/map.dart';
 import 'package:yss/model/NewsModel.dart';
 import 'package:yss/pages/banner.dart';
-import 'package:date_format/date_format.dart';
+import 'package:yss/common/router/router.gr.dart';
+
 
 class NewsPage extends StatefulWidget {
   @override
@@ -157,7 +157,8 @@ class _NewsPageState extends State<NewsPage> {
         ],
       ),
       onTap: (){
-            Navigator.pushNamed(context, '/newsinfo',arguments: {"id": '${this._dataList[index].id}'});
+            //Navigator.pushNamed(context, '/newsinfo',arguments: {"id": '${this._dataList[index].id}'});
+         ExtendedNavigator.rootNavigator.pushNewsInfoPageRoute(id:'${this._dataList[index].id}');
 
       },
     );

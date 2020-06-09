@@ -9,17 +9,17 @@ import 'package:flutter_html/style.dart';
 import 'package:yss/common/utils.dart';
 import 'package:yss/model/NewsInfoModel.dart';
 
-class NewsInfoPagePage extends StatefulWidget {
-  Map arguments;
+class NewsInfoPage extends StatefulWidget {
+  final String id;
 
-  NewsInfoPagePage({Key key, this.arguments}) : super(key: key);
+  NewsInfoPage({Key key, this.id}) : super(key: key);
 
   @override
-  _NewsInfoPagePageState createState() =>
-      _NewsInfoPagePageState(arguments: this.arguments);
+  _NewsInfoPageState createState() =>
+      _NewsInfoPageState();
 }
 
-class _NewsInfoPagePageState extends State<NewsInfoPagePage> {
+class _NewsInfoPageState extends State<NewsInfoPage> {
 
   Map arguments;
   var _title="";
@@ -31,11 +31,11 @@ class _NewsInfoPagePageState extends State<NewsInfoPagePage> {
     _getData();
   }
 
-  _NewsInfoPagePageState({this.arguments});
+  _NewsInfoPageState();
   _getData() async {
-    if(arguments['id'] != null){
+    if(widget.id != null){
       var api = Config.domain +
-          'index.php?m=Home&c=Newapi&a=details&type=1&id=${arguments['id']}';
+          'index.php?m=Home&c=Newapi&a=details&type=1&id=${widget.id}';
       var result = await Dio().get(api);
       var getData = json.decode(result.data);
       var newsInfoContent = NewsInfoModel.fromJson(getData);

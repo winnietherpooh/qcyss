@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:yss/common/router/router.gr.dart';
+//import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -99,7 +102,8 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text('登录'),
                         color: Color.fromRGBO(246, 159, 0, 1),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/');
+                         // Navigator.pushNamed(context, '/');
+                          ExtendedNavigator.of(context).pushNamed(Routes.tabsRoute);
                         },
                       ),
                     ),

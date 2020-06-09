@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:dio/dio.dart';
+import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:yss/model/BannerModel.dart';
 import 'package:yss/Config.dart';
@@ -54,7 +56,9 @@ class _BannerPageState extends State<BannerPage> {
           // pagination: new SwiperPagination(alignment: Alignment.centerRight),
           //control: new SwiperControl(),
           onTap: (v){   //点击事件
-            Navigator.pushNamed(context, '/login');
+            //Navigator.pushNamed(context, '/login');
+           ExtendedNavigator.of(context).pushNamed(Routes.loginPageRoute);
+
           },
         ),
       );

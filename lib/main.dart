@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'routes/route.dart';
+import 'package:yss/common/router/router.gr.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,9 +12,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
       ),
       debugShowCheckedModeBanner: false, //去掉debug的图标
-      initialRoute: '/',  //设置初始化时,显示的页面路由
-      onGenerateRoute: onGenerateRoute,
-      //routes: routes,
+      builder: ExtendedNavigator<AppRouter>(
+        initialRoute: Routes.tabsRoute,
+        router: AppRouter(),
+       // guards: [AuthGuard()],
+      ),
     );
   }
 }

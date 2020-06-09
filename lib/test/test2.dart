@@ -8,7 +8,6 @@ import 'package:yss/common/util/screen.dart';
 import 'package:yss/data/map.dart';
 import 'package:yss/model/NewsModel.dart';
 import 'package:yss/pages/banner.dart';
-import 'package:date_format/date_format.dart';
 
 class Test2Page extends StatefulWidget {
   @override

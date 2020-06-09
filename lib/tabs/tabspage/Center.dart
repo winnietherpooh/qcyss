@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/utils.dart';
 
 class CenterPage extends StatefulWidget {
@@ -128,7 +130,8 @@ class _CenterPageState extends State<CenterPage> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/setlist');
+                            //Navigator.pushNamed(context, '/setlist');
+                            ExtendedNavigator.rootNavigator.pushNamed(Routes.setListPageRoute);
                           },
                         ),
                       ),
@@ -145,7 +148,7 @@ class _CenterPageState extends State<CenterPage> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/setlist');
+                            ExtendedNavigator.rootNavigator.pushNamed(Routes.setListPageRoute);
                           },
                         ),
                       )

@@ -1,12 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
 
-class SetList extends StatefulWidget {
+class SetListPage extends StatefulWidget {
   @override
-  _SetListState createState() => _SetListState();
+  _SetListPageState createState() => _SetListPageState();
 }
 
-class _SetListState extends State<SetList> {
+class _SetListPageState extends State<SetListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +59,7 @@ class _SetListState extends State<SetList> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/setlist');
+                      ExtendedNavigator.rootNavigator.pushNamed(Routes.setPassWdPageRoute);
                     },
                   ),
                 )
@@ -110,7 +112,7 @@ class _SetListState extends State<SetList> {
                           style: BorderStyle.none,
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/setpasswd');
+                          ExtendedNavigator.rootNavigator.pushNamed(Routes.setPassWdPageRoute);
                         },
                       ),
                     ),
@@ -131,7 +133,7 @@ class _SetListState extends State<SetList> {
                     child: Text('退出'),
                     color: Color.fromRGBO(246, 159, 0, 1),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/login');
+                      ExtendedNavigator.rootNavigator.pushNamed(Routes.loginPageRoute);
                     },
                   ),
                 ),
