@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:yss/global.dart';
 import 'package:yss/pages/login.dart';
+import '../tabs/Taps.dart';
 
 class IndexPage extends StatefulWidget {
   IndexPage({Key key}) : super(key: key);
-
   @override
   _IndexPageState createState() => _IndexPageState();
 }
@@ -42,6 +41,6 @@ class _IndexPageState extends State<IndexPage> {
       allowFontScaling: true,
     );
     return Global.isOfflineLogin == true
-        ? Tab() :  LoginPage();
+        ? Taps() :  LoginPage();
   }
 }

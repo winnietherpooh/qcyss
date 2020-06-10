@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:yss/common/apis/News.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -104,58 +105,10 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
       width: syGetWidth(),
       margin: EdgeInsets.fromLTRB(
           sySetWidth(10), sySetHeight(10), sySetHeight(24), 0),
-      child: Html(
-        data: this._content,
-//        shrinkWrap:false,
-        //Optional parameters:
-        style: {
-          "html": Style(
-//            padding: EdgeInsets.all(10),
-//            margin: EdgeInsets.all(10),
-            //width: 1920,
-            fontSize:FontSize(sySetFontSize(28)),
-            color: Color.fromRGBO(51, 51, 51, 1),
-          ),
-//            "h1": Style(
-//              textAlign: TextAlign.center,
-//            ),
-          "table": Style(
-            backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),
-          ),
-          "tr": Style(
-            border: Border(bottom: BorderSide(color: Colors.grey)),
-          ),
-          "th": Style(
-            padding: EdgeInsets.all(6),
-            backgroundColor: Colors.grey,
-          ),
-          "td": Style(
-            padding: EdgeInsets.all(6),
-          ),
-          "var": Style(fontFamily: 'serif'),
-        },
-        customRender: {
-          "flutter":
-              (RenderContext context, Widget child, attributes, _) {
-            return FlutterLogo(
-              style: (attributes['horizontal'] != null)
-                  ? FlutterLogoStyle.horizontal
-                  : FlutterLogoStyle.markOnly,
-              textColor: context.style.color,
-              size: context.style.fontSize.size * 5,
-            );
-          },
-        },
-        onLinkTap: (url) {
-          print("Opening $url...");
-        },
-        onImageTap: (src) {
-          print(src);
-        },
-        onImageError: (exception, stackTrace) {
-          print(exception);
-        },
-      ),
+      child: HtmlWidget(
+        this._content,
+        webView: true,
+      )
     );
   }
 }
