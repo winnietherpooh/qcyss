@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/Config.dart';
 import 'package:yss/common/apis/News.dart';
+import 'package:yss/common/util/function.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:yss/model/NewsModel.dart';
 import 'package:yss/pages/banner.dart';
@@ -94,12 +96,13 @@ class _NewsPageState extends State<NewsPage> {
             padding: EdgeInsets.fromLTRB(
                 sySetWidth(24), sySetHeight(0), sySetWidth(24), 0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
                   width: sySetWidth(270),
                   height: sySetWidth(180),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(4),
                     image: DecorationImage(
                         image: NetworkImage(this._dataList[index].img),
@@ -124,11 +127,17 @@ class _NewsPageState extends State<NewsPage> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(
-                            sySetWidth(20), sySetWidth(20), sySetWidth(24), 0),
+                        alignment: Alignment.topLeft,
+                        margin: EdgeInsets.fromLTRB(
+                            sySetWidth(20), sySetHeight(10), sySetWidth(24), 0),
+                        //padding: EdgeInsets.all(0),
                         child: Text(
-                          this._dataList[index].content,
+                          CommonFunction.getNewsContent(this._dataList[index].content),
                           overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Color.fromRGBO(153, 153, 153, 1),
+                            fontSize: sySetFontSize(26),
+                          ),
                           maxLines: 2,
                         ),
                       ),

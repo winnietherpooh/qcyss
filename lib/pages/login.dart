@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/common/apis/user.dart';
 import 'package:yss/common/router/router.gr.dart';
+
 //import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:yss/global.dart';
@@ -16,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   var _userName = new TextEditingController(text: "7277");
   var _passWd = new TextEditingController(text: "123456");
 
-  _loginRequest() async{
+  _loginRequest() async {
     UserLoginRequestEntity params = UserLoginRequestEntity(
       userAccount: _userName.value.text,
       passWord: _passWd.value.text,
@@ -31,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
 
     ExtendedNavigator.rootNavigator.pushNamed(Routes.tabsRoute);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +50,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(sySetWidth(32), sySetHeight(200), sySetWidth(32), 0),
+                padding: EdgeInsets.fromLTRB(
+                    sySetWidth(32), sySetHeight(200), sySetWidth(32), 0),
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(0),
@@ -70,7 +73,6 @@ class _LoginPageState extends State<LoginPage> {
                           fit: BoxFit.cover,
                         ),
                         hintText: '请输入用户名',
-
                         labelStyle: TextStyle(
                           fontSize: sySetFontSize(30),
                         ),
@@ -79,7 +81,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(sySetWidth(32), 0, sySetWidth(32), 0),
+                padding:
+                    EdgeInsets.fromLTRB(sySetWidth(32), 0, sySetWidth(32), 0),
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.fromLTRB(0, sySetHeight(50), 0, 0),
@@ -93,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Color.fromRGBO(229, 229, 229, 1)))),
                   child: TextField(
                     controller: this._passWd,
-                    obscureText:true,
+                    obscureText: true,
                     decoration: InputDecoration(
                         icon: Image.asset(
                           'images/passwd.png',
@@ -109,21 +112,31 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: sySetHeight(100),),
+              SizedBox(
+                height: sySetHeight(100),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
                     child: Container(
                       height: sySetHeight(96),
-                      padding: EdgeInsets.fromLTRB(sySetWidth(32), 0, sySetWidth(32), 0),
+                      padding: EdgeInsets.fromLTRB(
+                          sySetWidth(32), 0, sySetWidth(32), 0),
                       //因为有他,所以可以设置宽高
                       child: FlatButton(
-                        child: Text('登录'),
+                        child: Text(
+                          '登录',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: sySetFontSize(32),
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                          ),
+                        ),
                         color: Color.fromRGBO(246, 159, 0, 1),
                         onPressed: () {
-                         // Navigator.pushNamed(context, '/');
-                         //ExtendedNavigator.of(context).pushNamed(Routes.tabsRoute);
+                          // Navigator.pushNamed(context, '/');
+                          //ExtendedNavigator.of(context).pushNamed(Routes.tabsRoute);
                           this._loginRequest();
                         },
                       ),

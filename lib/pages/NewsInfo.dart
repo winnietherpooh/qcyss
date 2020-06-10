@@ -44,6 +44,7 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
         this._title = newsInfoModel.data.title;
         this._createTime = newsInfoModel.data.time;
         this._content = newsInfoModel.data.content;
+        print(MediaQuery.of(context).size.width);
       });
     }
   }
@@ -57,10 +58,12 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
         centerTitle: true,
       ),
       body: Container(
+        width: double.infinity,
           child: ListView(
         children: <Widget>[
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
                 margin: EdgeInsets.fromLTRB(
@@ -85,61 +88,74 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
                       fontSize: sySetFontSize(24)),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    sySetWidth(10), sySetHeight(10), sySetHeight(24), 0),
-                child: Html(
-                  data: this._content,
-                  //Optional parameters:
-                  style: {
-                    "html": Style(
-//              color: Colors.white,
-                    ),
-//            "h1": Style(
-//              textAlign: TextAlign.center,
-//            ),
-                    "table": Style(
-                      backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),
-                    ),
-                    "tr": Style(
-                      border: Border(bottom: BorderSide(color: Colors.grey)),
-                    ),
-                    "th": Style(
-                      padding: EdgeInsets.all(6),
-                      backgroundColor: Colors.grey,
-                    ),
-                    "td": Style(
-                      padding: EdgeInsets.all(6),
-                    ),
-                    "var": Style(fontFamily: 'serif'),
-                  },
-                  customRender: {
-                    "flutter":
-                        (RenderContext context, Widget child, attributes, _) {
-                      return FlutterLogo(
-                        style: (attributes['horizontal'] != null)
-                            ? FlutterLogoStyle.horizontal
-                            : FlutterLogoStyle.markOnly,
-                        textColor: context.style.color,
-                        size: context.style.fontSize.size * 5,
-                      );
-                    },
-                  },
-                  onLinkTap: (url) {
-                    print("Opening $url...");
-                  },
-                  onImageTap: (src) {
-                    print(src);
-                  },
-                  onImageError: (exception, stackTrace) {
-                    print(exception);
-                  },
-                ),
-              )
+             Padding(
+               padding: EdgeInsets.all(1),
+               child:  _getHtmlWidget(),
+             )
             ],
           ),
         ],
       )),
+    );
+  }
+
+  Widget _getHtmlWidget(){
+    return  Container(
+      width: syGetWidth(),
+      margin: EdgeInsets.fromLTRB(
+          sySetWidth(10), sySetHeight(10), sySetHeight(24), 0),
+      child: Html(
+        data: this._content,
+//        shrinkWrap:false,
+        //Optional parameters:
+        style: {
+          "html": Style(
+//            padding: EdgeInsets.all(10),
+//            margin: EdgeInsets.all(10),
+            //width: 1920,
+            fontSize:FontSize(sySetFontSize(20)),
+            color: Color.fromRGBO(51, 51, 51, 1),
+          ),
+//            "h1": Style(
+//              textAlign: TextAlign.center,
+//            ),
+          "table": Style(
+            backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),
+          ),
+          "tr": Style(
+            border: Border(bottom: BorderSide(color: Colors.grey)),
+          ),
+          "th": Style(
+            padding: EdgeInsets.all(6),
+            backgroundColor: Colors.grey,
+          ),
+          "td": Style(
+            padding: EdgeInsets.all(6),
+          ),
+          "var": Style(fontFamily: 'serif'),
+        },
+        customRender: {
+          "flutter":
+              (RenderContext context, Widget child, attributes, _) {
+            return FlutterLogo(
+              style: (attributes['horizontal'] != null)
+                  ? FlutterLogoStyle.horizontal
+                  : FlutterLogoStyle.markOnly,
+              textColor: context.style.color,
+              size: context.style.fontSize.size * 5,
+            );
+          },
+        },
+        onLinkTap: (url) {
+          print("Opening $url...");
+        },
+        onImageTap: (src) {
+          print(src);
+        },
+        onImageError: (exception, stackTrace) {
+          print(exception);
+        },
+      ),
     );
   }
 }

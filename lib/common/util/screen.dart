@@ -26,3 +26,7 @@ double sySetHeight(double height) {
 double sySetFontSize(double fontSize) {
   return ScreenUtil().setSp(fontSize);;
 }
+
+double syGetWidth() {
+  return ScreenUtil.screenWidth;
+}

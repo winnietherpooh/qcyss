@@ -41,7 +41,7 @@ class _IndexPageState extends State<IndexPage> {
       height:1334-40,
       allowFontScaling: true,
     );
-    return Global.isFirstOpen == true
+    return Global.isOfflineLogin == true
         ? Tab() :  LoginPage();
   }
 }
