@@ -113,7 +113,7 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
 //            padding: EdgeInsets.all(10),
 //            margin: EdgeInsets.all(10),
             //width: 1920,
-            fontSize:FontSize(sySetFontSize(20)),
+            fontSize:FontSize(sySetFontSize(28)),
             color: Color.fromRGBO(51, 51, 51, 1),
           ),
 //            "h1": Style(
