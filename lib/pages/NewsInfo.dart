@@ -1,7 +1,5 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:yss/common/apis/News.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/html_parser.dart';
@@ -30,19 +28,22 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
   void initState() {
     _getData();
   }
-
   _NewsInfoPageState();
+
   _getData() async {
+    NewsInfoRequestModel newsInfoRequestModel = NewsInfoRequestModel(
+        id: widget.id, type: '1'
+    );
+    NewsInfoModel newsInfoModel = await NewsInfoApi.getData(
+        context: context,
+        newsInfoRequestModel: newsInfoRequestModel
+    );
+    print(newsInfoModel);
     if(widget.id != null){
-      var api = Config.domain +
-          'index.php?m=Home&c=Newapi&a=details&type=1&id=${widget.id}';
-      var result = await Dio().get(api);
-      var getData = json.decode(result.data);
-      var newsInfoContent = NewsInfoModel.fromJson(getData);
       setState(() {
-        this._title = newsInfoContent.data.title;
-        this._createTime = newsInfoContent.data.time;
-        this._content = newsInfoContent.data.content;
+        this._title = newsInfoModel.data.title;
+        this._createTime = newsInfoModel.data.time;
+        this._content = newsInfoModel.data.content;
       });
     }
   }

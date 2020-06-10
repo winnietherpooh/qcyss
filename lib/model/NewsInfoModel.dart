@@ -1,6 +1,29 @@
+import 'package:flutter/cupertino.dart';
+
+class NewsInfoRequestModel {
+  String id;
+  String type;
+
+  NewsInfoRequestModel({
+    @required this.id,
+    @required this.type,
+  });
+
+  factory NewsInfoRequestModel.fromJson(Map<String, dynamic> json) =>
+      NewsInfoRequestModel(
+        id: json["id"],
+        type: json["type"],
+      );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "type": type,
+  };
+}
+
 class NewsInfoModel {
   Data data;
-  String error;
+  int error;
   String message;
 
   NewsInfoModel({this.data, this.error, this.message});

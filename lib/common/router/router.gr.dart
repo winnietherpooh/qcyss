@@ -7,19 +7,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:yss/pages/index.dart';
 import 'package:yss/tabs/Taps.dart';
 import 'package:yss/pages/login.dart';
+import 'package:yss/common/router/router.dart';
 import 'package:yss/pages/NewsInfo.dart';
 import 'package:yss/pages/SetList.dart';
 import 'package:yss/pages/setPasswd.dart';
 
 abstract class Routes {
-  static const tabsRoute = '/';
+  static const indexPageRoute = '/';
+  static const tabsRoute = '/tabs-route';
   static const loginPageRoute = '/login-page-route';
   static const newsInfoPageRoute = '/news-info-page-route';
   static const setListPageRoute = '/set-list-page-route';
   static const setPassWdPageRoute = '/set-pass-wd-page-route';
   static const all = {
+    indexPageRoute,
     tabsRoute,
     loginPageRoute,
     newsInfoPageRoute,
@@ -40,15 +44,25 @@ class AppRouter extends RouterBase {
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
+      case Routes.indexPageRoute:
+        if (hasInvalidArgs<IndexPageArguments>(args)) {
+          return misTypedArgsRoute<IndexPageArguments>(args);
+        }
+        final typedArgs = args as IndexPageArguments ?? IndexPageArguments();
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => IndexPage(key: typedArgs.key),
+          settings: settings,
+        );
       case Routes.tabsRoute:
         return MaterialPageRoute<dynamic>(
           builder: (context) => Taps(),
           settings: settings,
         );
       case Routes.loginPageRoute:
-        return MaterialPageRoute<dynamic>(
-          builder: (context) => LoginPage(),
+        return PageRouteBuilder<dynamic>(
+          pageBuilder: (context, animation, secondaryAnimation) => LoginPage(),
           settings: settings,
+          transitionsBuilder: zoomInTransition,
         );
       case Routes.newsInfoPageRoute:
         if (hasInvalidArgs<NewsInfoPageArguments>(args)) {
@@ -81,6 +95,12 @@ class AppRouter extends RouterBase {
 // Arguments holder classes
 // **************************************************************************
 
+//IndexPage arguments holder class
+class IndexPageArguments {
+  final Key key;
+  IndexPageArguments({this.key});
+}
+
 //NewsInfoPage arguments holder class
 class NewsInfoPageArguments {
   final Key key;
@@ -93,6 +113,14 @@ class NewsInfoPageArguments {
 // **************************************************************************
 
 extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
+  Future pushIndexPageRoute({
+    Key key,
+  }) =>
+      pushNamed(
+        Routes.indexPageRoute,
+        arguments: IndexPageArguments(key: key),
+      );
+
   Future pushTabsRoute() => pushNamed(Routes.tabsRoute);
 
   Future pushLoginPageRoute() => pushNamed(Routes.loginPageRoute);

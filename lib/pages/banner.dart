@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:dio/dio.dart';
+import 'package:yss/common/apis/apis.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:yss/model/BannerModel.dart';
-import 'package:yss/Config.dart';
-import 'package:yss/model/FocusModel.dart';
 class BannerPage extends StatefulWidget {
   @override
   _BannerPageState createState() => _BannerPageState();
@@ -23,19 +19,16 @@ class _BannerPageState extends State<BannerPage> {
     _getBannerData();
   }
 
-
-  _getBannerData() async {
-    var api = Config.domain+'index.php?m=Home&c=Newapi&a=carousels&cid=${Config.companyId}';
-    var result = await Dio().get(api);
-    var getData = json.decode(result.data);
-    var bannerResult = BannerModel.fromJson(getData);
-
-
-
+  _getBannerData() async{
+    BannerModel bannerItem = await BannerAPI.getBanner(
+      context: context,
+    );
     setState(() {
-      this._dataList = bannerResult.data;
+      this._dataList = bannerItem.data.toList();
     });
   }
+
+
 
 
   @override
@@ -56,7 +49,6 @@ class _BannerPageState extends State<BannerPage> {
           // pagination: new SwiperPagination(alignment: Alignment.centerRight),
           //control: new SwiperControl(),
           onTap: (v){   //点击事件
-            //Navigator.pushNamed(context, '/login');
            ExtendedNavigator.of(context).pushNamed(Routes.loginPageRoute);
 
           },

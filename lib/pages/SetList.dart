@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/global.dart';
 
 class SetListPage extends StatefulWidget {
   @override
@@ -133,6 +134,8 @@ class _SetListPageState extends State<SetListPage> {
                     child: Text('退出'),
                     color: Color.fromRGBO(246, 159, 0, 1),
                     onPressed: () {
+                      //清空数据
+                      Global.delProfile();
                       ExtendedNavigator.rootNavigator.pushNamed(Routes.loginPageRoute);
                     },
                   ),

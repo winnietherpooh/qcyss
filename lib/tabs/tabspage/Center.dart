@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/utils.dart';
+import 'package:yss/global.dart';
 
 class CenterPage extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _CenterPageState extends State<CenterPage> {
                     borderRadius: BorderRadius.circular(sySetWidth(55)),
                     image: DecorationImage(
                         image: NetworkImage(
-                            "http://cdn.toolvip.com//imagedemo/2.jpg"),
+                            "${Global.profile.userPortrait}"),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -76,7 +77,7 @@ class _CenterPageState extends State<CenterPage> {
                     children: <Widget>[
                       Container(
                         child: Text(
-                          '张三丰',
+                          '${Global.profile.userName}',
                           style: TextStyle(
                               fontSize: sySetFontSize(32),
                               fontWeight: FontWeight.bold,
@@ -86,7 +87,7 @@ class _CenterPageState extends State<CenterPage> {
                       Container(
                         margin: EdgeInsets.only(top: sySetHeight(30)),
                         child: Text(
-                          '厂领导',
+                          '${Global.profile.userPosition}',
                           style: TextStyle(
                               fontSize: sySetFontSize(28),
                               color: AppColors.mainFontColor),
@@ -95,7 +96,7 @@ class _CenterPageState extends State<CenterPage> {
                       Container(
                         margin: EdgeInsets.only(top: sySetHeight(20)),
                         child: Text(
-                          '长庆油田采油厂领导',
+                          '${Global.profile.dName}${Global.profile.userPosition}',
                           style: TextStyle(
                               fontSize: sySetFontSize(28),
                               color: AppColors.mainFontColor),
@@ -159,7 +160,7 @@ class _CenterPageState extends State<CenterPage> {
                   margin: EdgeInsets.fromLTRB(
                       0, sySetHeight(36), sySetWidth(26), 0),
                   child: Text(
-                    '工号：100001',
+                    '工号：${Global.profile.account}',
                     style: TextStyle(
                         fontSize: sySetFontSize(26),
                         color: AppColors.mainFontColor),

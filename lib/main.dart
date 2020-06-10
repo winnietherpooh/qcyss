@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/common/router/router.gr.dart';
+import 'package:yss/global.dart';
 
-void main() => runApp(MyApp());
+void main() => Global.init().then((value) => runApp(MyApp()));
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,7 +14,6 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false, //去掉debug的图标
       builder: ExtendedNavigator<AppRouter>(
-        initialRoute: Routes.tabsRoute,
         router: AppRouter(),
        // guards: [AuthGuard()],
       ),

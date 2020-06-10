@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/Config.dart';
+import 'package:yss/common/apis/News.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:yss/model/NewsModel.dart';
 import 'package:yss/pages/banner.dart';
@@ -26,23 +27,17 @@ class _NewsPageState extends State<NewsPage> {
   }
 
   _getNewsData(_touchType) async {
-    print('---------------------');
-    var api = Config.domain +
-        'index.php?m=Home&c=Newapi&a=newList&cid=${Config.companyId}';
-    var result = await Dio().get(api);
-    print(result);
-    var getData = json.decode(result.data);
-    var NewsResult = NewsModel.fromJson(getData);
+    NewsModel newsModel = await NewsListApi.getData(
+      context: context,
+    );
     setState(() {
       if (_touchType == 0 || _touchType == 1) {
         // this._dataList = NewsResult.data;
-        this._dataList.addAll(NewsResult.data);
+        this._dataList.addAll(newsModel.data);
       } else {
-        this._dataList.addAll(NewsResult.data);
+        this._dataList.addAll(newsModel.data);
       }
     });
-
-    print(_dataList.length);
   }
 
   @override

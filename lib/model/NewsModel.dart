@@ -2,7 +2,7 @@ class NewsModel {
   int page;
   int mpage;
   List<NewsItemModel> data;
-  String error;
+  int error;
   String message;
 
   NewsModel({this.page, this.mpage, this.data, this.error, this.message});

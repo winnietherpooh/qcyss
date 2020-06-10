@@ -1,6 +1,6 @@
 class BannerModel {
   List<bannerItemModel> data;
-  String error;
+  int error;
   String message;
 
   BannerModel({this.data, this.error, this.message});

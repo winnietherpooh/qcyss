@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:yss/common/apis/user.dart';
 import 'package:yss/common/router/router.gr.dart';
 //import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/global.dart';
+import 'package:yss/model/userModel.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,9 +13,24 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var _userName = new TextEditingController();
-  var _passWd = new TextEditingController();
+  var _userName = new TextEditingController(text: "7277");
+  var _passWd = new TextEditingController(text: "123456");
 
+  _loginRequest() async{
+    UserLoginRequestEntity params = UserLoginRequestEntity(
+      userAccount: _userName.value.text,
+      passWord: _passWd.value.text,
+    );
+
+    UserInfoModel userProfile = await UserAPI.login(
+      context: context,
+      params: params,
+    );
+
+    Global.saveProfile(userProfile);
+
+    ExtendedNavigator.rootNavigator.pushNamed(Routes.tabsRoute);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                           fit: BoxFit.cover,
                         ),
                         hintText: '请输入用户名',
+
                         labelStyle: TextStyle(
                           fontSize: sySetFontSize(30),
                         ),
@@ -74,6 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Color.fromRGBO(229, 229, 229, 1)))),
                   child: TextField(
                     controller: this._passWd,
+                    obscureText:true,
                     decoration: InputDecoration(
                         icon: Image.asset(
                           'images/passwd.png',
@@ -103,7 +123,8 @@ class _LoginPageState extends State<LoginPage> {
                         color: Color.fromRGBO(246, 159, 0, 1),
                         onPressed: () {
                          // Navigator.pushNamed(context, '/');
-                          ExtendedNavigator.of(context).pushNamed(Routes.tabsRoute);
+                         //ExtendedNavigator.of(context).pushNamed(Routes.tabsRoute);
+                          this._loginRequest();
                         },
                       ),
                     ),
