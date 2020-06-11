@@ -24,11 +24,20 @@ class _SalaryInfoPageState extends State<SalaryInfoPage> {
  _getdata() async{
     SalaryResponseModel salaryResponseModel = await SalayrCalApi.getData(
         context: context, salaryRequestModel: this.widget.salaryRequestModel);
-    print(salaryResponseModel.data);
-   print(json.encode(salaryResponseModel.data));
    setState(() {
      this._salaryData = salaryResponseModel.data;
    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('计算结果'),
+        centerTitle: true,
+      ),
+      body: _getAllData(),
+    );
   }
 
 
@@ -105,17 +114,6 @@ class _SalaryInfoPageState extends State<SalaryInfoPage> {
           )
         ],
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('计算结果'),
-        centerTitle: true,
-      ),
-      body: _getAllData(),
     );
   }
 
