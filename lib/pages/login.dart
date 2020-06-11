@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     Global.saveProfile(userProfile);
-
+    print(userProfile.token);
     ExtendedNavigator.rootNavigator.pushNamed(Routes.tabsRoute);
   }
 

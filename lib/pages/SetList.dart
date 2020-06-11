@@ -60,7 +60,8 @@ class _SetListPageState extends State<SetListPage> {
                       ),
                     ),
                     onPressed: () {
-                      ExtendedNavigator.rootNavigator.pushNamed(Routes.setPassWdPageRoute);
+                      ExtendedNavigator.rootNavigator
+                          .pushNamed(Routes.setPassWdPageRoute);
                     },
                   ),
                 )
@@ -95,40 +96,45 @@ class _SetListPageState extends State<SetListPage> {
                   ),
                 ),
                 Container(
-                    child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: OutlineButton(
-                        child: Row(
-                          children: <Widget>[
-                            Text('设置密码'),
-                            Image.asset(
-                              'images/right.png',
-                              width: sySetWidth(24),
-                              height: sySetWidth(24),
-                            ),
-                          ],
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        child: OutlineButton(
+                          child: Row(
+                            children: <Widget>[
+                              Text('设置密码'),
+                              Image.asset(
+                                'images/right.png',
+                                width: sySetWidth(24),
+                                height: sySetWidth(24),
+                              ),
+                            ],
+                          ),
+                          borderSide: BorderSide(
+                            style: BorderStyle.none,
+                          ),
+                          onPressed: () {
+                            ExtendedNavigator.rootNavigator
+                                .pushNamed(Routes.setPassWdPageRoute);
+                          },
                         ),
-                        borderSide: BorderSide(
-                          style: BorderStyle.none,
-                        ),
-                        onPressed: () {
-                          ExtendedNavigator.rootNavigator.pushNamed(Routes.setPassWdPageRoute);
-                        },
                       ),
-                    ),
-                  ],
-                ))
+                    ],
+                  ),
+                )
               ],
             ),
           ),
-          SizedBox(height: sySetHeight(300),),
+          SizedBox(
+            height: sySetHeight(300),
+          ),
           Row(
             children: <Widget>[
               Expanded(
                 child: Container(
                   height: sySetHeight(96),
-                  padding: EdgeInsets.fromLTRB(sySetWidth(32), 0, sySetWidth(32), 0),
+                  padding:
+                      EdgeInsets.fromLTRB(sySetWidth(32), 0, sySetWidth(32), 0),
                   //因为有他,所以可以设置宽高
                   child: FlatButton(
                     child: Text('退出'),
@@ -136,7 +142,8 @@ class _SetListPageState extends State<SetListPage> {
                     onPressed: () {
                       //清空数据
                       Global.delProfile();
-                      ExtendedNavigator.rootNavigator.pushNamed(Routes.loginPageRoute);
+                      ExtendedNavigator.rootNavigator
+                          .pushNamed(Routes.loginPageRoute);
                     },
                   ),
                 ),

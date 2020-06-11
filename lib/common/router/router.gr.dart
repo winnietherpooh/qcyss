@@ -14,6 +14,8 @@ import 'package:yss/common/router/router.dart';
 import 'package:yss/pages/NewsInfo.dart';
 import 'package:yss/pages/SetList.dart';
 import 'package:yss/pages/setPasswd.dart';
+import 'package:yss/pages/SalaryInfo.dart';
+import 'package:yss/model/SalaryModel.dart';
 
 abstract class Routes {
   static const indexPageRoute = '/';
@@ -22,6 +24,7 @@ abstract class Routes {
   static const newsInfoPageRoute = '/news-info-page-route';
   static const setListPageRoute = '/set-list-page-route';
   static const setPassWdPageRoute = '/set-pass-wd-page-route';
+  static const salaryInfoPageRoute = '/salary-info-page-route';
   static const all = {
     indexPageRoute,
     tabsRoute,
@@ -29,6 +32,7 @@ abstract class Routes {
     newsInfoPageRoute,
     setListPageRoute,
     setPassWdPageRoute,
+    salaryInfoPageRoute,
   };
 }
 
@@ -85,6 +89,18 @@ class AppRouter extends RouterBase {
           builder: (context) => SetPassWdPage(),
           settings: settings,
         );
+      case Routes.salaryInfoPageRoute:
+        if (hasInvalidArgs<SalaryInfoPageArguments>(args)) {
+          return misTypedArgsRoute<SalaryInfoPageArguments>(args);
+        }
+        final typedArgs =
+            args as SalaryInfoPageArguments ?? SalaryInfoPageArguments();
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => SalaryInfoPage(
+              key: typedArgs.key,
+              salaryRequestModel: typedArgs.salaryRequestModel),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -106,6 +122,13 @@ class NewsInfoPageArguments {
   final Key key;
   final String id;
   NewsInfoPageArguments({this.key, this.id});
+}
+
+//SalaryInfoPage arguments holder class
+class SalaryInfoPageArguments {
+  final Key key;
+  final SalaryRequestModel salaryRequestModel;
+  SalaryInfoPageArguments({this.key, this.salaryRequestModel});
 }
 
 // *************************************************************************
@@ -137,4 +160,14 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
   Future pushSetListPageRoute() => pushNamed(Routes.setListPageRoute);
 
   Future pushSetPassWdPageRoute() => pushNamed(Routes.setPassWdPageRoute);
+
+  Future pushSalaryInfoPageRoute({
+    Key key,
+    SalaryRequestModel salaryRequestModel,
+  }) =>
+      pushNamed(
+        Routes.salaryInfoPageRoute,
+        arguments: SalaryInfoPageArguments(
+            key: key, salaryRequestModel: salaryRequestModel),
+      );
 }

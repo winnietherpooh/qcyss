@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:yss/common/apis/News.dart';
 import 'package:yss/common/util/screen.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/html_parser.dart';
-import 'package:flutter_html/style.dart';
 import 'package:yss/common/utils.dart';
 import 'package:yss/model/NewsInfoModel.dart';
 

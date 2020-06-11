@@ -52,6 +52,8 @@ dependencies:
 
   #渲染html标签
   flutter_widget_from_html: ^0.3.3+4
+  #radio的美化
+  custom_radio_grouped_button: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

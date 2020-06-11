@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route_annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yss/pages/NewsInfo.dart';
+import 'package:yss/pages/SalaryInfo.dart';
 import 'package:yss/pages/SetList.dart';
 import 'package:yss/pages/index.dart';
 import 'package:yss/pages/login.dart';
@@ -13,7 +14,7 @@ Widget zoomInTransition(BuildContext context, Animation<double> animation,
     Animation<double> secondaryAnimation, Widget child) {
   return ScaleTransition(scale: animation, child: child);
 }
-
+//flutter packages pub run build_runner build
 @MaterialAutoRouter(generateNavigationHelperExtension: true)
 class $AppRouter {
   @initial //首页注解
@@ -29,6 +30,8 @@ class $AppRouter {
   SetListPage setListPageRoute;
 
   SetPassWdPage setPassWdPageRoute;
+
+  SalaryInfoPage salaryInfoPageRoute;
 
 
 }
