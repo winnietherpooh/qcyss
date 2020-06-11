@@ -145,7 +145,7 @@ class _CenterPageState extends State<CenterPage> {
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(
-                            sySetWidth(0), sySetHeight(30), sySetWidth(30), 0),
+                            sySetWidth(0), sySetHeight(30), sySetWidth(4), 0),
                         child: IconButton(
                           icon: ClipOval(
                             child: Image.asset(
@@ -166,7 +166,7 @@ class _CenterPageState extends State<CenterPage> {
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(
-                      0, sySetHeight(36), sySetWidth(26), 0),
+                      0, sySetHeight(36), sySetWidth(20), 0),
                   child: Text(
                     '工号：${Global.profile.account}',
                     style: TextStyle(
@@ -402,7 +402,7 @@ class _CenterPageState extends State<CenterPage> {
                   child: Image.asset(
                     'images/select.png',
                     width: sySetWidth(44),
-                    height: sySetWidth(44),
+                    height: sySetHeight(44),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -414,7 +414,7 @@ class _CenterPageState extends State<CenterPage> {
                     'images/search.png',
                     fit: BoxFit.fill,
                     width: sySetWidth(44),
-                    height: sySetWidth(44),
+                    height: sySetHeight(44),
                   ),
                 )
               ],
