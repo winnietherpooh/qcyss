@@ -61,10 +61,16 @@ class _CenterPageState extends State<CenterPage> {
                   width: sySetWidth(110),
                   height: sySetWidth(110),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(sySetWidth(55)),
+                    //242
+                    border: Border.all(
+                      color: Color.fromRGBO(242, 242, 242, 1),
+                      width: sySetWidth(2),
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      sySetWidth(55),
+                    ),
                     image: DecorationImage(
-                        image: NetworkImage(
-                            "${Global.profile.userPortrait}"),
+                        image: NetworkImage("${Global.profile.userPortrait}"),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -120,8 +126,8 @@ class _CenterPageState extends State<CenterPage> {
                     children: <Widget>[
                       Container(
                         child: IconButton(
-                            padding:EdgeInsets.all(0),
-                          iconSize:sySetFontSize(40),
+                          padding: EdgeInsets.all(0),
+                          iconSize: sySetFontSize(40),
                           icon: ClipOval(
                             child: Image.asset(
                               'images/setting.png',
@@ -132,7 +138,8 @@ class _CenterPageState extends State<CenterPage> {
                           ),
                           onPressed: () {
                             //Navigator.pushNamed(context, '/setlist');
-                            ExtendedNavigator.rootNavigator.pushNamed(Routes.setListPageRoute);
+                            ExtendedNavigator.rootNavigator
+                                .pushNamed(Routes.setListPageRoute);
                           },
                         ),
                       ),
@@ -149,7 +156,8 @@ class _CenterPageState extends State<CenterPage> {
                             ),
                           ),
                           onPressed: () {
-                            ExtendedNavigator.rootNavigator.pushNamed(Routes.setListPageRoute);
+                            ExtendedNavigator.rootNavigator
+                                .pushNamed(Routes.setListPageRoute);
                           },
                         ),
                       )
