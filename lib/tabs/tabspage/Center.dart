@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/utils.dart';
 import 'package:yss/global.dart';
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 
 class CenterPage extends StatefulWidget {
   @override
@@ -12,6 +14,20 @@ class CenterPage extends StatefulWidget {
 
 class _CenterPageState extends State<CenterPage> {
   var _controller = ScrollController();
+  String _format = 'yyyy-MM';
+  String MIN_DATETIME = '2018-08-01';
+  String MAX_DATETIME =
+      formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
+  String INIT_DATETIME =
+      formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
+  DateTime _dateTime;
+  DateTimePickerLocale _locale = DateTimePickerLocale.zh_cn;
+  @override
+  void initState() {
+    super.initState();
+    _dateTime = DateTime.parse(INIT_DATETIME);
+    print(formatDate(DateTime.now(), ['yyyy', '-', 'mm']));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +38,40 @@ class _CenterPageState extends State<CenterPage> {
         centerTitle: true,
       ),
       body: _getAllWidget(),
+    );
+  }
+
+  void _showDatePicker() {
+    DatePicker.showDatePicker(
+      context,
+      onMonthChangeStartWithFirstDate: true,
+      pickerTheme: DateTimePickerTheme(
+        showTitle: true,
+        confirm: Text('确定', style: TextStyle(color: Colors.black)),
+      ),
+      minDateTime: DateTime.parse(MIN_DATETIME),
+      maxDateTime: DateTime.parse(MAX_DATETIME),
+      initialDateTime: _dateTime,
+      dateFormat: _format,
+      locale: _locale,
+      onClose: () {
+        print(_dateTime);
+      },
+      onCancel: () {
+        print(_dateTime);
+      },
+      onChange: (dateTime, List<int> index) {
+        setState(() {
+          _dateTime = dateTime;
+          print(_dateTime);
+        });
+      },
+      onConfirm: (dateTime, List<int> index) {
+        setState(() {
+          _dateTime = dateTime;
+          print(_dateTime);
+        });
+      },
     );
   }
 
@@ -314,6 +364,10 @@ class _CenterPageState extends State<CenterPage> {
             width: sySetWidth(160),
             height: sySetHeight(76),
             child: TextField(
+              keyboardType: TextInputType.datetime,
+              onTap: () {
+                _showDatePicker();
+              },
               maxLines: 1,
               textAlign: TextAlign.start,
               textAlignVertical: TextAlignVertical.bottom,

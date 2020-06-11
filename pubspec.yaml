@@ -54,6 +54,8 @@ dependencies:
   flutter_widget_from_html: ^0.3.3+4
   #radio的美化
   custom_radio_grouped_button: ^1.0.0
+  #日期选择器
+  flutter_cupertino_date_picker: ^1.0.26
 dev_dependencies:
   flutter_test:
     sdk: flutter
