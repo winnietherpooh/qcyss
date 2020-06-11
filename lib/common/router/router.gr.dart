@@ -90,15 +90,12 @@ class AppRouter extends RouterBase {
           settings: settings,
         );
       case Routes.salaryInfoPageRoute:
-        if (hasInvalidArgs<SalaryInfoPageArguments>(args)) {
+        if (hasInvalidArgs<SalaryInfoPageArguments>(args, isRequired: true)) {
           return misTypedArgsRoute<SalaryInfoPageArguments>(args);
         }
-        final typedArgs =
-            args as SalaryInfoPageArguments ?? SalaryInfoPageArguments();
+        final typedArgs = args as SalaryInfoPageArguments;
         return MaterialPageRoute<dynamic>(
-          builder: (context) => SalaryInfoPage(
-              key: typedArgs.key,
-              salaryRequestModel: typedArgs.salaryRequestModel),
+          builder: (context) => SalaryInfoPage(typedArgs.salaryRequestModel),
           settings: settings,
         );
       default:
@@ -126,9 +123,8 @@ class NewsInfoPageArguments {
 
 //SalaryInfoPage arguments holder class
 class SalaryInfoPageArguments {
-  final Key key;
   final SalaryRequestModel salaryRequestModel;
-  SalaryInfoPageArguments({this.key, this.salaryRequestModel});
+  SalaryInfoPageArguments({@required this.salaryRequestModel});
 }
 
 // *************************************************************************
@@ -162,12 +158,11 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
   Future pushSetPassWdPageRoute() => pushNamed(Routes.setPassWdPageRoute);
 
   Future pushSalaryInfoPageRoute({
-    Key key,
-    SalaryRequestModel salaryRequestModel,
+    @required SalaryRequestModel salaryRequestModel,
   }) =>
       pushNamed(
         Routes.salaryInfoPageRoute,
-        arguments: SalaryInfoPageArguments(
-            key: key, salaryRequestModel: salaryRequestModel),
+        arguments:
+            SalaryInfoPageArguments(salaryRequestModel: salaryRequestModel),
       );
 }

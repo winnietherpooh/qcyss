@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   _submitAll(){
     SalaryRequestModel salaryRequestModel = SalaryRequestModel(
-        salary: this.sqSalary.value.text,
+        salary: this.sqSalary.value.text ?? '0',
         insurance: this._insurance.value.text,
         accumulationFund: this._accumulationFund.value.text,
         childrenNum: this._education.value.text,
@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
         houseFund: this._housingFund.toString(),
         supportOld: this._supportingElderly.toString()
     );
+    print(this.sqSalary.value.text);
     ExtendedNavigator.rootNavigator.pushSalaryInfoPageRoute(salaryRequestModel: salaryRequestModel);
   }
 

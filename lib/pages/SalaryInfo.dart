@@ -7,7 +7,7 @@ import 'package:yss/model/SalaryModel.dart';
 
 class SalaryInfoPage extends StatefulWidget {
   final SalaryRequestModel salaryRequestModel;
-  SalaryInfoPage({Key key, this.salaryRequestModel}) : super(key: key);
+  SalaryInfoPage(this.salaryRequestModel);
   @override
   _SalaryInfoPageState createState() => _SalaryInfoPageState();
 }
