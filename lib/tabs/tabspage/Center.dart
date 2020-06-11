@@ -131,8 +131,8 @@ class _CenterPageState extends State<CenterPage> {
                           icon: ClipOval(
                             child: Image.asset(
                               'images/setting.png',
-                              width: sySetWidth(40),
-                              height: sySetWidth(40),
+                              width: sySetWidth(44),
+                              height: sySetWidth(44),
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -150,8 +150,8 @@ class _CenterPageState extends State<CenterPage> {
                           icon: ClipOval(
                             child: Image.asset(
                               'images/notice.png',
-                              width: sySetWidth(40),
-                              height: sySetWidth(40),
+                              width: sySetWidth(44),
+                              height: sySetWidth(44),
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -401,8 +401,8 @@ class _CenterPageState extends State<CenterPage> {
                   margin: EdgeInsets.only(right: 0),
                   child: Image.asset(
                     'images/select.png',
-                    width: sySetWidth(28),
-                    height: sySetHeight(28),
+                    width: sySetWidth(44),
+                    height: sySetWidth(44),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -413,8 +413,8 @@ class _CenterPageState extends State<CenterPage> {
                   child: Image.asset(
                     'images/search.png',
                     fit: BoxFit.fill,
-                    width: sySetWidth(28),
-                    height: sySetHeight(28),
+                    width: sySetWidth(44),
+                    height: sySetWidth(44),
                   ),
                 )
               ],
