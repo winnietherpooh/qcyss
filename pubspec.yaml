@@ -56,6 +56,9 @@ dependencies:
   custom_radio_grouped_button: ^1.0.0
   #日期选择器
   flutter_cupertino_date_picker: ^1.0.26
+  #文件保存
+  path_provider: ^1.6.10
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,5 +1,5 @@
-class SignSalaryRequestModel {
-  SignSalaryRequestModel({
+class SalaryImgRequestModel {
+  SalaryImgRequestModel({
     this.ffrq,
     this.ffy,
     this.signIMg,
@@ -12,7 +12,7 @@ class SignSalaryRequestModel {
   int welfarename;
 
 
-  factory SignSalaryRequestModel.fromJson(Map<String, dynamic> json) => SignSalaryRequestModel(
+  factory SalaryImgRequestModel.fromJson(Map<String, dynamic> json) => SalaryImgRequestModel(
     ffrq: json["ffrq"],
     ffy: json["ffy"],
     signIMg: json["signIMg"],
