@@ -28,16 +28,17 @@ class SignPage extends StatefulWidget {
 class _SignPageState extends State<SignPage> {
   GlobalKey repaintWidgetKey = GlobalKey(); // 绘图key值
 
-
+  List<Uint8List> images = List();
   Future<String> _getBase64() async{
     RenderRepaintBoundary boundary =
     repaintWidgetKey.currentContext.findRenderObject();
+    print(boundary.debugNeedsPaint);
     final image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
     ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     Uint8List pngBytes = byteData.buffer.asUint8List();
     String bs64 = base64Encode(pngBytes);
     String bs64Image = "data:image/png;base64,"+bs64;
-    print(bs64Image);
+   // print(bs64Image);
     return bs64Image;
   }
 
@@ -50,6 +51,13 @@ class _SignPageState extends State<SignPage> {
       ui.Image image = await boundary.toImage(pixelRatio: dpr);
       ByteData _byteData =
           await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List pngBytes = _byteData.buffer.asUint8List();
+      setState(() {
+        images.add(pngBytes);
+      });
+//      String bs64 = base64Encode(pngBytes);
+//      String bs64Image = "data:image/png;base64,"+bs64;
+     // print(bs64Image);
       return _byteData;
     } catch (e) {
       print(e);
@@ -67,17 +75,17 @@ class _SignPageState extends State<SignPage> {
     this.widget.salaryRequestModel.signIMg = '/sign.png';
     bool isDirExist = await Directory(storagePath).exists();
 
-  if(!isDirExist) Directory(storagePath).create();
-
-    if (!file.existsSync()) {
-      file.createSync();
-    }
-    file.writeAsBytesSync(sourceBytes);
-    var res = SignImageUploadApi.getData(
-        context: context,
-        salaryRequestModel: this.widget.salaryRequestModel,
-        file: file);
-    print(res);
+//  if(!isDirExist) Directory(storagePath).create();
+//
+//    if (!file.existsSync()) {
+//      file.createSync();
+//    }
+//    file.writeAsBytesSync(sourceBytes);
+//    var res = SignImageUploadApi.getData(
+//        context: context,
+//        salaryRequestModel: this.widget.salaryRequestModel,
+//        file: file);
+//    print(res);
     //上传图片
 //    String bs64 = base64Encode(sourceBytes);
 //    String bs64Image = "data:image/png;base64,"+bs64;
@@ -155,6 +163,7 @@ class _SignPageState extends State<SignPage> {
                     setState(() {
                       //ExtendedNavigator.rootNavigator.pushSignPageRoute(salaryRequestModel: this.widget.salaryRequestModel  );
                       PointerList._points = <Offset>[];
+                      images = List();
                     });
                     ;
                   },
@@ -184,8 +193,8 @@ class _SignPageState extends State<SignPage> {
                 onPressed: () {
                   setState(
                     () {
-                     _shareUiImage();
-                      //_getBase64();
+                      _shareUiImage();
+                     // _getBase64();
                     },
                   );
                   ;
@@ -209,9 +218,20 @@ class _SignPageState extends State<SignPage> {
             ),
           )),
 
-//            Container(
-//              child: Image.asset('images/center.png'),
-//            )
+            Container(
+              width: 200,
+              height: 200,
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return Image.memory(
+                    images[index],
+                    fit: BoxFit.cover,
+                  );
+                },
+                itemCount: images.length,
+                scrollDirection: Axis.horizontal,
+              ),
+            )
         ],
       )),
     );
