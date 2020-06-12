@@ -16,6 +16,8 @@ import 'package:yss/pages/SetList.dart';
 import 'package:yss/pages/setPasswd.dart';
 import 'package:yss/pages/SalaryInfo.dart';
 import 'package:yss/model/SalaryModel.dart';
+import 'package:yss/pages/Sign.dart';
+import 'package:yss/model/SignSalaryRequestModel.dart';
 
 abstract class Routes {
   static const indexPageRoute = '/';
@@ -25,6 +27,7 @@ abstract class Routes {
   static const setListPageRoute = '/set-list-page-route';
   static const setPassWdPageRoute = '/set-pass-wd-page-route';
   static const salaryInfoPageRoute = '/salary-info-page-route';
+  static const signPageRoute = '/sign-page-route';
   static const all = {
     indexPageRoute,
     tabsRoute,
@@ -33,6 +36,7 @@ abstract class Routes {
     setListPageRoute,
     setPassWdPageRoute,
     salaryInfoPageRoute,
+    signPageRoute,
   };
 }
 
@@ -98,6 +102,15 @@ class AppRouter extends RouterBase {
           builder: (context) => SalaryInfoPage(typedArgs.salaryRequestModel),
           settings: settings,
         );
+      case Routes.signPageRoute:
+        if (hasInvalidArgs<SignPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<SignPageArguments>(args);
+        }
+        final typedArgs = args as SignPageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => SignPage(typedArgs.salaryRequestModel),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -125,6 +138,12 @@ class NewsInfoPageArguments {
 class SalaryInfoPageArguments {
   final SalaryRequestModel salaryRequestModel;
   SalaryInfoPageArguments({@required this.salaryRequestModel});
+}
+
+//SignPage arguments holder class
+class SignPageArguments {
+  final SignSalaryRequestModel salaryRequestModel;
+  SignPageArguments({@required this.salaryRequestModel});
 }
 
 // *************************************************************************
@@ -164,5 +183,13 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
         Routes.salaryInfoPageRoute,
         arguments:
             SalaryInfoPageArguments(salaryRequestModel: salaryRequestModel),
+      );
+
+  Future pushSignPageRoute({
+    @required SignSalaryRequestModel salaryRequestModel,
+  }) =>
+      pushNamed(
+        Routes.signPageRoute,
+        arguments: SignPageArguments(salaryRequestModel: salaryRequestModel),
       );
 }

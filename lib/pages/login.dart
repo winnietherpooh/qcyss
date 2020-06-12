@@ -14,7 +14,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var _userName = new TextEditingController(text: "7277");
+  var _userName = new TextEditingController(text: "80212300");
   var _passWd = new TextEditingController(text: "123456");
 
   _loginRequest() async {

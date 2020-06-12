@@ -2,10 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yss/common/apis/SignSalary.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/utils.dart';
 import 'package:yss/global.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+import 'package:yss/model/SignSalaryRequestModel.dart';
+import 'package:yss/model/SignSalaryResponseModel.dart';
 
 class CenterPage extends StatefulWidget {
   @override
@@ -24,13 +27,24 @@ class _CenterPageState extends State<CenterPage> {
   String INIT_DATETIME =
       formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
   DateTime _dateTime;
-  DateTimePickerLocale _locale = DateTimePickerLocale.zh_cn;
-
+  List<Basepay> basepay = [];
+  List<Welfarepay> welfarepay = [];
   @override
   void initState() {
     super.initState();
     _dateTime = DateTime.parse(INIT_DATETIME);
     //print(formatDate(DateTime.now(), ['yyyy', '-', 'mm']));
+    _getSalaryData();
+  }
+
+  _getSalaryData() async {
+    SignSalaryResponseModel salaryResponseModel =
+        await SignSalaryApi.getData(context: context);
+    Data data = salaryResponseModel.data;
+    setState(() {
+      basepay = data.basepay;
+      welfarepay = data.welfarepay;
+    });
   }
 
   @override
@@ -98,9 +112,9 @@ class _CenterPageState extends State<CenterPage> {
         controller: this._controller,
         children: <Widget>[
           _getHeadWidget(),
-          _getBasyPayWidget('未确定发放工资明细'),
-          _getBasyPayWidget('未确定发放奖金明细'),
-          _getSearchList(),
+          _getBasyPayWidget('未确定发放工资明细', basepay),
+          //_getBasyPayWidget('未确定发放奖金明细'),
+          //_getSearchList(),
         ],
       ),
     );
@@ -249,7 +263,7 @@ class _CenterPageState extends State<CenterPage> {
   }
 
   //未确定工资布局
-  _getBasyPayWidget(String title) {
+  _getBasyPayWidget(String title, var key) {
     return Container(
       margin: EdgeInsets.only(top: sySetHeight(30)),
       child: Column(
@@ -273,10 +287,7 @@ class _CenterPageState extends State<CenterPage> {
               controller: this._controller,
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              children: <Widget>[
-                _getBasePayAllItem(),
-                _getBasePayAllItem(),
-              ],
+              children: _getBasePayAllItem(key),
             ),
           ),
         ],
@@ -284,8 +295,61 @@ class _CenterPageState extends State<CenterPage> {
     );
   }
 
+  //这个返回每一项工资的所有键值对
   //未确认工资明细的每一项布局
-  _getBasePayListItemWidget() {
+  List<Widget> _getBasePayListItemWidget(List value,String sendMonth) {
+    List<Widget> itemWidget = new List();
+    for (var i = 0; i < value.length; i++) {
+      var t = Container(
+        decoration: BoxDecoration(
+            border: Border(
+                right: BorderSide(
+                    color: Color.fromRGBO(248, 248, 248, 1),
+                    width: sySetWidth(2)))),
+        width: sySetWidth(200),
+        height: sySetHeight(220),
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              width: sySetWidth(200),
+              height: sySetHeight(100),
+              color: AppColors.mainColor,
+              child: Text(
+                '${value[i].name}',
+                style: TextStyle(
+                  color: AppColors.mainFontColor,
+                  fontSize: sySetFontSize(28),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              width: sySetWidth(200),
+              height: sySetHeight(100),
+              color: AppColors.mainFontColor,
+              child: Text(
+                '${value[i].value}',
+                style: TextStyle(
+                  color: Color.fromRGBO(51, 51, 51, 1),
+                  fontSize: sySetFontSize(28),
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+      itemWidget.add(t);
+    }
+    if (itemWidget.length > 0) {
+
+      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: sendMonth,ffy: sendMonth,welfarename: 1)));
+      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: sendMonth,ffy: sendMonth,welfarename: 1),buttonColor: Color.fromRGBO(190, 1, 8, 1),buttonText: '反馈',labelTitle: '反馈'));
+    }
+    return itemWidget;
+  }
+
+  _getItemButton(SignSalaryRequestModel salaryRequestModel,{Color buttonColor,String buttonText='确认',String labelTitle="签字"}) {
     return Container(
       decoration: BoxDecoration(
           border: Border(
@@ -302,7 +366,7 @@ class _CenterPageState extends State<CenterPage> {
             height: sySetHeight(100),
             color: AppColors.mainColor,
             child: Text(
-              '姓名',
+              '${labelTitle}',
               style: TextStyle(
                 color: AppColors.mainFontColor,
                 fontSize: sySetFontSize(28),
@@ -310,45 +374,48 @@ class _CenterPageState extends State<CenterPage> {
             ),
           ),
           Container(
-            alignment: Alignment.center,
-            width: sySetWidth(200),
-            height: sySetHeight(100),
-            color: AppColors.mainFontColor,
-            child: Text(
-              '2658',
-              style: TextStyle(
-                color: Color.fromRGBO(51, 51, 51, 1),
-                fontSize: sySetFontSize(28),
-              ),
-            ),
-          )
+              alignment: Alignment.center,
+              width: sySetWidth(200),
+              height: sySetHeight(100),
+              color: AppColors.mainFontColor,
+              child: Container(
+                width: sySetWidth(130),
+                height: sySetWidth(80),
+                child: FlatButton(
+                  color: buttonColor ?? Color.fromRGBO(0, 122, 255, 1),
+                  onPressed: () {
+                  //  ExtendedNavigator.rootNavigator.pushNewsInfoPageRoute(id:'${this._dataList[index].id}');
+                    ExtendedNavigator.rootNavigator.pushSignPageRoute(salaryRequestModel: salaryRequestModel);
+                  },
+                  child: Text(
+                    '${buttonText}',
+                    style: TextStyle(
+                      fontSize: sySetFontSize(28),
+                      color: Color.fromRGBO(255, 255, 255, 1)
+                    ),
+                  ),
+                ),
+              ))
         ],
       ),
     );
   }
 
   //获取工资奖金列表
-  _getBasePayAllItem() {
-    return Container(
-      height: sySetHeight(200),
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        controller: this._controller,
-        children: <Widget>[
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-          _getBasePayListItemWidget(),
-        ],
-      ),
-    );
+  List<Widget> _getBasePayAllItem(List basepay) {
+    List<Widget> baseWidget = [];
+    for (var i = 0; i < basepay.length; i++) {
+      var t = Container(
+        height: sySetHeight(200),
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          controller: this._controller,
+          children: _getBasePayListItemWidget(basepay[i].value,basepay[i].name),
+        ),
+      );
+      baseWidget.add(t);
+    }
+    return baseWidget;
   }
 
   //搜索布局
@@ -359,14 +426,14 @@ class _CenterPageState extends State<CenterPage> {
       child: Column(
         children: <Widget>[
           _getSearchTitleWidget(),
-          _getBasePayAllItem(),
-          _getBasePayAllItem(),
+//          _getBasePayAllItem(),
+//          _getBasePayAllItem(),
         ],
       ),
     );
   }
 
-  _searchTextFiledWidget(int type, var controller,{String times}) {
+  _searchTextFiledWidget(int type, var controller, {String times}) {
     return Container(
       margin: EdgeInsets.only(left: sySetWidth(26)),
       width: sySetWidth(160),
@@ -426,7 +493,7 @@ class _CenterPageState extends State<CenterPage> {
         // crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          _searchTextFiledWidget(1,dateStart, times: TIME_NOW),
+          _searchTextFiledWidget(1, dateStart, times: TIME_NOW),
           Container(
             margin: EdgeInsets.fromLTRB(
                 sySetWidth(12), sySetHeight(0), sySetWidth(12), 0),
@@ -437,7 +504,7 @@ class _CenterPageState extends State<CenterPage> {
               fit: BoxFit.fill,
             ),
           ),
-          _searchTextFiledWidget(2, dateEnd,times: '2018-01'),
+          _searchTextFiledWidget(2, dateEnd, times: '2018-01'),
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
