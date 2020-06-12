@@ -14,7 +14,10 @@ class CenterPage extends StatefulWidget {
 
 class _CenterPageState extends State<CenterPage> {
   var _controller = ScrollController();
+  var dateStart = TextEditingController();
+  var dateEnd = TextEditingController();
   String _format = 'yyyy-MM';
+  String TIME_NOW = formatDate(DateTime.now(), ['yyyy', '-', 'mm']);
   String MIN_DATETIME = '2018-08-01';
   String MAX_DATETIME =
       formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
@@ -22,11 +25,12 @@ class _CenterPageState extends State<CenterPage> {
       formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
   DateTime _dateTime;
   DateTimePickerLocale _locale = DateTimePickerLocale.zh_cn;
+
   @override
   void initState() {
     super.initState();
     _dateTime = DateTime.parse(INIT_DATETIME);
-    print(formatDate(DateTime.now(), ['yyyy', '-', 'mm']));
+    //print(formatDate(DateTime.now(), ['yyyy', '-', 'mm']));
   }
 
   @override
@@ -41,10 +45,10 @@ class _CenterPageState extends State<CenterPage> {
     );
   }
 
-  void _showDatePicker() {
+  void _showDatePicker(int type) {
     DatePicker.showDatePicker(
       context,
-      onMonthChangeStartWithFirstDate: true,
+      // onMonthChangeStartWithFirstDate: true,
       pickerTheme: DateTimePickerTheme(
         showTitle: true,
         confirm: Text('确定', style: TextStyle(color: Colors.black)),
@@ -53,23 +57,35 @@ class _CenterPageState extends State<CenterPage> {
       maxDateTime: DateTime.parse(MAX_DATETIME),
       initialDateTime: _dateTime,
       dateFormat: _format,
-      locale: _locale,
-      onClose: () {
-        print(_dateTime);
-      },
-      onCancel: () {
-        print(_dateTime);
-      },
-      onChange: (dateTime, List<int> index) {
-        setState(() {
-          _dateTime = dateTime;
-          print(_dateTime);
-        });
-      },
+      //locale: _locale,
+      // onClose: () {
+      //   print(_dateTime);
+      // },
+      // onCancel: () {
+      //   print(_dateTime);
+      // },
+      // onChange: (dateTime, List<int> index) {
+      //   setState(() {
+      //     _dateTime = dateTime;
+      //     print(_dateTime);
+      //   });
+      // },
       onConfirm: (dateTime, List<int> index) {
+        print(dateTime);
         setState(() {
+          //print(formatDate(dateTime, ['yyyy', '-', 'mm']));
+//          print('=====================================');
+//          print(formatDate(dateTime, ['yyyy', '-', 'mm']).trim() is String);
+//          print('=====================================');
           _dateTime = dateTime;
-          print(_dateTime);
+//          dateStart = TextEditingController();
+//          dateStart = TextEditingController();
+          if (type == 1) {
+            dateStart.text = formatDate(dateTime, ['yyyy', '-', 'mm']).trim();
+            //dateStart.text = '2020-05';
+          } else {
+            dateEnd.text = formatDate(dateTime, ['yyyy', '-', 'mm']).trim();
+          }
         });
       },
     );
@@ -350,51 +366,67 @@ class _CenterPageState extends State<CenterPage> {
     );
   }
 
+  _searchTextFiledWidget(int type, var controller,{String times}) {
+    return Container(
+      margin: EdgeInsets.only(left: sySetWidth(26)),
+      width: sySetWidth(160),
+      height: sySetHeight(60),
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: sySetWidth(2),
+          color: Color.fromRGBO(229, 229, 229, 1),
+        ),
+      ),
+      child: TextField(
+        readOnly: true,
+        controller: controller,
+        keyboardType: TextInputType.datetime,
+        onTap: () {
+          _showDatePicker(type);
+        },
+        maxLines: 1,
+        maxLength: 7,
+        textAlign: TextAlign.center,
+        textAlignVertical: TextAlignVertical.center,
+        style: TextStyle(
+          fontSize: sySetFontSize(28),
+          color: Color.fromRGBO(153, 153, 153, 1),
+        ),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          counterText: "", //最大显示数量的文本
+//                enabledBorder: OutlineInputBorder(
+//                  borderSide: BorderSide(
+//                    color: Color.fromRGBO(232, 232, 232, 1),
+//                  ),
+//                  borderRadius: BorderRadius.all(
+//                    Radius.circular(1),
+//                  ),
+//                ),
+          hintText: times,
+//                focusedBorder: OutlineInputBorder(
+//                  borderRadius: BorderRadius.all(
+//                    Radius.circular(1),
+//                  ),
+//                  borderSide: BorderSide(
+//                    color: Color.fromRGBO(232, 232, 232, 1),
+//                  ),
+//                ),
+        ),
+      ),
+    );
+  }
+
   //搜索布局表头
   _getSearchTitleWidget() {
     return Container(
       color: AppColors.mainFontColor,
       height: sySetHeight(148),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(left: sySetWidth(26)),
-            width: sySetWidth(160),
-            height: sySetHeight(76),
-            child: TextField(
-              keyboardType: TextInputType.datetime,
-              onTap: () {
-                _showDatePicker();
-              },
-              maxLines: 1,
-              textAlign: TextAlign.start,
-              textAlignVertical: TextAlignVertical.bottom,
-              style: TextStyle(
-                  fontSize: sySetFontSize(28),
-                  color: Color.fromRGBO(153, 153, 153, 1)),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromRGBO(232, 232, 232, 1),
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(1),
-                  ),
-                ),
-                hintText: '2020-04',
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(1),
-                  ),
-                  borderSide: BorderSide(
-                    color: Color.fromRGBO(232, 232, 232, 1),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          _searchTextFiledWidget(1,dateStart, times: TIME_NOW),
           Container(
             margin: EdgeInsets.fromLTRB(
                 sySetWidth(12), sySetHeight(0), sySetWidth(12), 0),
@@ -405,37 +437,7 @@ class _CenterPageState extends State<CenterPage> {
               fit: BoxFit.fill,
             ),
           ),
-          Container(
-            width: sySetWidth(160),
-            height: sySetHeight(76),
-            child: TextField(
-              maxLines: 1,
-              textAlign: TextAlign.start,
-              textAlignVertical: TextAlignVertical.bottom,
-              style: TextStyle(
-                  fontSize: sySetFontSize(28),
-                  color: Color.fromRGBO(153, 153, 153, 1)),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromRGBO(232, 232, 232, 1),
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(1),
-                  ),
-                ),
-                hintText: '2020-04',
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(1),
-                  ),
-                  borderSide: BorderSide(
-                    color: Color.fromRGBO(232, 232, 232, 1),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          _searchTextFiledWidget(2, dateEnd,times: '2018-01'),
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -456,7 +458,7 @@ class _CenterPageState extends State<CenterPage> {
                   child: Image.asset(
                     'images/select.png',
                     width: sySetWidth(44),
-                    height: sySetHeight(44),
+                    height: sySetWidth(44),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -468,7 +470,7 @@ class _CenterPageState extends State<CenterPage> {
                     'images/search.png',
                     fit: BoxFit.fill,
                     width: sySetWidth(44),
-                    height: sySetHeight(44),
+                    height: sySetWidth(44),
                   ),
                 )
               ],
