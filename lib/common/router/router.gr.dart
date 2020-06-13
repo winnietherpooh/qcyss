@@ -18,6 +18,8 @@ import 'package:yss/pages/SalaryInfo.dart';
 import 'package:yss/model/SalaryModel.dart';
 import 'package:yss/pages/Sign.dart';
 import 'package:yss/model/SignSalaryRequestModel.dart';
+import 'package:yss/pages/SignView.dart';
+import 'dart:typed_data';
 
 abstract class Routes {
   static const indexPageRoute = '/';
@@ -28,6 +30,7 @@ abstract class Routes {
   static const setPassWdPageRoute = '/set-pass-wd-page-route';
   static const salaryInfoPageRoute = '/salary-info-page-route';
   static const signPageRoute = '/sign-page-route';
+  static const signViewPageRoute = '/sign-view-page-route';
   static const all = {
     indexPageRoute,
     tabsRoute,
@@ -37,6 +40,7 @@ abstract class Routes {
     setPassWdPageRoute,
     salaryInfoPageRoute,
     signPageRoute,
+    signViewPageRoute,
   };
 }
 
@@ -111,6 +115,16 @@ class AppRouter extends RouterBase {
           builder: (context) => SignPage(typedArgs.salaryRequestModel),
           settings: settings,
         );
+      case Routes.signViewPageRoute:
+        if (hasInvalidArgs<SignViewPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<SignViewPageArguments>(args);
+        }
+        final typedArgs = args as SignViewPageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) =>
+              SignViewPage(typedArgs.imageData, typedArgs.salaryRequestModel),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -144,6 +158,14 @@ class SalaryInfoPageArguments {
 class SignPageArguments {
   final SignSalaryRequestModel salaryRequestModel;
   SignPageArguments({@required this.salaryRequestModel});
+}
+
+//SignViewPage arguments holder class
+class SignViewPageArguments {
+  final Uint8List imageData;
+  final SignSalaryRequestModel salaryRequestModel;
+  SignViewPageArguments(
+      {@required this.imageData, @required this.salaryRequestModel});
 }
 
 // *************************************************************************
@@ -191,5 +213,15 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
       pushNamed(
         Routes.signPageRoute,
         arguments: SignPageArguments(salaryRequestModel: salaryRequestModel),
+      );
+
+  Future pushSignViewPageRoute({
+    @required Uint8List imageData,
+    @required SignSalaryRequestModel salaryRequestModel,
+  }) =>
+      pushNamed(
+        Routes.signViewPageRoute,
+        arguments: SignViewPageArguments(
+            imageData: imageData, salaryRequestModel: salaryRequestModel),
       );
 }

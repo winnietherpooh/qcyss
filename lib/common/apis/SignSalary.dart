@@ -8,6 +8,7 @@ import 'package:yss/global.dart';
 import 'package:yss/model/SalaryModel.dart';
 import 'package:yss/model/SignSalaryRequestModel.dart';
 import 'package:yss/model/SignSalaryResponseModel.dart';
+import 'package:yss/model/responseModel.dart';
 
 class SignSalaryApi {
   /// banner
@@ -26,7 +27,7 @@ class SignSalaryApi {
 
 
 class SignImageUploadApi{
-  static Future<SignSalaryResponseModel> getData({
+  static Future<ResponseModel> getData({
     @required BuildContext context,
     @required SignSalaryRequestModel salaryRequestModel,
     @required File file
@@ -49,7 +50,7 @@ class SignImageUploadApi{
       params:map,
     );
     print(response);
-    return SignSalaryResponseModel.fromJson(json.decode(response));
+    return ResponseModel.fromJson(json.decode(response));
   }
 }
 

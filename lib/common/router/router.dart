@@ -5,6 +5,7 @@ import 'package:yss/pages/NewsInfo.dart';
 import 'package:yss/pages/SalaryInfo.dart';
 import 'package:yss/pages/SetList.dart';
 import 'package:yss/pages/Sign.dart';
+import 'package:yss/pages/SignView.dart';
 import 'package:yss/pages/index.dart';
 import 'package:yss/pages/login.dart';
 import 'package:yss/pages/setPasswd.dart';
@@ -35,5 +36,7 @@ class $AppRouter {
   SalaryInfoPage salaryInfoPageRoute;
 
   SignPage signPageRoute;
+
+  SignViewPage signViewPageRoute;
 
 }
