@@ -112,7 +112,8 @@ class _CenterPageState extends State<CenterPage> {
         controller: this._controller,
         children: <Widget>[
           _getHeadWidget(),
-          _getBasyPayWidget('未确定发放工资明细', basepay),
+          _getBasyPayWidget('未确定发放工资明细', basepay,1),
+          _getBasyPayWidget('未确定发放奖金明细', welfarepay,2),
           //_getBasyPayWidget('未确定发放奖金明细'),
           //_getSearchList(),
         ],
@@ -263,7 +264,7 @@ class _CenterPageState extends State<CenterPage> {
   }
 
   //未确定工资布局
-  _getBasyPayWidget(String title, var key) {
+  _getBasyPayWidget(String title, var key,int type) {
     return Container(
       margin: EdgeInsets.only(top: sySetHeight(30)),
       child: Column(
@@ -287,7 +288,7 @@ class _CenterPageState extends State<CenterPage> {
               controller: this._controller,
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              children: _getBasePayAllItem(key),
+              children: _getBasePayAllItem(key,type),
             ),
           ),
         ],
@@ -295,9 +296,11 @@ class _CenterPageState extends State<CenterPage> {
     );
   }
 
+
+
   //这个返回每一项工资的所有键值对
   //未确认工资明细的每一项布局
-  List<Widget> _getBasePayListItemWidget(List value,String sendMonth) {
+  List<Widget> _getBasePayListItemWidget(List value,String sendMonth,int type,{String ffrq}) {
     List<Widget> itemWidget = new List();
     for (var i = 0; i < value.length; i++) {
       var t = Container(
@@ -343,8 +346,8 @@ class _CenterPageState extends State<CenterPage> {
     }
     if (itemWidget.length > 0) {
 
-      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: sendMonth,ffy: sendMonth,welfarename: 1)));
-      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: sendMonth,ffy: sendMonth,welfarename: 1),buttonColor: Color.fromRGBO(190, 1, 8, 1),buttonText: '反馈',labelTitle: '反馈'));
+      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: ffrq,ffy: sendMonth,welfarename: type)));
+      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: ffrq,ffy: sendMonth,welfarename: type),buttonColor: Color.fromRGBO(190, 1, 8, 1),buttonText: '反馈',labelTitle: '反馈'));
     }
     return itemWidget;
   }
@@ -402,21 +405,30 @@ class _CenterPageState extends State<CenterPage> {
   }
 
   //获取工资奖金列表
-  List<Widget> _getBasePayAllItem(List basepay) {
+  List<Widget> _getBasePayAllItem(List basepay,int type) {
+
     List<Widget> baseWidget = [];
     for (var i = 0; i < basepay.length; i++) {
+
+      String times = basepay[i].name;
+      if(type == 2){
+        times =  basepay[i].times;
+      }
+
       var t = Container(
         height: sySetHeight(200),
         child: ListView(
           scrollDirection: Axis.horizontal,
           controller: this._controller,
-          children: _getBasePayListItemWidget(basepay[i].value,basepay[i].name),
+          children: _getBasePayListItemWidget(basepay[i].value,basepay[i].name,type,ffrq: times),
         ),
       );
       baseWidget.add(t);
     }
     return baseWidget;
   }
+
+
 
   //搜索布局
   _getSearchList() {

@@ -49,7 +49,6 @@ class SignImageUploadApi{
       context: context,
       params:map,
     );
-    print(response);
     return ResponseModel.fromJson(json.decode(response));
   }
 }
