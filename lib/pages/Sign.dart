@@ -81,7 +81,6 @@ class _SignPageState extends State<SignPage> {
         }else{
           ExtendedNavigator.rootNavigator.pushSignViewPageRoute(imageData: images,salaryRequestModel:widget.salaryRequestModel);
         }
-
     });
   }
 

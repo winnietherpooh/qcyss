@@ -19,3 +19,135 @@ Future<bool> toastInfo({
     fontSize: sySetFontSize(16),
   );
 }
+
+void showConfim(context, String notice,Function confirmCallback) {
+  showDialog(
+    barrierDismissible: true,
+    context: context,
+    builder: (context) {
+      return Center(
+        child: Card(
+          child: Container(
+            width: 250,
+            padding: EdgeInsets.all(8),
+            margin: EdgeInsets.all(8),
+            constraints: BoxConstraints(minHeight: 120, minWidth: 180),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 80,
+                  alignment: Alignment.center,
+                  child: Text(
+                    '请先确认工资',
+                    style: TextStyle(
+                        color: Color.fromRGBO(51, 51, 51, 1), fontSize: 16),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Align(
+                        child: Container(
+                          margin: EdgeInsets.all(0),
+                          padding: EdgeInsets.all(0),
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              '取消',
+                              style: TextStyle(
+                                  color: Color.fromRGBO(249, 158, 5, 1),
+                                  fontSize: 28),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        child: Container(
+                          height: 20,
+                          child: VerticalDivider(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        child: Container(
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              confirmCallback();
+                            },
+                            child: Text(
+                              '确认',
+                              style: TextStyle(
+                                  color: Color.fromRGBO(51, 51, 51, 1),
+                                  fontSize: 28),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+
+void showLoading(context, String text) {
+  showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return Center(
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(3.0),
+                boxShadow: [
+                  //阴影
+                  BoxShadow(
+                    color: Colors.black12,
+                    //offset: Offset(2.0,2.0),
+                    blurRadius: 10.0,
+                  )
+                ]),
+            padding: EdgeInsets.all(16),
+            margin: EdgeInsets.all(16),
+            constraints: BoxConstraints(minHeight: 120, minWidth: 180),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 3,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    text,
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+}

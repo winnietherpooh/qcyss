@@ -19,6 +19,15 @@ class SignViewPage extends StatefulWidget {
 
 class _SignViewPageState extends State<SignViewPage> {
 
+
+  _comfimUpload(){
+    showConfim(context,'确认工资无误?',_doUploadImg);
+  }
+
+  _doUploadImg(){
+    showLoading(context,"正在提交");
+    _shareUiImage();
+  }
   _shareUiImage() async {
 
     Uint8List sourceBytes = widget.imageData;
@@ -101,7 +110,7 @@ class _SignViewPageState extends State<SignViewPage> {
                       ),
                       color: Color.fromRGBO(246, 159, 0, 1),
                       onPressed: () {
-                        _shareUiImage();
+                        _comfimUpload();
                       },
                     ),
                   ),
