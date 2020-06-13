@@ -76,10 +76,12 @@ class _SignPageState extends State<SignPage> {
   }
   _gotoCofim(){
     _capturePngToByteData().then((data){
-        if(images == null){
-          toastInfo(msg: "请重新签名");
+        if(PointerList._points.length == 0 || images == null || PointerList._points.length < 3){
+          toastInfo(msg: "请先签名");
+        }else{
+          ExtendedNavigator.rootNavigator.pushSignViewPageRoute(imageData: images,salaryRequestModel:widget.salaryRequestModel);
         }
-        ExtendedNavigator.rootNavigator.pushSignViewPageRoute(imageData: images,salaryRequestModel:widget.salaryRequestModel);
+
     });
   }
 
