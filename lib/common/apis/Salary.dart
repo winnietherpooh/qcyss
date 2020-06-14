@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:yss/Config.dart';
 import 'package:yss/common/util/utils.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/NewsInfoModel.dart';

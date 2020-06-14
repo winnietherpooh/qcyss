@@ -1,3 +1,18 @@
+class NewsRequestModel {
+  int page =1;
+  NewsRequestModel({this.page});
+
+  NewsRequestModel.fromJson(Map<String, dynamic> json) {
+    page = json['page'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['page'] = this.page;
+    return data;
+  }
+}
+
 class NewsModel {
   int page;
   int mpage;

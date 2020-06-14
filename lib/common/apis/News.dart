@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:yss/Config.dart';
 import 'package:yss/common/util/utils.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/NewsInfoModel.dart';
@@ -12,12 +11,15 @@ class NewsListApi {
   /// banner
   static Future<NewsModel> getData({
     @required BuildContext context,
+    NewsRequestModel newsRequestModel
   }) async {
 
-    var response = await HttpUtil().get(
-      '${Global.domain}index.php?m=Home&c=Newapi&a=newList&cid=${Config.companyId}',
+    var response = await HttpUtil().post(
+      '${Global.domain}index.php?m=Home&c=Newapi&a=newList&cid=${Global.companyId}',
       context: context,
+      params: newsRequestModel
     );
+    print(response);
     return NewsModel.fromJson(json.decode(response));
   }
 }
