@@ -1,14 +1,17 @@
 class NewsRequestModel {
   int page =1;
-  NewsRequestModel({this.page});
+  int companyId;
+  NewsRequestModel({this.page,this.companyId});
 
   NewsRequestModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
+    companyId = json['companyId'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['page'] = this.page;
+    data['companyId'] = this.companyId;
     return data;
   }
 }

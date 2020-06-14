@@ -11,15 +11,16 @@ class NewsListApi {
   /// banner
   static Future<NewsModel> getData({
     @required BuildContext context,
-    NewsRequestModel newsRequestModel
+    int page
   }) async {
 
-    var response = await HttpUtil().post(
-      '${Global.domain}index.php?m=Home&c=Newapi&a=newList&cid=${Global.companyId}',
+    var response = await HttpUtil().get(
+      '${Global.domain}index.php?m=Home&c=Newapi&'
+          'a=newList&cid=${Global.companyId}',
       context: context,
-      params: newsRequestModel
+     // params: newsRequestModel
     );
-    print(response);
+   // print(response);
     return NewsModel.fromJson(json.decode(response));
   }
 }
