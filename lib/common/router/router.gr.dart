@@ -66,8 +66,12 @@ class AppRouter extends RouterBase {
           settings: settings,
         );
       case Routes.tabsRoute:
+        if (hasInvalidArgs<TapsArguments>(args)) {
+          return misTypedArgsRoute<TapsArguments>(args);
+        }
+        final typedArgs = args as TapsArguments ?? TapsArguments();
         return MaterialPageRoute<dynamic>(
-          builder: (context) => Taps(),
+          builder: (context) => Taps(index: typedArgs.index),
           settings: settings,
         );
       case Routes.loginPageRoute:
@@ -141,6 +145,12 @@ class IndexPageArguments {
   IndexPageArguments({this.key});
 }
 
+//Taps arguments holder class
+class TapsArguments {
+  final int index;
+  TapsArguments({this.index});
+}
+
 //NewsInfoPage arguments holder class
 class NewsInfoPageArguments {
   final Key key;
@@ -181,7 +191,13 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
         arguments: IndexPageArguments(key: key),
       );
 
-  Future pushTabsRoute() => pushNamed(Routes.tabsRoute);
+  Future pushTabsRoute({
+    int index,
+  }) =>
+      pushNamed(
+        Routes.tabsRoute,
+        arguments: TapsArguments(index: index),
+      );
 
   Future pushLoginPageRoute() => pushNamed(Routes.loginPageRoute);
 

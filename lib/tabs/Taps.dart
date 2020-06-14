@@ -5,26 +5,33 @@ import 'tabspage/News.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yss/common/utils.dart';
 class Taps extends StatefulWidget {
+  final int index;
+  Taps({this.index});
   @override
   _TapsState createState() => _TapsState();
 }
 
 class _TapsState extends State<Taps> {
-  int currentIndexTemp = 0;
+  int _currentIndexTemp;
   List pageList = [
     HomePage(),
     NewsPage(),
     CenterPage(),
   ];
+  @override
+  void initState() {
+    this._currentIndexTemp = widget.index ?? 0;
+  }
+
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, width: 750, height: 1334-40);
     return Scaffold(
 
-      body: this.pageList[this.currentIndexTemp],
+      body: this.pageList[this._currentIndexTemp],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: this.currentIndexTemp,
+        currentIndex: this._currentIndexTemp,
         iconSize: sySetWidth(30),
         //tab大小
         type: BottomNavigationBarType.fixed,
@@ -33,7 +40,7 @@ class _TapsState extends State<Taps> {
         //选中的tab颜色
         onTap: (index) {
           setState(() {
-            currentIndexTemp = index;
+            _currentIndexTemp = index;
           });
         },
         items: [
@@ -92,4 +99,5 @@ class _TapsState extends State<Taps> {
       ),
     );
   }
+
 }

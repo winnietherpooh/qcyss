@@ -10,6 +10,7 @@ import 'package:yss/pages/index.dart';
 import 'package:yss/pages/login.dart';
 import 'package:yss/pages/setPasswd.dart';
 import 'package:yss/tabs/Taps.dart';
+import 'package:yss/tabs/tabspage/Home.dart';
 
 //动画
 Widget zoomInTransition(BuildContext context, Animation<double> animation,
@@ -38,5 +39,6 @@ class $AppRouter {
   SignPage signPageRoute;
 
   SignViewPage signViewPageRoute;
+
 
 }
