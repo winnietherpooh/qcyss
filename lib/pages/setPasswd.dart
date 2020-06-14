@@ -47,10 +47,17 @@ class _SetPassWdPageState extends State<SetPassWdPage> {
                           child: Container(
                             margin: EdgeInsets.only(left: sySetWidth(25)),
                             child: TextField(
+                              maxLines: 1,
+                              keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                   hintText: '请输入原密码',
+                                  hintStyle: TextStyle(
+                                    fontSize: sySetFontSize(28),
+                                    color: Color.fromRGBO(153, 153, 153, 1)
+                                  ),
                                   labelStyle: TextStyle(
-                                    fontSize: sySetFontSize(30),
+                                    fontSize: sySetFontSize(28),
+                                      color: Color.fromRGBO(51, 51, 51, 1)
                                   ),
                                   border: InputBorder.none),
                             ),
@@ -90,6 +97,10 @@ class _SetPassWdPageState extends State<SetPassWdPage> {
                                   labelStyle: TextStyle(
                                     fontSize: sySetFontSize(30),
                                   ),
+                                  hintStyle: TextStyle(
+                                      fontSize: sySetFontSize(28),
+                                      color: Color.fromRGBO(153, 153, 153, 1)
+                                  ),
                                   border: InputBorder.none),
                             ),
                           ),
@@ -127,6 +138,10 @@ class _SetPassWdPageState extends State<SetPassWdPage> {
                                   hintText: '请再次输入密码（6-18位字母加数字组成）',
                                   labelStyle: TextStyle(
                                     fontSize: sySetFontSize(30),
+                                  ),
+                                  hintStyle: TextStyle(
+                                      fontSize: sySetFontSize(28),
+                                      color: Color.fromRGBO(153, 153, 153, 1)
                                   ),
                                   border: InputBorder.none),
                             ),

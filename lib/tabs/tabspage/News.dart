@@ -159,7 +159,10 @@ class _NewsPageState extends State<NewsPage> {
                                   0, 0, sySetWidth(14), sySetWidth(24)),
                               alignment: Alignment.bottomRight,
                               child: Text(
-                                v.addTime,
+                                v.addTime,style: TextStyle(
+                                fontSize: sySetFontSize(22),
+                                color: Color.fromRGBO(153, 153, 153, 1)
+                              ),
                               ),
                             ),
                           ],

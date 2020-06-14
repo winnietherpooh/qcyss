@@ -102,7 +102,10 @@ class _SetListPageState extends State<SetListPage> {
                         child: OutlineButton(
                           child: Row(
                             children: <Widget>[
-                              Text('设置密码'),
+                              Text('设置密码',style: TextStyle(
+                                fontSize: sySetFontSize(28),
+                                color: Color.fromRGBO(153, 153, 153, 1)
+                              ),),
                               Image.asset(
                                 'images/right.png',
                                 width: sySetWidth(24),
