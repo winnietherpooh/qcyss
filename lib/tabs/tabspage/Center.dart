@@ -29,6 +29,8 @@ class _CenterPageState extends State<CenterPage> {
   DateTime _dateTime;
   List<Basepay> basepay = [];
   List<Welfarepay> welfarepay = [];
+  bool isShowBaseWidget = true;
+  bool isShowWareWidget = true;
   @override
   void initState() {
     super.initState();
@@ -43,6 +45,13 @@ class _CenterPageState extends State<CenterPage> {
     Data data = salaryResponseModel.data;
     setState(() {
       basepay = data.basepay;
+      print(basepay.length);
+      if(basepay.length > 0){
+        isShowBaseWidget = false;
+      }
+      if(welfarepay.length > 0){
+        isShowWareWidget = false;
+      }
       welfarepay = data.welfarepay;
     });
   }
@@ -58,6 +67,8 @@ class _CenterPageState extends State<CenterPage> {
       body: _getAllWidget(),
     );
   }
+
+
 
   void _showDatePicker(int type) {
     DatePicker.showDatePicker(
@@ -112,8 +123,15 @@ class _CenterPageState extends State<CenterPage> {
         controller: this._controller,
         children: <Widget>[
           _getHeadWidget(),
-          _getBasyPayWidget('未确定发放工资明细', basepay,1),
-          _getBasyPayWidget('未确定发放奖金明细', welfarepay,2),
+          Offstage(
+            offstage: isShowBaseWidget,
+            child: _getBasyPayWidget('未确定发放工资明细', basepay,1),
+          ),
+          Offstage(
+            offstage: isShowWareWidget,
+           child:  _getBasyPayWidget('未确定发放奖金明细', welfarepay,2),
+          )
+
           //_getBasyPayWidget('未确定发放奖金明细'),
           //_getSearchList(),
         ],
@@ -264,7 +282,8 @@ class _CenterPageState extends State<CenterPage> {
   }
 
   //未确定工资布局
-  _getBasyPayWidget(String title, var key,int type) {
+  _getBasyPayWidget(String title, List<dynamic> key,int type) {
+
     return Container(
       margin: EdgeInsets.only(top: sySetHeight(30)),
       child: Column(
