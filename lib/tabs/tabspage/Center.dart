@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:yss/common/apis/SignSalary.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/utils.dart';
+import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:yss/model/SignSalaryRequestModel.dart';
@@ -31,6 +32,7 @@ class _CenterPageState extends State<CenterPage> {
   List<Welfarepay> welfarepay = [];
   bool isShowBaseWidget = true;
   bool isShowWareWidget = true;
+  bool isShowLoading = false;
   @override
   void initState() {
     super.initState();
@@ -46,13 +48,16 @@ class _CenterPageState extends State<CenterPage> {
     setState(() {
       basepay = data.basepay;
       print(basepay.length);
-      if(basepay.length > 0){
+      if(data.basepay.length > 0){
         isShowBaseWidget = false;
       }
-      if(welfarepay.length > 0){
+      if(data.welfarepay.length > 0){
         isShowWareWidget = false;
       }
       welfarepay = data.welfarepay;
+      if(isShowBaseWidget == false || isShowWareWidget == false){
+        isShowLoading = true;
+      }
     });
   }
 
@@ -124,6 +129,10 @@ class _CenterPageState extends State<CenterPage> {
         children: <Widget>[
           _getHeadWidget(),
           Offstage(
+            offstage: isShowLoading,
+            child: getLoadingWidget(),
+          ),
+          Offstage(
             offstage: isShowBaseWidget,
             child: _getBasyPayWidget('未确定发放工资明细', basepay,1),
           ),
@@ -170,7 +179,8 @@ class _CenterPageState extends State<CenterPage> {
                     ),
                     image: DecorationImage(
                         image: NetworkImage("${Global.profile.userPortrait}"),
-                        fit: BoxFit.cover),
+
+                        fit: BoxFit.fitWidth),
                   ),
                 ),
                 Container(

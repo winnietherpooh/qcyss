@@ -5,6 +5,7 @@ import 'package:yss/common/router/router.gr.dart';
 
 //import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/userModel.dart';
 
@@ -18,18 +19,22 @@ class _LoginPageState extends State<LoginPage> {
   var _passWd = new TextEditingController(text: "123456");
 
   _loginRequest() async {
+    showLoading(context,"登录中...");
     UserLoginRequestEntity params = UserLoginRequestEntity(
       userAccount: _userName.value.text,
       passWord: _passWd.value.text,
     );
 
-    UserInfoModel userProfile = await UserAPI.login(
+    UserResponseModel userResponseModel = await UserAPI.login(
       context: context,
       params: params,
     );
-
+    if(userResponseModel.error != 200){
+      Navigator.pop(context);
+      return showError(context,text: userResponseModel.message,times: 1000);
+    }
+    UserInfoModel userProfile = userResponseModel.data;
     Global.saveProfile(userProfile);
-    print(userProfile.token);
     ExtendedNavigator.rootNavigator.pushNamed(Routes.tabsRoute);
   }
 

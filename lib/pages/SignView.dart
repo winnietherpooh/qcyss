@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
@@ -27,7 +28,7 @@ class _SignViewPageState extends State<SignViewPage> {
   }
 
   _doUploadImg(){
-    showLoading(context,"正在提交");
+     showLoading(context,"正在提交");
     _shareUiImage();
   }
   _shareUiImage() async {
@@ -50,13 +51,15 @@ class _SignViewPageState extends State<SignViewPage> {
         salaryRequestModel: this.widget.salaryRequestModel,
         file: file);
     if(responseModel.error == 200){
-       toastInfo(msg: responseModel.message);
-       ExtendedNavigator.rootNavigator.pushTabsRoute(index: 2);
+       Navigator.pop(context);
+       showSuccessRoute(context,_gotoCenter,text: responseModel.message,times:500);
     }else{
-      toastInfo(msg: responseModel.message);
+      showError(responseModel.message);
     }
   }
-
+  _gotoCenter(){
+    ExtendedNavigator.rootNavigator.pushTabsRoute(index: 2);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yss/common/apis/News.dart';
 import 'package:yss/common/util/function.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/NewsModel.dart';
 import 'package:yss/pages/banner.dart';
@@ -16,7 +17,8 @@ class NewsPage extends StatefulWidget {
 
 class _NewsPageState extends State<NewsPage> {
   List<NewsItemModel> _dataList = new List();
-  NewsRequestModel newsRequestModel = NewsRequestModel(page: 1,companyId: Global.companyId);
+  NewsRequestModel newsRequestModel =
+      NewsRequestModel(p: 1, companyId: Global.companyId);
   ScrollController _controller = ScrollController();
   bool _flag = true;
   bool _isHadMore = true;
@@ -27,7 +29,9 @@ class _NewsPageState extends State<NewsPage> {
     _getNewsData(newsRequestModel);
     _controller.addListener(() {
       if ((_controller.position.pixels >
-          _controller.position.maxScrollExtent - 40) && _flag == true && _isHadMore) {
+              _controller.position.maxScrollExtent - 40) &&
+          _flag == true &&
+          _isHadMore) {
         //开始加载更多
         _getNewsData(newsRequestModel);
         setState(() {
@@ -40,22 +44,20 @@ class _NewsPageState extends State<NewsPage> {
   }
 
   _getNewsData(NewsRequestModel newsRequestModel) async {
-    if(!_isHadMore){
+    if (!_isHadMore) {
       return;
     }
-    NewsModel newsModel = await NewsListApi.getData(
-      context: context,
-      page: this.newsRequestModel.page
-    );
-   // print(newsModel.toJson());
+    NewsModel newsModel =
+        await NewsListApi.getData(context: context, p: this.newsRequestModel.p);
+    // print(newsModel.toJson());
     setState(() {
 //      print(newsModel.mpage);
 //      print(newsModel.page);
-      if(newsModel.mpage < this.newsRequestModel.page){
+      if (newsModel.mpage < this.newsRequestModel.p) {
         _isHadMore = false;
         return;
       }
-      this.newsRequestModel.page+=1;
+      this.newsRequestModel.p += 1;
       // this._dataList = NewsResult.data;
       this._dataList.addAll(newsModel.data);
     });
@@ -80,10 +82,9 @@ class _NewsPageState extends State<NewsPage> {
           child: Container(
             color: Color.fromRGBO(240, 240, 240, 1),
             child: ListView(
-              physics: AlwaysScrollableScrollPhysics(),
-              controller: _controller,
-              children: _getNewsItemWidget()
-            ),
+                physics: AlwaysScrollableScrollPhysics(),
+                controller: _controller,
+                children: _getNewsItemWidget()),
           ),
         ));
   }
@@ -159,10 +160,10 @@ class _NewsPageState extends State<NewsPage> {
                                   0, 0, sySetWidth(14), sySetWidth(24)),
                               alignment: Alignment.bottomRight,
                               child: Text(
-                                v.addTime,style: TextStyle(
-                                fontSize: sySetFontSize(22),
-                                color: Color.fromRGBO(153, 153, 153, 1)
-                              ),
+                                v.addTime,
+                                style: TextStyle(
+                                    fontSize: sySetFontSize(22),
+                                    color: Color.fromRGBO(153, 153, 153, 1)),
                               ),
                             ),
                           ],
@@ -185,6 +186,8 @@ class _NewsPageState extends State<NewsPage> {
           list.add(t);
         },
       );
+    } else {
+      list.add(getLoadingWidget());
     }
 //    return GestureDetector(
 //      child: Column(

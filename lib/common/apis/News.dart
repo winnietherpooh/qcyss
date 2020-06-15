@@ -11,12 +11,12 @@ class NewsListApi {
   /// banner
   static Future<NewsModel> getData({
     @required BuildContext context,
-    int page
+    int p
   }) async {
 
     var response = await HttpUtil().get(
       '${Global.domain}index.php?m=Home&c=Newapi&'
-          'a=newList&cid=${Global.companyId}',
+          'a=newList&cid=${Global.companyId}&p=${p}',
       context: context,
      // params: newsRequestModel
     );
