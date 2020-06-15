@@ -27,8 +27,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(widget.textList);
-    print(widget.times);
   }
 
   @override

@@ -2,12 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yss/common/apis/SearchSalary.dart';
 import 'package:yss/common/apis/SignSalary.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/utils.dart';
 import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+import 'package:yss/model/SearchModel.dart';
 import 'package:yss/model/SignSalaryRequestModel.dart';
 import 'package:yss/model/SignSalaryResponseModel.dart';
 
@@ -33,12 +35,16 @@ class _CenterPageState extends State<CenterPage> {
   bool isShowBaseWidget = true;
   bool isShowWareWidget = true;
   bool isShowLoading = false;
+  List<WagesDropdown> dorpDown;
+  List<List<WagesList>> wagesList=[];
+  var _dropDownValue;
   @override
   void initState() {
     super.initState();
     _dateTime = DateTime.parse(INIT_DATETIME);
     //print(formatDate(DateTime.now(), ['yyyy', '-', 'mm']));
     _getSalaryData();
+    _getSearchData();
   }
 
   _getSalaryData() async {
@@ -61,6 +67,15 @@ class _CenterPageState extends State<CenterPage> {
     });
   }
 
+  _getSearchData() async{
+    SearchRequestModel searchRequestModel = SearchRequestModel(cid: Global.companyId);
+    SearchModel searchModel = await SearchSalaryApi.getData(context: context, searchRequestModel: searchRequestModel);
+    if(searchModel.error == 200){
+      dorpDown = searchModel.data.wagesDropdown;
+      wagesList = searchModel.data.wagesList;
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,21 +143,20 @@ class _CenterPageState extends State<CenterPage> {
         controller: this._controller,
         children: <Widget>[
           _getHeadWidget(),
-          Offstage(
-            offstage: isShowLoading,
-            child: getLoadingWidget(),
-          ),
-          Offstage(
-            offstage: isShowBaseWidget,
-            child: _getBasyPayWidget('未确定发放工资明细', basepay,1),
-          ),
-          Offstage(
-            offstage: isShowWareWidget,
-           child:  _getBasyPayWidget('未确定发放奖金明细', welfarepay,2),
-          )
+//          Offstage(
+//            offstage: isShowLoading,
+//            child: getLoadingWidget(),
+//          ),
+//          Offstage(
+//            offstage: isShowBaseWidget,
+//            child: _getBasyPayWidget('未确定发放工资明细', basepay,1),
+//          ),
+//          Offstage(
+//            offstage: isShowWareWidget,
+//           child:  _getBasyPayWidget('未确定发放奖金明细', welfarepay,2),
+//          )
 
-          //_getBasyPayWidget('未确定发放奖金明细'),
-          //_getSearchList(),
+          _getSearchList(),
         ],
       ),
     );
@@ -475,6 +489,7 @@ class _CenterPageState extends State<CenterPage> {
       child: Column(
         children: <Widget>[
           _getSearchTitleWidget(),
+          _getSearchWidget(wagesList),
 //          _getBasePayAllItem(),
 //          _getBasePayAllItem(),
         ],
@@ -553,7 +568,7 @@ class _CenterPageState extends State<CenterPage> {
               fit: BoxFit.fill,
             ),
           ),
-          _searchTextFiledWidget(2, dateEnd, times: '2018-01'),
+          _searchTextFiledWidget(2, dateEnd, times: TIME_NOW),
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -592,6 +607,97 @@ class _CenterPageState extends State<CenterPage> {
               ],
             ),
           )
+        ],
+      ),
+    );
+  }
+
+
+  //这个返回每一项工资的所有键值对
+  //未确认工资明细的每一项布局
+  List<Widget> _getSearchListItemWidget(
+      List value) {
+    List<Widget> itemWidget = new List();
+    for (var i = 0; i < value.length; i++) {
+      var t = Container(
+        decoration: BoxDecoration(
+            border: Border(
+                right: BorderSide(
+                    color: Color.fromRGBO(248, 248, 248, 1),
+                    width: sySetWidth(2)))),
+        width: sySetWidth(200),
+        height: sySetHeight(220),
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              width: sySetWidth(200),
+              height: sySetHeight(100),
+              color: AppColors.mainColor,
+              child: Text(
+                '${value[i].name}',
+                style: TextStyle(
+                  color: AppColors.mainFontColor,
+                  fontSize: sySetFontSize(28),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              width: sySetWidth(200),
+              height: sySetHeight(100),
+              color: AppColors.mainFontColor,
+              child: Text(
+                '${value[i].value}',
+                style: TextStyle(
+                  color: Color.fromRGBO(51, 51, 51, 1),
+                  fontSize: sySetFontSize(28),
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+      itemWidget.add(t);
+    }
+    return itemWidget;
+  }
+
+
+  //获取工资奖金列表
+  List<Widget> _getSearchAllItem(List<List<WagesList>> basepay) {
+    print(basepay);
+    List<Widget> baseWidget = [];
+    for (var i = 0; i < basepay.length; i++) {
+      var t = Container(
+        height: sySetHeight(200),
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          controller: this._controller,
+          children: _getSearchListItemWidget(
+              basepay[i]),
+        ),
+      );
+      baseWidget.add(t);
+    }
+    return baseWidget;
+  }
+
+
+  _getSearchWidget(List<List<WagesList>> key) {
+
+    return Container(
+      margin: EdgeInsets.only(top: sySetHeight(30)),
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: ListView(
+              controller: this._controller,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: _getSearchAllItem(key),
+            ),
+          ),
         ],
       ),
     );
