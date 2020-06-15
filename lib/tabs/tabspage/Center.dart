@@ -329,7 +329,8 @@ class _CenterPageState extends State<CenterPage> {
 
   //这个返回每一项工资的所有键值对
   //未确认工资明细的每一项布局
-  List<Widget> _getBasePayListItemWidget(List value,String sendMonth,int type,{String ffrq}) {
+  List<Widget> _getBasePayListItemWidget(
+      List value,String sendMonth,int type,{String ffrq,List<String> textlist,String monthText}) {
     List<Widget> itemWidget = new List();
     for (var i = 0; i < value.length; i++) {
       var t = Container(
@@ -376,12 +377,12 @@ class _CenterPageState extends State<CenterPage> {
     if (itemWidget.length > 0) {
 
       itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: ffrq,ffy: sendMonth,welfarename: type)));
-      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: ffrq,ffy: sendMonth,welfarename: type),buttonColor: Color.fromRGBO(190, 1, 8, 1),buttonText: '反馈',labelTitle: '反馈'));
+      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: ffrq,ffy: sendMonth,welfarename: type,textList: textlist,monthText: monthText),buttonColor: Color.fromRGBO(190, 1, 8, 1),buttonText: '反馈',labelTitle: '反馈',type: 2));
     }
     return itemWidget;
   }
 
-  _getItemButton(SignSalaryRequestModel salaryRequestModel,{Color buttonColor,String buttonText='确认',String labelTitle="签字"}) {
+  _getItemButton(SignSalaryRequestModel salaryRequestModel,{int type = 1,Color buttonColor,String buttonText='确认',String labelTitle="签字"}) {
     return Container(
       decoration: BoxDecoration(
           border: Border(
@@ -417,7 +418,11 @@ class _CenterPageState extends State<CenterPage> {
                   color: buttonColor ?? Color.fromRGBO(0, 122, 255, 1),
                   onPressed: () {
                   //  ExtendedNavigator.rootNavigator.pushNewsInfoPageRoute(id:'${this._dataList[index].id}');
-                    ExtendedNavigator.rootNavigator.pushSignPageRoute(salaryRequestModel: salaryRequestModel);
+                    if(type == 2){
+                      ExtendedNavigator.rootNavigator.pushFeedbackPageRoute(textList: salaryRequestModel.textList,times: salaryRequestModel.ffy,monthText: salaryRequestModel.monthText);
+                    }else{
+                      ExtendedNavigator.rootNavigator.pushSignPageRoute(salaryRequestModel: salaryRequestModel);
+                    }
                   },
                   child: Text(
                     '${buttonText}',
@@ -437,11 +442,13 @@ class _CenterPageState extends State<CenterPage> {
   List<Widget> _getBasePayAllItem(List basepay,int type) {
 
     List<Widget> baseWidget = [];
+    List<String> textList = ['基本工资'];
     for (var i = 0; i < basepay.length; i++) {
 
       String times = basepay[i].name;
       if(type == 2){
         times =  basepay[i].times;
+        textList = basepay[i].textList;
       }
 
       var t = Container(
@@ -449,7 +456,8 @@ class _CenterPageState extends State<CenterPage> {
         child: ListView(
           scrollDirection: Axis.horizontal,
           controller: this._controller,
-          children: _getBasePayListItemWidget(basepay[i].value,basepay[i].name,type,ffrq: times),
+          children: _getBasePayListItemWidget(
+              basepay[i].value,basepay[i].name,type,ffrq: times,textlist: textList,monthText: basepay[i].monthText),
         ),
       );
       baseWidget.add(t);

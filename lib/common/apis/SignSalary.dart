@@ -37,7 +37,6 @@ class SignImageUploadApi{
     var fileData = await MultipartFile.fromFile(
         path
     );
-    print(file);
     Map<String,dynamic> map = {
       'ffrq':salaryRequestModel.ffrq,
       'ffy':salaryRequestModel.ffy,

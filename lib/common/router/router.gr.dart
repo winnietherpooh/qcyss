@@ -20,6 +20,7 @@ import 'package:yss/pages/Sign.dart';
 import 'package:yss/model/SignSalaryRequestModel.dart';
 import 'package:yss/pages/SignView.dart';
 import 'dart:typed_data';
+import 'package:yss/pages/Feedback.dart';
 
 abstract class Routes {
   static const indexPageRoute = '/';
@@ -31,6 +32,7 @@ abstract class Routes {
   static const salaryInfoPageRoute = '/salary-info-page-route';
   static const signPageRoute = '/sign-page-route';
   static const signViewPageRoute = '/sign-view-page-route';
+  static const feedbackPageRoute = '/feedback-page-route';
   static const all = {
     indexPageRoute,
     tabsRoute,
@@ -41,6 +43,7 @@ abstract class Routes {
     salaryInfoPageRoute,
     signPageRoute,
     signViewPageRoute,
+    feedbackPageRoute,
   };
 }
 
@@ -129,6 +132,16 @@ class AppRouter extends RouterBase {
               SignViewPage(typedArgs.imageData, typedArgs.salaryRequestModel),
           settings: settings,
         );
+      case Routes.feedbackPageRoute:
+        if (hasInvalidArgs<FeedbackPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<FeedbackPageArguments>(args);
+        }
+        final typedArgs = args as FeedbackPageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => FeedbackPage(
+              typedArgs.textList, typedArgs.times, typedArgs.monthText),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -176,6 +189,17 @@ class SignViewPageArguments {
   final SignSalaryRequestModel salaryRequestModel;
   SignViewPageArguments(
       {@required this.imageData, @required this.salaryRequestModel});
+}
+
+//FeedbackPage arguments holder class
+class FeedbackPageArguments {
+  final List<String> textList;
+  final String times;
+  final String monthText;
+  FeedbackPageArguments(
+      {@required this.textList,
+      @required this.times,
+      @required this.monthText});
 }
 
 // *************************************************************************
@@ -239,5 +263,16 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
         Routes.signViewPageRoute,
         arguments: SignViewPageArguments(
             imageData: imageData, salaryRequestModel: salaryRequestModel),
+      );
+
+  Future pushFeedbackPageRoute({
+    @required List<String> textList,
+    @required String times,
+    @required String monthText,
+  }) =>
+      pushNamed(
+        Routes.feedbackPageRoute,
+        arguments: FeedbackPageArguments(
+            textList: textList, times: times, monthText: monthText),
       );
 }

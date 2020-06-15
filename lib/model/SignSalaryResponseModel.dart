@@ -46,18 +46,22 @@ class Basepay {
   Basepay({
     this.name,
     this.value,
+    this.monthText
   });
 
   String name;
+  String monthText;
   List<Value> value;
 
   factory Basepay.fromJson(Map<String, dynamic> json) => Basepay(
     name: json["name"],
+    monthText: json["monthText"],
     value: List<Value>.from(json["value"].map((x) => Value.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "name": name,
+    "monthText": monthText,
     "value": List<dynamic>.from(value.map((x) => x.toJson())),
   };
 }
@@ -86,22 +90,30 @@ class Welfarepay {
   Welfarepay({
     this.name,
     this.times,
+    this.textList,
     this.value,
+    this.monthText,
   });
 
   String name;
   String times;
+  List<String> textList;
+  String monthText;
   List<Value> value;
 
   factory Welfarepay.fromJson(Map<String, dynamic> json) => Welfarepay(
     name: json["name"],
     times: json["times"],
+    monthText: json["monthText"],
+    textList: List<String>.from(json["textList"].map((x) => x)),
     value: List<Value>.from(json["value"].map((x) => Value.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "name": name,
     "times": times,
+    "monthText": monthText,
+    "textList": List<dynamic>.from(textList.map((x) => x)),
     "value": List<dynamic>.from(value.map((x) => x.toJson())),
   };
 }

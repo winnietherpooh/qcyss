@@ -159,7 +159,7 @@ void showLoading(context, String text) {
 
 void showError(context, {String text = "网络错误", int times = 2000}) {
   showDialog(
-      barrierDismissible: true,
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return Center(

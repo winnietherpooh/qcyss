@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:yss/pages/Feedback.dart';
 import 'package:yss/pages/NewsInfo.dart';
 import 'package:yss/pages/SalaryInfo.dart';
 import 'package:yss/pages/SetList.dart';
@@ -39,6 +40,8 @@ class $AppRouter {
   SignPage signPageRoute;
 
   SignViewPage signViewPageRoute;
+
+  FeedbackPage feedbackPageRoute;
 
 
 }
