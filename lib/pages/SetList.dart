@@ -20,7 +20,7 @@ class _SetListPageState extends State<SetListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget('设置'),
+      appBar: getAppBarWidget(context,'设置'),
       body: Column(
         children: <Widget>[
           Container(
@@ -166,8 +166,12 @@ class _SetListPageState extends State<SetListPage> {
 
 
   Future _selectImgChangeAvatar() async {
-    showLoading(context, '上传头像中');
+
     var images = await ImagePicker().getImage(source: ImageSource.gallery);
+    if(images == null){
+      return ;
+    }
+    showLoading(context, '上传头像中');
     UploadResponseModel uploadResponseModel = await UploadAvatarApi.uploadImg(context: context,  file: images);
     print(uploadResponseModel.error);
     if(uploadResponseModel.error == 200){

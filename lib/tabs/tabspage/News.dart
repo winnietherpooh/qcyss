@@ -67,7 +67,7 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget('新闻',isShowIcon: false),
+      appBar: getAppBarWidget(context,'新闻',isShowIcon: false),
       body: RefreshIndicator(
         onRefresh: () {
           return Future.delayed(Duration(seconds: 1), () {

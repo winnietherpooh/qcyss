@@ -19,6 +19,10 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
   ScrollController _controller = ScrollController();
   bool _isHadMore = true;
   bool _flag = true;  //数据是否加载完成
+
+  _gobackReflush(){
+    ExtendedNavigator.rootNavigator.pushTabsRoute(index: 2);
+  }
   //1,下拉,2,上拉
   _getFeedbackList({int type=1}) async {
 //    print('方法当前page${page}');
@@ -76,9 +80,23 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
   }
 
   @override
+  void deactivate() {
+    super.deactivate();
+    var bool = ModalRoute.of(context).isCurrent;
+    print("是否返回"+bool.toString());
+    if (bool) {
+      setState(() {
+        page = 1;
+        _isHadMore = true;
+        this._getFeedbackList();
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: getAppBarWidget('反馈'),
+        appBar: getAppBarWidget(context,'反馈'),
         body: RefreshIndicator(
           onRefresh: () {
             return Future.delayed(Duration(seconds: 1), () {

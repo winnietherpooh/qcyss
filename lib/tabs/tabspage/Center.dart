@@ -92,7 +92,7 @@ class _CenterPageState extends State<CenterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget('个人中心',isShowIcon: false),
+      appBar: getAppBarWidget(context,'个人中心',isShowIcon: false),
       body: _getAllWidget(),
     );
   }

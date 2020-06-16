@@ -33,7 +33,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget('反馈'),
+      appBar: getAppBarWidget(context,'反馈'),
       body: _getFeedbackWidget(),
     );
   }

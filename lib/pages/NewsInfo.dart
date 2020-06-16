@@ -52,7 +52,7 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
   Widget build(BuildContext context) {
     print(arguments);
     return Scaffold(
-      appBar: getAppBarWidget('新闻详情'),
+      appBar: getAppBarWidget(context,'新闻详情'),
       body: Container(
         width: double.infinity,
           child: ListView(

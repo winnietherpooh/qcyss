@@ -31,7 +31,7 @@ class _SalaryInfoPageState extends State<SalaryInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget('计算结果'),
+      appBar: getAppBarWidget(context,'计算结果'),
       body: _getAllData(),
     );
   }

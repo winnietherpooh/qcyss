@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget('优算师',isShowIcon: false),
+      appBar: getAppBarWidget(context,'优算师',isShowIcon: false),
       body: ListView(
         children: <Widget>[
           BannerPage(),

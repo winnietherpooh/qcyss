@@ -65,7 +65,7 @@ class _SignViewPageState extends State<SignViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget('签名确认'),
+      appBar: getAppBarWidget(context,'签名确认'),
       body: Container(
         child: Column(
           children: <Widget>[
