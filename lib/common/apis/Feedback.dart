@@ -48,7 +48,6 @@ class FeedbackApi {
       context: context,
       params: map
     );
-    print(response);
     return FeedbackInfoModel.fromJson(json.decode(response));
   }
 }

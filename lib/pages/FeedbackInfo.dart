@@ -20,7 +20,6 @@ class FeedbackInfoPage extends StatefulWidget {
 
 class _FeedbackInfoPageState extends State<FeedbackInfoPage> {
 
-  Map arguments;
   var _title="";
   var _content="";
 
@@ -37,15 +36,14 @@ class _FeedbackInfoPageState extends State<FeedbackInfoPage> {
     );
     if(feedbackInfoModel.error == 200){
       setState(() {
-        this._title = feedbackInfoModel.data.content;
-        this._content = feedbackInfoModel.data.backCont;
+        this._title = feedbackInfoModel.data.content ?? "";
+        this._content = feedbackInfoModel.data.backCont ?? "";
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    print(arguments);
     return Scaffold(
       appBar: AppBar(
         title: Text('反馈详情'),
@@ -64,8 +62,6 @@ class _FeedbackInfoPageState extends State<FeedbackInfoPage> {
                     sySetWidth(24), sySetHeight(50), sySetHeight(24), 0),
                 child: Text(
                   _title,
-                  maxLines: 1,
-                  overflow: TextOverflow.visible,
                   style: TextStyle(
                       color: Color.fromRGBO(51, 51, 51, 1),
                       fontWeight: FontWeight.bold,
