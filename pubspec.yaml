@@ -58,7 +58,8 @@ dependencies:
   flutter_cupertino_date_picker: ^1.0.26
   #文件保存
   path_provider: ^1.6.10
-
+  #图片选择
+  image_picker: ^0.6.7+2
 dev_dependencies:
   flutter_test:
     sdk: flutter
