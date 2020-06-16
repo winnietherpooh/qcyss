@@ -15,13 +15,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var sqSalary = TextEditingController();
-  var _insurance = TextEditingController(); //保险
-  var _accumulationFund = TextEditingController(); //公积金
-  var _education = TextEditingController(); //子女教育
+  TextEditingController sqSalary = TextEditingController();
+  TextEditingController _insurance = TextEditingController(); //保险
+  TextEditingController _accumulationFund = TextEditingController(); //公积金
+  TextEditingController _education = TextEditingController(); //子女教育
   var _educationPercent = 0; //子女教育百分比
   var _adultEducationPercent = 0; //继续教育百分比
-  var _medical = TextEditingController(); //医疗
+  TextEditingController _medical = TextEditingController(); //医疗
   var _housingLoans = 0; //住房贷款
   var _housingFund = 0;
 
@@ -47,8 +47,8 @@ class _HomePageState extends State<HomePage> {
 
   _resetAll() {
     setState(() {
-      sqSalary = TextEditingController();
       _insurance = TextEditingController();
+      sqSalary = TextEditingController();
       _accumulationFund = TextEditingController();
       _education = TextEditingController();
       _medical = TextEditingController();
@@ -66,9 +66,9 @@ class _HomePageState extends State<HomePage> {
           _getTopTitleWidget('个税计算器（金额最多2位小数）'),
           _getCenterMsgHadIconWidget('税前工资', '请输入税前工资', sqSalary),
           _getCenterMsgWidthoutIconWidget(
-              '各项社会保险', '请输入各项社会保险金额', this._insurance),
+              '各项社会保险', '请输入各项社会保险金额', _insurance),
           _getCenterMsgWidthoutIconWidget(
-              '五险一金', '请输入公积金', this._accumulationFund),
+              '五险一金', '请输入公积金', _accumulationFund),
           _getTopTitleWidget('专项抵扣'),
           _getCenterMsgHadButtonListWidget(
               '子女教育', '请输入人数', this._education, this._educationPercent,
@@ -123,7 +123,11 @@ class _HomePageState extends State<HomePage> {
                     color: Color.fromRGBO(255, 255, 255, 1),
                     fontSize: sySetFontSize(32)
                 ),),
-                onPressed: _resetAll,
+                onPressed: (){
+                  setState(() {
+                    _resetAll();
+                  });
+                },
               ),
             ),
           )
@@ -148,7 +152,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   //带图标的文本输入框
-  _getCenterMsgHadIconWidget(String label, String floatLabel, var Controller) {
+  _getCenterMsgHadIconWidget(String label, String floatLabel, var myEditController) {
     return Container(
       height: sySetHeight(110),
       decoration: BoxDecoration(
@@ -187,7 +191,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.only(right: sySetWidth(24)),
               child: TextField(
-                controller: Controller,
+                controller: myEditController,
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -239,6 +243,7 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               margin: EdgeInsets.only(right: sySetWidth(24)),
               child: TextField(
+                controller: Controller,
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -301,6 +306,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.only(right: sySetWidth(24)),
               child: TextField(
+                controller: Controller,
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(

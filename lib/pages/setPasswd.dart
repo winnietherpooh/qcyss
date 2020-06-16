@@ -55,9 +55,9 @@ class _SetPassWdPageState extends State<SetPassWdPage> {
                           child: Container(
                             margin: EdgeInsets.only(left: sySetWidth(25)),
                             child: TextField(
+                              keyboardType: TextInputType.visiblePassword,
                               controller: _oldPassWd,
                               maxLines: 1,
-                              keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                   hintText: '请输入原密码',
                                   hintStyle: TextStyle(
@@ -101,6 +101,7 @@ class _SetPassWdPageState extends State<SetPassWdPage> {
                           child: Container(
                             margin: EdgeInsets.only(left: sySetWidth(25)),
                             child: TextField(
+                              keyboardType: TextInputType.visiblePassword,
                               controller: _newPassWd,
                               decoration: InputDecoration(
                                   hintText: '请输入新密码（6-18位字母加数字组成）',
@@ -145,6 +146,7 @@ class _SetPassWdPageState extends State<SetPassWdPage> {
                             margin: EdgeInsets.only(left: sySetWidth(25)),
                             child: TextField(
                               controller: _repeatPassWd,
+                              keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                   hintText: '请再次输入密码（6-18位字母加数字组成）',
                                   labelStyle: TextStyle(
