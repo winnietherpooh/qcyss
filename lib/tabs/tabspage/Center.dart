@@ -288,7 +288,7 @@ class _CenterPageState extends State<CenterPage> {
                           ),
                           onPressed: () {
                             ExtendedNavigator.rootNavigator
-                                .pushNamed(Routes.setListPageRoute);
+                                .pushNamed(Routes.feedbackListPageRoute);
                           },
                         ),
                       )

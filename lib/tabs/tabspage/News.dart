@@ -66,27 +66,28 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('新闻'),
-          centerTitle: true,
-        ),
-        body: RefreshIndicator(
-          onRefresh: () {
-            return Future.delayed(Duration(seconds: 1), () {
-              setState(() {
-                this._getNewsData(newsRequestModel);
-              });
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text('新闻'),
+        centerTitle: true,
+      ),
+      body: RefreshIndicator(
+        onRefresh: () {
+          return Future.delayed(Duration(seconds: 1), () {
+            setState(() {
+              this._getNewsData(newsRequestModel);
             });
-          },
-          child: Container(
-            color: Color.fromRGBO(240, 240, 240, 1),
-            child: ListView(
-                physics: AlwaysScrollableScrollPhysics(),
-                controller: _controller,
-                children: _getNewsItemWidget()),
-          ),
-        ));
+          });
+        },
+        child: Container(
+          color: Color.fromRGBO(240, 240, 240, 1),
+          child: ListView(
+              physics: AlwaysScrollableScrollPhysics(),
+              controller: _controller,
+              children: _getNewsItemWidget()),
+        ),
+      ),
+    );
   }
 
   _getHeightLine() {

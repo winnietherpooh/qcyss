@@ -21,6 +21,7 @@ import 'package:yss/model/SignSalaryRequestModel.dart';
 import 'package:yss/pages/SignView.dart';
 import 'dart:typed_data';
 import 'package:yss/pages/Feedback.dart';
+import 'package:yss/pages/FeedbackList.dart';
 
 abstract class Routes {
   static const indexPageRoute = '/';
@@ -33,6 +34,7 @@ abstract class Routes {
   static const signPageRoute = '/sign-page-route';
   static const signViewPageRoute = '/sign-view-page-route';
   static const feedbackPageRoute = '/feedback-page-route';
+  static const feedbackListPageRoute = '/feedback-list-page-route';
   static const all = {
     indexPageRoute,
     tabsRoute,
@@ -44,6 +46,7 @@ abstract class Routes {
     signPageRoute,
     signViewPageRoute,
     feedbackPageRoute,
+    feedbackListPageRoute,
   };
 }
 
@@ -140,6 +143,11 @@ class AppRouter extends RouterBase {
         return MaterialPageRoute<dynamic>(
           builder: (context) => FeedbackPage(
               typedArgs.textList, typedArgs.times, typedArgs.monthText),
+          settings: settings,
+        );
+      case Routes.feedbackListPageRoute:
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => FeedbackListPage(),
           settings: settings,
         );
       default:
@@ -275,4 +283,6 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
         arguments: FeedbackPageArguments(
             textList: textList, times: times, monthText: monthText),
       );
+
+  Future pushFeedbackListPageRoute() => pushNamed(Routes.feedbackListPageRoute);
 }

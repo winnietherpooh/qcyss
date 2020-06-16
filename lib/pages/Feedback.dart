@@ -200,7 +200,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
         content: _controllerTextField.value.text,
         times: widget.times,
     );
-    ResponseModel responseModel = await FeedbackApi.getData(
+    ResponseModel responseModel = await FeedbackApi.postData(
         context: context, feedbackRequestEntity: feedbackRequestEntity);
     if(responseModel.error == 200){
       Navigator.pop(context);

@@ -15,13 +15,14 @@ class Global {
     token: null,
   );
 
-  static String domain = 'http://test.yousuanshi.com/reckoner/';
-  //static String domain = 'http://192.168.0.136/';
+   static String domain = 'http://test.yousuanshi.com/reckoner/';
+  // static String domain = 'http://192.168.0.136/';
   //企业ID
   static int companyId = 18;
   /// 服务器连接超时时间
   static int connectTimeout = 2000;
 
+  static Color bgColor = Color.fromRGBO(255, 255, 255, 1);
   //响应流间隔时间
   static int  receiveTimeout = 5000;
   /// 发布渠道
