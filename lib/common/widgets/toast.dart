@@ -327,3 +327,60 @@ getLoadingWidget(){
     ),
   );
 }
+
+
+
+void showNotice(context, String notice) {
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (context) {
+      return Center(
+        child: Card(
+          child: Container(
+            width: 250,
+            padding: EdgeInsets.all(8),
+            margin: EdgeInsets.all(8),
+            constraints: BoxConstraints(minHeight: 80, minWidth: 180),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(sySetWidth(10)),
+                  alignment: Alignment.center,
+                  child: Text(
+                    notice,
+                    style: TextStyle(
+                      color: Color.fromRGBO(51, 51, 51, 1),
+                      fontSize: sySetFontSize(26),
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                ),
+                Container(
+                  height: sySetHeight(50),
+                  width: double.infinity,
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      '知道了',
+                      style: TextStyle(
+                        color: Color.fromRGBO(249, 158, 5, 1),
+                        fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
