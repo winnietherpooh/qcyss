@@ -13,17 +13,20 @@ class FeedbackListPage extends StatefulWidget {
 class _FeedbackListPageState extends State<FeedbackListPage> {
   int page = 1;
   List<Datum> dataList = [];
+  ScrollController _controller = ScrollController();
+  bool _flag = true;
+  bool _isHadMore = true;
   //1,下拉,2,上拉
   _getFeedbackList({int type=1}) async {
     FeedbackResponseModel feedbackResponseModel =
         await FeedbackApi.getData(context: context, p: page);
-    print(feedbackResponseModel);
     if (feedbackResponseModel.error == 200) {
       setState(() {
-        if(type == 1){
+        if(type == 1){ //下拉
           dataList = feedbackResponseModel.data;
         }else{
           if(feedbackResponseModel.mpage < page){
+            _isHadMore = false;
             return ;
           }
           page++;
@@ -38,6 +41,20 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
     // TODO: implement initState
     super.initState();
     _getFeedbackList();
+    _controller.addListener(() {
+      if ((_controller.position.pixels >
+          _controller.position.maxScrollExtent - 40) &&
+          _flag == true &&
+          _isHadMore) {
+        //开始加载更多
+        _getFeedbackList(type: 2);
+        setState(() {
+          _flag = false;
+        });
+        print('加载更多');
+        // this._getListData();
+      }
+    });
   }
 
   @override
@@ -58,6 +75,7 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
           child: Container(
             color: Global.bgColor,
             child: ListView(
+              controller: _controller,
               //children: _getListItem(),
               children: _getListItem(),
             ),
@@ -67,7 +85,6 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
 
   _getListItem() {
     List<Widget> itemList = [];
-
     if (dataList != null) {
       dataList.forEach((element) {
         double width = 26;
