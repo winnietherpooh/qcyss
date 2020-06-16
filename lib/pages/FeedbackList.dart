@@ -14,22 +14,33 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
   int page = 1;
   List<Datum> dataList = [];
   ScrollController _controller = ScrollController();
-  bool _flag = true;
   bool _isHadMore = true;
+  bool _flag = true;  //数据是否加载完成
   //1,下拉,2,上拉
   _getFeedbackList({int type=1}) async {
+    print('方法当前page${page}');
+    print('方法当前_isHadMore${_isHadMore}');
+    print('方法当前flag${_flag}');
+    if (!_isHadMore) {
+      return;
+    }
     FeedbackResponseModel feedbackResponseModel =
         await FeedbackApi.getData(context: context, p: page);
     if (feedbackResponseModel.error == 200) {
       setState(() {
+
+        print('方法当前2page${page}');
+        print('方法当前2_isHadMore${_isHadMore}');
+        print('方法当前2flag${_flag}');
+        if(feedbackResponseModel.mpage < page){
+          _isHadMore = false;
+          return ;
+        }
+        page++;
+        _flag = true;
         if(type == 1){ //下拉
           dataList = feedbackResponseModel.data;
         }else{
-          if(feedbackResponseModel.mpage < page){
-            _isHadMore = false;
-            return ;
-          }
-          page++;
           dataList.addAll(feedbackResponseModel.data);
         }
       });
@@ -40,13 +51,16 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getFeedbackList();
+    _getFeedbackList(type: 1);
     _controller.addListener(() {
+
       if ((_controller.position.pixels >
-          _controller.position.maxScrollExtent - 40) &&
-          _flag == true &&
-          _isHadMore) {
+          _controller.position.maxScrollExtent - 40)  &&
+          _isHadMore  && _flag == true ) {
         //开始加载更多
+        print('下拉监听当前page${page}');
+        print('下拉监听当前_isHadMore${_isHadMore}');
+        print('下拉监听当前flag${_flag}');
         _getFeedbackList(type: 2);
         setState(() {
           _flag = false;
@@ -55,6 +69,7 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
         // this._getListData();
       }
     });
+
   }
 
   @override
@@ -68,6 +83,8 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
           onRefresh: () {
             return Future.delayed(Duration(seconds: 1), () {
               setState(() {
+                page = 1;
+                _isHadMore = true;
                 this._getFeedbackList();
               });
             });
