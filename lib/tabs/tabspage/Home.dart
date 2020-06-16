@@ -198,10 +198,10 @@ class _HomePageState extends State<HomePage> {
                     hintText: '${floatLabel}',
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(153, 153, 153, 1),
-                        fontSize: sySetFontSize(28)
+                        fontSize: sySetFontSize(30)
                     ),
                     labelStyle: TextStyle(
-                      fontSize: sySetFontSize(28),
+                      fontSize: sySetFontSize(30),
                     ),
                     border: InputBorder.none),
               ),
@@ -250,10 +250,10 @@ class _HomePageState extends State<HomePage> {
                     hintText: '${floatLabel}',
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(153, 153, 153, 1),
-                        fontSize: sySetFontSize(28)
+                        fontSize: sySetFontSize(30)
                     ),
                     labelStyle: TextStyle(
-                      fontSize: sySetFontSize(28),
+                      fontSize: sySetFontSize(30),
                     ),
                     border: InputBorder.none),
               ),
@@ -313,10 +313,10 @@ class _HomePageState extends State<HomePage> {
                     hintText: '${floatLabel}',
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(153, 153, 153, 1),
-                        fontSize: sySetFontSize(28)
+                        fontSize: sySetFontSize(30)
                     ),
                     labelStyle: TextStyle(
-                      fontSize: sySetFontSize(28),
+                      fontSize: sySetFontSize(30),
                     ),
                     border: InputBorder.none),
               ),
