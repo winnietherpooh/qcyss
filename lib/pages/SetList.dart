@@ -9,7 +9,6 @@ import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/UploadResponseModel.dart';
-import 'package:yss/model/responseModel.dart';
 
 class SetListPage extends StatefulWidget {
   @override
