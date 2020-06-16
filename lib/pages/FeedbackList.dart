@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/common/apis/Feedback.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/Feedback.dart';
+import 'package:yss/common/router/router.gr.dart';
 
 class FeedbackListPage extends StatefulWidget {
   @override
@@ -18,9 +20,9 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
   bool _flag = true;  //数据是否加载完成
   //1,下拉,2,上拉
   _getFeedbackList({int type=1}) async {
-    print('方法当前page${page}');
-    print('方法当前_isHadMore${_isHadMore}');
-    print('方法当前flag${_flag}');
+//    print('方法当前page${page}');
+//    print('方法当前_isHadMore${_isHadMore}');
+//    print('方法当前flag${_flag}');
     if (!_isHadMore) {
       return;
     }
@@ -29,9 +31,9 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
     if (feedbackResponseModel.error == 200) {
       setState(() {
 
-        print('方法当前2page${page}');
-        print('方法当前2_isHadMore${_isHadMore}');
-        print('方法当前2flag${_flag}');
+//        print('方法当前2page${page}');
+//        print('方法当前2_isHadMore${_isHadMore}');
+//        print('方法当前2flag${_flag}');
         if(feedbackResponseModel.mpage < page){
           _isHadMore = false;
           return ;
@@ -58,9 +60,9 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
           _controller.position.maxScrollExtent - 40)  &&
           _isHadMore  && _flag == true ) {
         //开始加载更多
-        print('下拉监听当前page${page}');
-        print('下拉监听当前_isHadMore${_isHadMore}');
-        print('下拉监听当前flag${_flag}');
+//        print('下拉监听当前page${page}');
+//        print('下拉监听当前_isHadMore${_isHadMore}');
+//        print('下拉监听当前flag${_flag}');
         _getFeedbackList(type: 2);
         setState(() {
           _flag = false;
@@ -112,85 +114,90 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
         if (element.sign == "2") {
           isShow = false;
         }
-        var t = Container(
-          height: sySetHeight(154),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                child: Image.asset(
-                  'images/redStart.png',
-                  fit: BoxFit.cover,
-                  width: sySetWidth(width),
-                  height: sySetHeight(width),
+        var t = InkWell(
+          child: Container(
+            height: sySetHeight(154),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  child: Image.asset(
+                    'images/redStart.png',
+                    fit: BoxFit.cover,
+                    width: sySetWidth(width),
+                    height: sySetHeight(width),
+                  ),
+                  alignment: Alignment.topRight,
+                  height: sySetWidth(20),
                 ),
-                alignment: Alignment.topRight,
-                height: sySetWidth(20),
-              ),
-              Container(
-                width: sySetWidth(520),
-                margin:
-                    EdgeInsets.fromLTRB(sySetWidth(24), sySetHeight(18), 0, 0),
-                child: Text(
-                  '${element.content}',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: Color.fromRGBO(51, 51, 51, 1),
-                      fontSize: sySetFontSize(28)),
-                ),
-              ),
-              Container(
+                Container(
+                  width: sySetWidth(520),
                   margin:
-                      EdgeInsets.fromLTRB(0, sySetHeight(30), sySetWidth(0), 0),
-                  alignment: Alignment.bottomRight,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Offstage(
-                        child: Container(
-                          alignment: Alignment.centerLeft,
+                  EdgeInsets.fromLTRB(sySetWidth(24), sySetHeight(18), 0, 0),
+                  child: Text(
+                    '${element.content}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Color.fromRGBO(51, 51, 51, 1),
+                        fontSize: sySetFontSize(28)),
+                  ),
+                ),
+                Container(
+                    margin:
+                    EdgeInsets.fromLTRB(0, sySetHeight(30), sySetWidth(0), 0),
+                    alignment: Alignment.bottomRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Offstage(
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.fromLTRB(
+                                sySetWidth(20), 0, sySetWidth(20), 0),
+                            padding: EdgeInsets.fromLTRB(sySetWidth(12),
+                                sySetHeight(4), sySetWidth(12), sySetHeight(4)),
+                            color: Color.fromRGBO(246, 159, 0, 1),
+                            child: Text(
+                              '已回复',
+                              style: TextStyle(
+                                  color: Color.fromRGBO(255, 254, 254, 1),
+                                  fontSize: sySetFontSize(22)),
+                            ),
+                          ),
+                          offstage: isShow,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(""),
+                        ),
+                        Container(
                           margin: EdgeInsets.fromLTRB(
                               sySetWidth(20), 0, sySetWidth(20), 0),
-                          padding: EdgeInsets.fromLTRB(sySetWidth(12),
-                              sySetHeight(4), sySetWidth(12), sySetHeight(4)),
-                          color: Color.fromRGBO(246, 159, 0, 1),
                           child: Text(
-                            '已回复',
+                            '${element.addTime}',
                             style: TextStyle(
-                                color: Color.fromRGBO(255, 254, 254, 1),
-                                fontSize: sySetFontSize(22)),
+                                color: Color.fromRGBO(153, 153, 153, 1),
+                                fontSize: sySetFontSize(24)),
                           ),
-                        ),
-                        offstage: isShow,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Text(""),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(
-                            sySetWidth(20), 0, sySetWidth(20), 0),
-                        child: Text(
-                          '${element.addTime}',
-                          style: TextStyle(
-                              color: Color.fromRGBO(153, 153, 153, 1),
-                              fontSize: sySetFontSize(24)),
-                        ),
-                      )
-                    ],
-                  ))
-            ],
-          ),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                width: sySetWidth(2),
-                color: Color.fromRGBO(229, 229, 229, 1),
+                        )
+                      ],
+                    ))
+              ],
+            ),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: sySetWidth(2),
+                  color: Color.fromRGBO(229, 229, 229, 1),
+                ),
               ),
             ),
           ),
+          onTap: (){
+            ExtendedNavigator.rootNavigator.pushFeedbackInfoPageRoute(id: element.id);
+          },
         );
         itemList.add(t);
       });

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route_annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yss/pages/Feedback.dart';
+import 'package:yss/pages/FeedbackInfo.dart';
 import 'package:yss/pages/FeedbackList.dart';
 import 'package:yss/pages/NewsInfo.dart';
 import 'package:yss/pages/SalaryInfo.dart';
@@ -45,6 +46,8 @@ class $AppRouter {
   FeedbackPage feedbackPageRoute;
 
   FeedbackListPage feedbackListPageRoute;
+
+  FeedbackInfoPage feedbackInfoPageRoute;
 
 
 }

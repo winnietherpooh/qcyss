@@ -22,6 +22,7 @@ import 'package:yss/pages/SignView.dart';
 import 'dart:typed_data';
 import 'package:yss/pages/Feedback.dart';
 import 'package:yss/pages/FeedbackList.dart';
+import 'package:yss/pages/FeedbackInfo.dart';
 
 abstract class Routes {
   static const indexPageRoute = '/';
@@ -35,6 +36,7 @@ abstract class Routes {
   static const signViewPageRoute = '/sign-view-page-route';
   static const feedbackPageRoute = '/feedback-page-route';
   static const feedbackListPageRoute = '/feedback-list-page-route';
+  static const feedbackInfoPageRoute = '/feedback-info-page-route';
   static const all = {
     indexPageRoute,
     tabsRoute,
@@ -47,6 +49,7 @@ abstract class Routes {
     signViewPageRoute,
     feedbackPageRoute,
     feedbackListPageRoute,
+    feedbackInfoPageRoute,
   };
 }
 
@@ -150,6 +153,17 @@ class AppRouter extends RouterBase {
           builder: (context) => FeedbackListPage(),
           settings: settings,
         );
+      case Routes.feedbackInfoPageRoute:
+        if (hasInvalidArgs<FeedbackInfoPageArguments>(args)) {
+          return misTypedArgsRoute<FeedbackInfoPageArguments>(args);
+        }
+        final typedArgs =
+            args as FeedbackInfoPageArguments ?? FeedbackInfoPageArguments();
+        return MaterialPageRoute<dynamic>(
+          builder: (context) =>
+              FeedbackInfoPage(key: typedArgs.key, id: typedArgs.id),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -208,6 +222,13 @@ class FeedbackPageArguments {
       {@required this.textList,
       @required this.times,
       @required this.monthText});
+}
+
+//FeedbackInfoPage arguments holder class
+class FeedbackInfoPageArguments {
+  final Key key;
+  final String id;
+  FeedbackInfoPageArguments({this.key, this.id});
 }
 
 // *************************************************************************
@@ -285,4 +306,13 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
       );
 
   Future pushFeedbackListPageRoute() => pushNamed(Routes.feedbackListPageRoute);
+
+  Future pushFeedbackInfoPageRoute({
+    Key key,
+    String id,
+  }) =>
+      pushNamed(
+        Routes.feedbackInfoPageRoute,
+        arguments: FeedbackInfoPageArguments(key: key, id: id),
+      );
 }
