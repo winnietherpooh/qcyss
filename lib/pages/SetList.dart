@@ -1,8 +1,15 @@
+import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:yss/common/apis/uploadAvatar.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
+import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
+import 'package:yss/model/UploadResponseModel.dart';
+import 'package:yss/model/responseModel.dart';
 
 class SetListPage extends StatefulWidget {
   @override
@@ -10,13 +17,11 @@ class SetListPage extends StatefulWidget {
 }
 
 class _SetListPageState extends State<SetListPage> {
+  String avatarUrl = Global.profile.userPortrait;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('设置'),
-        centerTitle: true,
-      ),
+      appBar: getAppBarWidget('设置'),
       body: Column(
         children: <Widget>[
           Container(
@@ -53,15 +58,16 @@ class _SetListPageState extends State<SetListPage> {
                   child: IconButton(
                     icon: ClipOval(
                       child: Image.network(
-                        'http://cdn.toolvip.com//imagedemo/2.jpg',
+                        avatarUrl,
                         width: sySetWidth(84),
                         height: sySetWidth(84),
                         fit: BoxFit.cover,
                       ),
                     ),
                     onPressed: () {
-                      ExtendedNavigator.rootNavigator
-                          .pushNamed(Routes.setPassWdPageRoute);
+//                      ExtendedNavigator.rootNavigator
+//                          .pushNamed(Routes.setPassWdPageRoute);
+                      _selectImgChangeAvatar();
                     },
                   ),
                 )
@@ -156,5 +162,27 @@ class _SetListPageState extends State<SetListPage> {
         ],
       ),
     );
+  }
+
+
+
+  Future _selectImgChangeAvatar() async {
+    showLoading(context, '上传头像中');
+    var images = await ImagePicker().getImage(source: ImageSource.gallery);
+    UploadResponseModel uploadResponseModel = await UploadAvatarApi.uploadImg(context: context,  file: images);
+    print(uploadResponseModel.error);
+    if(uploadResponseModel.error == 200){
+      //更新缓存头像
+      Global.profile.userPortrait = uploadResponseModel.data.fileUrl;
+      setState(() {
+        avatarUrl = uploadResponseModel.data.fileUrl;
+      });
+      Navigator.pop(context);
+      showSuccess(context);
+    }else{
+      Navigator.pop(context);
+      showError(context,text:uploadResponseModel.message);
+    }
+
   }
 }

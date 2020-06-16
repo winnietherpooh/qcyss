@@ -19,9 +19,6 @@ class SalayrCalApi {
       context: context,
         params:salaryRequestModel
     );
-    print('=====================');
-    print(json.encode(response));
-    print('=====================');
     return SalaryResponseModel.fromJson(response);
   }
 }
