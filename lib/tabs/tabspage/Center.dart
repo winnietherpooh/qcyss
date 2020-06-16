@@ -19,28 +19,32 @@ class CenterPage extends StatefulWidget {
 }
 
 class _CenterPageState extends State<CenterPage> {
+  String _format = 'yyyy-MM';
+  String TIME_NOW = formatDate(DateTime.now(), ['yyyy','mm']);
+  String MIN_DATETIME = '2018-08-01';
+  String MAX_DATETIME =
+  formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
+  String INIT_DATETIME =
+  formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
+  DateTime _dateTime;
   var _controller = ScrollController();
   var dateStart = TextEditingController();
   var dateEnd = TextEditingController();
-  String _format = 'yyyy-MM';
-  String TIME_NOW = formatDate(DateTime.now(), ['yyyy', '-', 'mm']);
-  String MIN_DATETIME = '2018-08-01';
-  String MAX_DATETIME =
-      formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
-  String INIT_DATETIME =
-      formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
-  DateTime _dateTime;
+
   List<Basepay> basepay = [];
   List<Welfarepay> welfarepay = [];
   bool isShowBaseWidget = true;
   bool isShowWareWidget = true;
   bool isShowLoading = false;
-  List<WagesDropdown> dorpDown;
-  List<List<WagesList>> wagesList=[];
+  List<WagesDropdown> dorpDown=[];
+  List<List<WagesList>> wagesList = [];
   var _dropDownValue;
+
   @override
   void initState() {
     super.initState();
+     dateStart = TextEditingController(text: TIME_NOW);
+     dateEnd = TextEditingController(text: TIME_NOW);
     _dateTime = DateTime.parse(INIT_DATETIME);
     //print(formatDate(DateTime.now(), ['yyyy', '-', 'mm']));
     _getSalaryData();
@@ -54,28 +58,36 @@ class _CenterPageState extends State<CenterPage> {
     setState(() {
       basepay = data.basepay;
       print(basepay.length);
-      if(data.basepay.length > 0){
+      if (data.basepay.length > 0) {
         isShowBaseWidget = false;
       }
-      if(data.welfarepay.length > 0){
+      if (data.welfarepay.length > 0) {
         isShowWareWidget = false;
       }
       welfarepay = data.welfarepay;
-      if(isShowBaseWidget == false || isShowWareWidget == false){
+      if (isShowBaseWidget == false || isShowWareWidget == false) {
         isShowLoading = true;
       }
     });
   }
 
-  _getSearchData() async{
-    SearchRequestModel searchRequestModel = SearchRequestModel(cid: Global.companyId);
-    SearchModel searchModel = await SearchSalaryApi.getData(context: context, searchRequestModel: searchRequestModel);
-    if(searchModel.error == 200){
-      dorpDown = searchModel.data.wagesDropdown;
-      wagesList = searchModel.data.wagesList;
+  _getSearchData() async {
+    SearchRequestModel searchRequestModel = SearchRequestModel(
+        cid: Global.companyId,
+        startTime: dateStart.value.text,
+        endTime: dateEnd.value.text,
+        type: _dropDownValue);
+    SearchModel searchModel = await SearchSalaryApi.getData(
+        context: context, searchRequestModel: searchRequestModel);
+    print(searchModel.data.wagesList);
+    if (searchModel.error == 200) {
+     setState(() {
+       dorpDown = searchModel.data.wagesDropdown;
+       wagesList = searchModel.data.wagesList;
+     });
     }
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,8 +99,6 @@ class _CenterPageState extends State<CenterPage> {
       body: _getAllWidget(),
     );
   }
-
-
 
   void _showDatePicker(int type) {
     DatePicker.showDatePicker(
@@ -143,19 +153,18 @@ class _CenterPageState extends State<CenterPage> {
         controller: this._controller,
         children: <Widget>[
           _getHeadWidget(),
-//          Offstage(
-//            offstage: isShowLoading,
-//            child: getLoadingWidget(),
-//          ),
-//          Offstage(
-//            offstage: isShowBaseWidget,
-//            child: _getBasyPayWidget('未确定发放工资明细', basepay,1),
-//          ),
-//          Offstage(
-//            offstage: isShowWareWidget,
-//           child:  _getBasyPayWidget('未确定发放奖金明细', welfarepay,2),
-//          )
-
+          Offstage(
+            offstage: isShowLoading,
+            child: getLoadingWidget(),
+          ),
+          Offstage(
+            offstage: isShowBaseWidget,
+            child: _getBasyPayWidget('未确定发放工资明细', basepay,1),
+          ),
+          Offstage(
+            offstage: isShowWareWidget,
+           child:  _getBasyPayWidget('未确定发放奖金明细', welfarepay,2),
+          ),
           _getSearchList(),
         ],
       ),
@@ -193,7 +202,6 @@ class _CenterPageState extends State<CenterPage> {
                     ),
                     image: DecorationImage(
                         image: NetworkImage("${Global.profile.userPortrait}"),
-
                         fit: BoxFit.fitWidth),
                   ),
                 ),
@@ -306,8 +314,7 @@ class _CenterPageState extends State<CenterPage> {
   }
 
   //未确定工资布局
-  _getBasyPayWidget(String title, List<dynamic> key,int type) {
-
+  _getBasyPayWidget(String title, List<dynamic> key, int type) {
     return Container(
       margin: EdgeInsets.only(top: sySetHeight(30)),
       child: Column(
@@ -331,7 +338,7 @@ class _CenterPageState extends State<CenterPage> {
               controller: this._controller,
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              children: _getBasePayAllItem(key,type),
+              children: _getBasePayAllItem(key, type),
             ),
           ),
         ],
@@ -339,12 +346,10 @@ class _CenterPageState extends State<CenterPage> {
     );
   }
 
-
-
   //这个返回每一项工资的所有键值对
   //未确认工资明细的每一项布局
-  List<Widget> _getBasePayListItemWidget(
-      List value,String sendMonth,int type,{String ffrq,List<String> textlist,String monthText}) {
+  List<Widget> _getBasePayListItemWidget(List value, String sendMonth, int type,
+      {String ffrq, List<String> textlist, String monthText}) {
     List<Widget> itemWidget = new List();
     for (var i = 0; i < value.length; i++) {
       var t = Container(
@@ -389,14 +394,28 @@ class _CenterPageState extends State<CenterPage> {
       itemWidget.add(t);
     }
     if (itemWidget.length > 0) {
-
-      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: ffrq,ffy: sendMonth,welfarename: type)));
-      itemWidget.add(_getItemButton(SignSalaryRequestModel(ffrq: ffrq,ffy: sendMonth,welfarename: type,textList: textlist,monthText: monthText),buttonColor: Color.fromRGBO(190, 1, 8, 1),buttonText: '反馈',labelTitle: '反馈',type: 2));
+      itemWidget.add(_getItemButton(SignSalaryRequestModel(
+          ffrq: ffrq, ffy: sendMonth, welfarename: type)));
+      itemWidget.add(_getItemButton(
+          SignSalaryRequestModel(
+              ffrq: ffrq,
+              ffy: sendMonth,
+              welfarename: type,
+              textList: textlist,
+              monthText: monthText),
+          buttonColor: Color.fromRGBO(190, 1, 8, 1),
+          buttonText: '反馈',
+          labelTitle: '反馈',
+          type: 2));
     }
     return itemWidget;
   }
 
-  _getItemButton(SignSalaryRequestModel salaryRequestModel,{int type = 1,Color buttonColor,String buttonText='确认',String labelTitle="签字"}) {
+  _getItemButton(SignSalaryRequestModel salaryRequestModel,
+      {int type = 1,
+      Color buttonColor,
+      String buttonText = '确认',
+      String labelTitle = "签字"}) {
     return Container(
       decoration: BoxDecoration(
           border: Border(
@@ -431,19 +450,22 @@ class _CenterPageState extends State<CenterPage> {
                 child: FlatButton(
                   color: buttonColor ?? Color.fromRGBO(0, 122, 255, 1),
                   onPressed: () {
-                  //  ExtendedNavigator.rootNavigator.pushNewsInfoPageRoute(id:'${this._dataList[index].id}');
-                    if(type == 2){
-                      ExtendedNavigator.rootNavigator.pushFeedbackPageRoute(textList: salaryRequestModel.textList,times: salaryRequestModel.ffy,monthText: salaryRequestModel.monthText);
-                    }else{
-                      ExtendedNavigator.rootNavigator.pushSignPageRoute(salaryRequestModel: salaryRequestModel);
+                    //  ExtendedNavigator.rootNavigator.pushNewsInfoPageRoute(id:'${this._dataList[index].id}');
+                    if (type == 2) {
+                      ExtendedNavigator.rootNavigator.pushFeedbackPageRoute(
+                          textList: salaryRequestModel.textList,
+                          times: salaryRequestModel.ffy,
+                          monthText: salaryRequestModel.monthText);
+                    } else {
+                      ExtendedNavigator.rootNavigator.pushSignPageRoute(
+                          salaryRequestModel: salaryRequestModel);
                     }
                   },
                   child: Text(
                     '${buttonText}',
                     style: TextStyle(
-                      fontSize: sySetFontSize(28),
-                      color: Color.fromRGBO(255, 255, 255, 1)
-                    ),
+                        fontSize: sySetFontSize(28),
+                        color: Color.fromRGBO(255, 255, 255, 1)),
                   ),
                 ),
               ))
@@ -453,15 +475,13 @@ class _CenterPageState extends State<CenterPage> {
   }
 
   //获取工资奖金列表
-  List<Widget> _getBasePayAllItem(List basepay,int type) {
-
+  List<Widget> _getBasePayAllItem(List basepay, int type) {
     List<Widget> baseWidget = [];
     List<String> textList = ['基本工资'];
     for (var i = 0; i < basepay.length; i++) {
-
       String times = basepay[i].name;
-      if(type == 2){
-        times =  basepay[i].times;
+      if (type == 2) {
+        times = basepay[i].times;
         textList = basepay[i].textList;
       }
 
@@ -471,15 +491,14 @@ class _CenterPageState extends State<CenterPage> {
           scrollDirection: Axis.horizontal,
           controller: this._controller,
           children: _getBasePayListItemWidget(
-              basepay[i].value,basepay[i].name,type,ffrq: times,textlist: textList,monthText: basepay[i].monthText),
+              basepay[i].value, basepay[i].name, type,
+              ffrq: times, textlist: textList, monthText: basepay[i].monthText),
         ),
       );
       baseWidget.add(t);
     }
     return baseWidget;
   }
-
-
 
   //搜索布局
   _getSearchList() {
@@ -548,6 +567,22 @@ class _CenterPageState extends State<CenterPage> {
     );
   }
 
+  //获取下拉选项
+  _getSelectItems() {
+    if (dorpDown.length != 0) {
+      List<DropdownMenuItem> itemList = [];
+      var index = 0;
+      dorpDown.forEach((element) {
+        var t = DropdownMenuItem(
+          child: Text(element.label),
+          value: element.value,
+        );
+        itemList.add(t);
+      });
+      return itemList;
+    }
+  }
+
   //搜索布局表头
   _getSearchTitleWidget() {
     return Container(
@@ -576,32 +611,39 @@ class _CenterPageState extends State<CenterPage> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(right: sySetWidth(12)),
-                  child: Text(
-                    '类别',
-                    style: TextStyle(
-                        fontSize: sySetFontSize(28),
-                        color: Color.fromRGBO(153, 153, 153, 1)),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  margin: EdgeInsets.only(right: 0),
-                  child: Image.asset(
-                    'images/select.png',
-                    width: sySetWidth(44),
-                    height: sySetWidth(44),
-                    fit: BoxFit.fill,
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      icon: Image.asset(
+                        'images/select.png',
+                        width: sySetWidth(44),
+                        height: sySetWidth(44),
+                        fit: BoxFit.fill,
+                      ),
+                      hint: Text('请选择'),
+                      value: _dropDownValue,
+                      items: _getSelectItems(),
+                      onChanged: (value) {
+                        setState(() {
+                          _dropDownValue = value;
+                        });
+                      },
+                    ),
                   ),
                 ),
                 Container(
                   alignment: Alignment.centerRight,
                   margin: EdgeInsets.fromLTRB(
-                      sySetWidth(40), sySetHeight(0), sySetWidth(20), 0),
-                  child: Image.asset(
-                    'images/search.png',
-                    fit: BoxFit.fill,
-                    width: sySetWidth(44),
-                    height: sySetWidth(44),
+                      sySetWidth(5), sySetHeight(0), sySetWidth(20), 0),
+                  child: InkWell(
+                    child: Image.asset(
+                      'images/search.png',
+                      fit: BoxFit.fill,
+                      width: sySetWidth(44),
+                      height: sySetWidth(44),
+                    ),
+                    onTap: () {
+                      _getSearchData();
+                    },
                   ),
                 )
               ],
@@ -612,11 +654,9 @@ class _CenterPageState extends State<CenterPage> {
     );
   }
 
-
   //这个返回每一项工资的所有键值对
   //未确认工资明细的每一项布局
-  List<Widget> _getSearchListItemWidget(
-      List value) {
+  List<Widget> _getSearchListItemWidget(List value) {
     List<Widget> itemWidget = new List();
     for (var i = 0; i < value.length; i++) {
       var t = Container(
@@ -663,7 +703,6 @@ class _CenterPageState extends State<CenterPage> {
     return itemWidget;
   }
 
-
   //获取工资奖金列表
   List<Widget> _getSearchAllItem(List<List<WagesList>> basepay) {
     print(basepay);
@@ -674,8 +713,7 @@ class _CenterPageState extends State<CenterPage> {
         child: ListView(
           scrollDirection: Axis.horizontal,
           controller: this._controller,
-          children: _getSearchListItemWidget(
-              basepay[i]),
+          children: _getSearchListItemWidget(basepay[i]),
         ),
       );
       baseWidget.add(t);
@@ -683,9 +721,7 @@ class _CenterPageState extends State<CenterPage> {
     return baseWidget;
   }
 
-
   _getSearchWidget(List<List<WagesList>> key) {
-
     return Container(
       margin: EdgeInsets.only(top: sySetHeight(30)),
       child: Column(

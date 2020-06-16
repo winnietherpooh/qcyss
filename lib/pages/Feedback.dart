@@ -184,7 +184,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   }
 
   _submitAll() async {
-    showLoading(context,"正在提交");
+
     if (_dropDownValue == null) {
       showError(context, text: '请选择工资类型', times: 1000);
       return;
@@ -193,6 +193,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
       showError(context, text: '请输入您的建议', times: 1000);
       return;
     }
+    showLoading(context,"正在提交");
     FeedbackRequestEntity feedbackRequestEntity = FeedbackRequestEntity(
         cid: Global.companyId,
         wagesText: _dropDownValue,
