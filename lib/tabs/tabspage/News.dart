@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yss/common/apis/News.dart';
 import 'package:yss/common/util/function.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/NewsModel.dart';
@@ -66,11 +67,7 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text('新闻'),
-        centerTitle: true,
-      ),
+      appBar: getAppBarWidget('新闻',isShowIcon: false),
       body: RefreshIndicator(
         onRefresh: () {
           return Future.delayed(Duration(seconds: 1), () {

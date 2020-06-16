@@ -3,6 +3,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:yss/common/apis/News.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:yss/common/utils.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/model/NewsInfoModel.dart';
 
 class NewsInfoPage extends StatefulWidget {
@@ -51,10 +52,7 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
   Widget build(BuildContext context) {
     print(arguments);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('新闻详情'),
-        centerTitle: true,
-      ),
+      appBar: getAppBarWidget('新闻详情'),
       body: Container(
         width: double.infinity,
           child: ListView(

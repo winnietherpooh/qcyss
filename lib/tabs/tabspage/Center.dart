@@ -6,6 +6,7 @@ import 'package:yss/common/apis/SearchSalary.dart';
 import 'package:yss/common/apis/SignSalary.dart';
 import 'package:yss/common/router/router.gr.dart';
 import 'package:yss/common/utils.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
@@ -91,11 +92,7 @@ class _CenterPageState extends State<CenterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text('个人中心'),
-        centerTitle: true,
-      ),
+      appBar: getAppBarWidget('个人中心',isShowIcon: false),
       body: _getAllWidget(),
     );
   }

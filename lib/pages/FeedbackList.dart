@@ -3,6 +3,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/common/apis/Feedback.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/Feedback.dart';
 import 'package:yss/common/router/router.gr.dart';
@@ -77,10 +78,7 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('反馈'),
-          centerTitle: true,
-        ),
+        appBar: getAppBarWidget('反馈'),
         body: RefreshIndicator(
           onRefresh: () {
             return Future.delayed(Duration(seconds: 1), () {

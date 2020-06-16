@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:yss/common/apis/SignSalary.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/model/SignSalaryRequestModel.dart';
 import 'package:yss/model/responseModel.dart';
@@ -64,9 +65,7 @@ class _SignViewPageState extends State<SignViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('签名确认'),
-      ),
+      appBar: getAppBarWidget('签名确认'),
       body: Container(
         child: Column(
           children: <Widget>[

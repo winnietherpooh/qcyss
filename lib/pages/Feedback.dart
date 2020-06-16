@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:yss/common/apis/Feedback.dart';
 import 'package:yss/common/util/utils.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/Feedback.dart';
@@ -32,9 +33,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('反馈'),
-      ),
+      appBar: getAppBarWidget('反馈'),
       body: _getFeedbackWidget(),
     );
   }

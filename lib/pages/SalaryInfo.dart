@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yss/common/apis/Salary.dart';
 import 'package:yss/common/util/screen.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/model/SalaryModel.dart';
 
 class SalaryInfoPage extends StatefulWidget {
@@ -30,10 +31,7 @@ class _SalaryInfoPageState extends State<SalaryInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('计算结果'),
-        centerTitle: true,
-      ),
+      appBar: getAppBarWidget('计算结果'),
       body: _getAllData(),
     );
   }

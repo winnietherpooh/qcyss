@@ -4,6 +4,7 @@ import 'package:yss/common/apis/Feedback.dart';
 import 'package:yss/common/apis/News.dart';
 import 'package:yss/common/util/screen.dart';
 import 'package:yss/common/utils.dart';
+import 'package:yss/common/widgets/appbarWidget.dart';
 import 'package:yss/model/FeedbackInfoModel.dart';
 import 'package:yss/model/NewsInfoModel.dart';
 
@@ -45,10 +46,7 @@ class _FeedbackInfoPageState extends State<FeedbackInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('反馈详情'),
-        centerTitle: true,
-      ),
+      appBar: getAppBarWidget('反馈详情'),
       body: Container(
         width: double.infinity,
           child: ListView(
