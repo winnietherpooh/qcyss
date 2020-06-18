@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:install_plugin/install_plugin.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:yss/common/apis/apis.dart';
+import 'package:yss/common/util/screen.dart';
 import 'package:yss/common/widgets/toast.dart';
 import 'package:yss/global.dart';
 import 'package:yss/model/appUpdate.dart';
@@ -85,44 +86,55 @@ class AppUpdateUtil {
 
   /// 升级确认对话框
   void _appUpdateConformDialog(VoidCallback onPressed) {
-    EasyDialog(
-        title: Text(
-          "发现新版本${_appInfoModel.versionStr}",
-          style: TextStyle(fontWeight: FontWeight.bold),
-          textScaleFactor: 1.2,
-        ),
-        description: Text(
-          _appInfoModel.versionStr,
-          textScaleFactor: 1.1,
-          textAlign: TextAlign.center,
-        ),
-        height: 220,
-        contentList: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              new FlatButton(
-                padding: const EdgeInsets.only(top: 8.0),
-                textColor: Colors.lightBlue,
-                onPressed: onPressed,
-                child: new Text(
-                  "同意",
-                  textScaleFactor: 1.2,
-                ),
+    showDialog(
+      barrierDismissible: false,
+      context: _context,
+      builder: (context) {
+        return Center(
+          child: Card(
+            child: Container(
+              width: 250,
+              padding: EdgeInsets.all(8),
+              margin: EdgeInsets.all(8),
+              constraints: BoxConstraints(minHeight: 80, minWidth: 180),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.all(sySetWidth(10)),
+                    alignment: Alignment.center,
+                    child: Text(
+                      '发现新版本${_appInfoModel.versionStr}',
+                      style: TextStyle(
+                        color: Color.fromRGBO(51, 51, 51, 1),
+                        fontSize: sySetFontSize(26),
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    thickness: 1,
+                  ),
+                  Container(
+                    height: sySetHeight(50),
+                    width: double.infinity,
+                    child: FlatButton(
+                      onPressed: onPressed,
+                      child: Text(
+                        '知道了',
+                        style: TextStyle(
+                          color: Color.fromRGBO(249, 158, 5, 1),
+                          fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              new FlatButton(
-                padding: const EdgeInsets.only(top: 8.0),
-                textColor: Colors.lightBlue,
-                onPressed: () {
-                  Navigator.of(_context).pop();
-                },
-                child: new Text(
-                  "取消",
-                  textScaleFactor: 1.2,
-                ),
-              ),
-            ],
-          )
-        ]).show(_context);
+            ),
+          ),
+        );
+      },
+    );
   }
 }
