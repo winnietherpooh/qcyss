@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:yss/common/util/update.dart';
 import 'package:yss/global.dart';
 import 'package:yss/pages/login.dart';
 import '../tabs/Taps.dart';
@@ -15,22 +17,24 @@ class _IndexPageState extends State<IndexPage> {
   void initState() {
     super.initState();
 
-//    if (Global.isRelease == true) {
-//      doAppUpdate();
-//    }
+    //if (Global.isRelease == true) {
+    if (true) {
+      doAppUpdate();
+      print(Global.packageInfo.packageName);
+    }
   }
 
-//  Future doAppUpdate() async {
-//    await Future.delayed(Duration(seconds: 3), () async {
-//      if (Global.isIOS == false &&
-//          await Permission.storage.isGranted == false) {
-//        await [Permission.storage].request();
-//      }
-//      if (await Permission.storage.isGranted) {
-//        AppUpdateUtil().run(context);
-//      }
-//    });
-//  }
+  Future doAppUpdate() async {
+    await Future.delayed(Duration(seconds: 3), () async {
+      if (Global.isIOS == false &&
+          await Permission.storage.isGranted == false) {
+        await [Permission.storage].request();
+      }
+      if (await Permission.storage.isGranted) {
+        AppUpdateUtil().run(context);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

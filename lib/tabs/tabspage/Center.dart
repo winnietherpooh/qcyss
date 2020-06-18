@@ -58,7 +58,6 @@ class _CenterPageState extends State<CenterPage> {
     Data data = salaryResponseModel.data;
     setState(() {
       basepay = data.basepay;
-      print(basepay.length);
       if (data.basepay.length > 0) {
         isShowBaseWidget = false;
       }
@@ -69,6 +68,7 @@ class _CenterPageState extends State<CenterPage> {
       if (isShowBaseWidget == false || isShowWareWidget == false) {
         isShowLoading = true;
       }
+      isShowLoading = true;
     });
   }
 

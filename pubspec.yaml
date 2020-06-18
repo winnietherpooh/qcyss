@@ -49,7 +49,8 @@ dependencies:
 
   #权限
   permission_handler: ^5.0.1
-
+  #安装
+  install_plugin: ^2.0.1
   #渲染html标签
   flutter_widget_from_html: ^0.3.3+4
   #radio的美化
@@ -60,6 +61,10 @@ dependencies:
   path_provider: ^1.6.10
   #图片选择
   image_picker: ^0.6.7+2
+  #弹窗
+  easy_dialog: ^1.0.5
+  #包信息
+  package_info: ^0.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

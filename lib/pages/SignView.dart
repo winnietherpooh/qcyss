@@ -52,7 +52,7 @@ class _SignViewPageState extends State<SignViewPage> {
         salaryRequestModel: this.widget.salaryRequestModel,
         file: file);
     if(responseModel.error == 200){
-       Navigator.pop(context);
+      Navigator.pop(context);
        showSuccessRoute(context,_gotoCenter,text: responseModel.message,times:500);
     }else{
       showError(responseModel.message);

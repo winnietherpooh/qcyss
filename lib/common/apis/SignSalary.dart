@@ -48,6 +48,9 @@ class SignImageUploadApi{
       context: context,
       params:map,
     );
+//    if(!(response is ResponseModel)){
+//      return ResponseModel(error: 404,message: '网络错误');
+//    }
     return ResponseModel.fromJson(json.decode(response));
   }
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info/package_info.dart';
 import 'package:yss/model/userModel.dart';
 
 import 'common/util/utils.dart';
@@ -15,8 +16,10 @@ class Global {
     token: null,
   );
 
-   static String domain = 'http://test.yousuanshi.com/reckoner/';
-  // static String domain = 'http://192.168.0.136/';
+  static String domain = 'http://test.yousuanshi.com/reckoner/';
+  //  static String domain = 'http://192.168.0.136/';
+
+  static String publicDomain = 'http://update.yousuanshi.com/';
   //企业ID
   static int companyId = 18;
   /// 服务器连接超时时间
@@ -28,6 +31,7 @@ class Global {
   /// 发布渠道
   static String channel = "xiaomi";
 
+  static String Version = '0.0.1';
   /// 是否 ios
   static bool isIOS = Platform.isIOS;
 
@@ -37,8 +41,8 @@ class Global {
   // /// ios 设备信息
   // static IosDeviceInfo iosDeviceInfo;
 
-  // /// 包信息
-  // static PackageInfo packageInfo;
+  /// 包信息
+  static PackageInfo packageInfo;
 
   /// 是否第一次打开
   static bool isFirstOpen = false;
@@ -66,7 +70,7 @@ class Global {
     // }
 
     // 包信息
-   // Global.packageInfo = await PackageInfo.fromPlatform();
+   Global.packageInfo = await PackageInfo.fromPlatform();
 
     // 工具初始
     await StorageUtil.init();
