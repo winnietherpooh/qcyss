@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/router/router.gr.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/common/values/values.dart';
-import 'package:yss/global.dart';
+import 'package:yssqc/common/router/router.gr.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/common/values/values.dart';
+import 'package:yssqc/global.dart';
 
 /// 检查是否有 token
 Future<bool> isAuthenticated() async {

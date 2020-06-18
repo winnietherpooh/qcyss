@@ -1,6 +1,6 @@
 //library custom_radio_grouped_button;
 import 'package:flutter/material.dart';
-import 'package:yss/common/util/screen.dart';
+import 'package:yssqc/common/util/screen.dart';
 
 class CustomRadioButton extends StatefulWidget {
   CustomRadioButton({

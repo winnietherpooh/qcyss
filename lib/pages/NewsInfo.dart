@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:yss/common/apis/News.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/common/utils.dart';
-import 'package:yss/common/widgets/appbarWidget.dart';
-import 'package:yss/model/NewsInfoModel.dart';
+import 'package:yssqc/common/apis/News.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/common/utils.dart';
+import 'package:yssqc/common/widgets/appbarWidget.dart';
+import 'package:yssqc/model/NewsInfoModel.dart';
 
 class NewsInfoPage extends StatefulWidget {
   final String id;

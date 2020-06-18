@@ -3,7 +3,7 @@ import 'tabspage/Home.dart';
 import 'tabspage/Center.dart';
 import 'tabspage/News.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yss/common/utils.dart';
+import 'package:yssqc/common/utils.dart';
 class Taps extends StatefulWidget {
   final int index;
   Taps({this.index});

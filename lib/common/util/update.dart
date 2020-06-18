@@ -5,11 +5,11 @@ import 'package:easy_dialog/easy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:install_plugin/install_plugin.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:yss/common/apis/apis.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/common/widgets/toast.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/appUpdate.dart';
+import 'package:yssqc/common/apis/apis.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/common/widgets/toast.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/appUpdate.dart';
 
 /// app 升级
 class AppUpdateUtil {
@@ -105,10 +105,10 @@ class AppUpdateUtil {
                     padding: EdgeInsets.all(sySetWidth(10)),
                     alignment: Alignment.center,
                     child: Text(
-                      '发现新版本${_appInfoModel.versionStr}',
+                      '发现新版本${_appInfoModel.versionStr},现在可下载更新',
                       style: TextStyle(
                         color: Color.fromRGBO(51, 51, 51, 1),
-                        fontSize: sySetFontSize(26),
+                        fontSize: sySetFontSize(30),
                       ),
                     ),
                   ),
@@ -121,7 +121,7 @@ class AppUpdateUtil {
                     child: FlatButton(
                       onPressed: onPressed,
                       child: Text(
-                        '知道了',
+                        '确定',
                         style: TextStyle(
                           color: Color.fromRGBO(249, 158, 5, 1),
                           fontSize: Theme.of(context).textTheme.bodyText2.fontSize,

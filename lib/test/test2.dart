@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yss/Config.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/data/map.dart';
-import 'package:yss/model/NewsModel.dart';
-import 'package:yss/pages/banner.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/data/map.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/NewsModel.dart';
+import 'package:yssqc/pages/banner.dart';
 
 class Test2Page extends StatefulWidget {
   @override
@@ -27,8 +27,8 @@ class _Test2PageState extends State<Test2Page> {
 
   _getNewsData(_touchType) async {
     print('---------------------');
-    var api = Config.domain +
-        'index.php?m=Home&c=Newapi&a=newList&cid=${Config.companyId}';
+    var api = Global.domain +
+        'index.php?m=Home&c=Newapi&a=newList&cid=${Global.companyId}';
     var result = await Dio().get(api);
     print(result);
     var getData = json.decode(result.data);

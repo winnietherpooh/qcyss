@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
-import 'package:yss/model/userModel.dart';
+import 'package:yssqc/model/userModel.dart';
 
 import 'common/util/utils.dart';
 import 'common/values/values.dart';

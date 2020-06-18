@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:yss/common/util/update.dart';
-import 'package:yss/global.dart';
-import 'package:yss/pages/login.dart';
+import 'package:yssqc/common/util/update.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/pages/login.dart';
 import '../tabs/Taps.dart';
 
 class IndexPage extends StatefulWidget {

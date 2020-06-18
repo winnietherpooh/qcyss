@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/UploadResponseModel.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/UploadResponseModel.dart';
 
 class UploadAvatarApi{
   static Future<UploadResponseModel> uploadImg({

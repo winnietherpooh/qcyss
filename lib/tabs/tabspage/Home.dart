@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/apis/Salary.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/common/widgets/CustomRadioButton.dart';
-import 'package:yss/common/widgets/appbarWidget.dart';
-import 'package:yss/common/widgets/toast.dart';
-import 'package:yss/model/SalaryModel.dart';
-import 'package:yss/pages/banner.dart';
-import 'package:yss/common/router/router.gr.dart';
+import 'package:yssqc/common/apis/Salary.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/common/widgets/CustomRadioButton.dart';
+import 'package:yssqc/common/widgets/appbarWidget.dart';
+import 'package:yssqc/common/widgets/toast.dart';
+import 'package:yssqc/model/SalaryModel.dart';
+import 'package:yssqc/pages/banner.dart';
+import 'package:yssqc/common/router/router.gr.dart';
 
 class HomePage extends StatefulWidget {
   @override

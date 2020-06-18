@@ -1,8 +1,8 @@
 import 'dart:collection';
 
 import 'package:dio/dio.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/common/values/cache.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/common/values/cache.dart';
 
 class CacheObject {
   CacheObject(this.response)

@@ -4,13 +4,13 @@ import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:yss/common/apis/SignSalary.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/common/widgets/appbarWidget.dart';
-import 'package:yss/common/widgets/toast.dart';
-import 'package:yss/model/SignSalaryRequestModel.dart';
-import 'package:yss/model/responseModel.dart';
-import 'package:yss/common/router/router.gr.dart';
+import 'package:yssqc/common/apis/SignSalary.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/common/widgets/appbarWidget.dart';
+import 'package:yssqc/common/widgets/toast.dart';
+import 'package:yssqc/model/SignSalaryRequestModel.dart';
+import 'package:yssqc/model/responseModel.dart';
+import 'package:yssqc/common/router/router.gr.dart';
 
 class SignViewPage extends StatefulWidget {
   Uint8List imageData;

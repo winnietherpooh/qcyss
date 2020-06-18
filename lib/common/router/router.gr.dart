@@ -7,22 +7,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:yss/pages/index.dart';
-import 'package:yss/tabs/Taps.dart';
-import 'package:yss/pages/login.dart';
-import 'package:yss/common/router/router.dart';
-import 'package:yss/pages/NewsInfo.dart';
-import 'package:yss/pages/SetList.dart';
-import 'package:yss/pages/setPasswd.dart';
-import 'package:yss/pages/SalaryInfo.dart';
-import 'package:yss/model/SalaryModel.dart';
-import 'package:yss/pages/Sign.dart';
-import 'package:yss/model/SignSalaryRequestModel.dart';
-import 'package:yss/pages/SignView.dart';
+import 'package:yssqc/pages/index.dart';
+import 'package:yssqc/tabs/Taps.dart';
+import 'package:yssqc/pages/login.dart';
+import 'package:yssqc/common/router/router.dart';
+import 'package:yssqc/pages/NewsInfo.dart';
+import 'package:yssqc/pages/SetList.dart';
+import 'package:yssqc/pages/setPasswd.dart';
+import 'package:yssqc/pages/SalaryInfo.dart';
+import 'package:yssqc/model/SalaryModel.dart';
+import 'package:yssqc/pages/Sign.dart';
+import 'package:yssqc/model/SignSalaryRequestModel.dart';
+import 'package:yssqc/pages/SignView.dart';
 import 'dart:typed_data';
-import 'package:yss/pages/Feedback.dart';
-import 'package:yss/pages/FeedbackList.dart';
-import 'package:yss/pages/FeedbackInfo.dart';
+import 'package:yssqc/pages/Feedback.dart';
+import 'package:yssqc/pages/FeedbackList.dart';
+import 'package:yssqc/pages/FeedbackInfo.dart';
 
 abstract class Routes {
   static const indexPageRoute = '/';

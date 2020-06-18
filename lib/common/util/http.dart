@@ -1,16 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/common/values/cache.dart';
-import 'package:yss/common/values/proxy.dart';
-import 'package:yss/common/widgets/toast.dart';
-import 'package:yss/global.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/common/values/cache.dart';
+import 'package:yssqc/common/values/proxy.dart';
+import 'package:yssqc/common/widgets/toast.dart';
+import 'package:yssqc/global.dart';
 
 
 /*

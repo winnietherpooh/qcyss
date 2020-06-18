@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/apis/Feedback.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/common/widgets/appbarWidget.dart';
-import 'package:yss/common/widgets/toast.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/Feedback.dart';
-import 'package:yss/model/responseModel.dart';
-import 'package:yss/common/router/router.gr.dart';
+import 'package:yssqc/common/apis/Feedback.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/common/widgets/appbarWidget.dart';
+import 'package:yssqc/common/widgets/toast.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/Feedback.dart';
+import 'package:yssqc/model/responseModel.dart';
+import 'package:yssqc/common/router/router.gr.dart';
 
 class FeedbackPage extends StatefulWidget {
   final List<String> textList;

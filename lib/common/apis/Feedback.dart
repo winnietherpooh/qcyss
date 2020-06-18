@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/Feedback.dart';
-import 'package:yss/model/FeedbackInfoModel.dart';
-import 'package:yss/model/responseModel.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/Feedback.dart';
+import 'package:yssqc/model/FeedbackInfoModel.dart';
+import 'package:yssqc/model/responseModel.dart';
 
 class FeedbackApi {
   /// banner

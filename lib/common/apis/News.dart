@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/NewsInfoModel.dart';
-import 'package:yss/model/NewsModel.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/NewsInfoModel.dart';
+import 'package:yssqc/model/NewsModel.dart';
 
 /// 用户
 class NewsListApi {

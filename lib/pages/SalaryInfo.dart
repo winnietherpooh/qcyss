@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yss/common/apis/Salary.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/common/widgets/appbarWidget.dart';
-import 'package:yss/model/SalaryModel.dart';
+import 'package:yssqc/common/apis/Salary.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/common/widgets/appbarWidget.dart';
+import 'package:yssqc/model/SalaryModel.dart';
 
 class SalaryInfoPage extends StatefulWidget {
   final SalaryRequestModel salaryRequestModel;

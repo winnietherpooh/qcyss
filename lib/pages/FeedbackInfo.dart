@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/apis/Feedback.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/common/utils.dart';
-import 'package:yss/common/widgets/appbarWidget.dart';
-import 'package:yss/model/FeedbackInfoModel.dart';
-import 'package:yss/common/router/router.gr.dart';
+import 'package:yssqc/common/apis/Feedback.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/common/utils.dart';
+import 'package:yssqc/common/widgets/appbarWidget.dart';
+import 'package:yssqc/model/FeedbackInfoModel.dart';
+import 'package:yssqc/common/router/router.gr.dart';
 
 class FeedbackInfoPage extends StatefulWidget {
   final String id;

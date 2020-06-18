@@ -2,17 +2,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/apis/SearchSalary.dart';
-import 'package:yss/common/apis/SignSalary.dart';
-import 'package:yss/common/router/router.gr.dart';
-import 'package:yss/common/utils.dart';
-import 'package:yss/common/widgets/appbarWidget.dart';
-import 'package:yss/common/widgets/toast.dart';
-import 'package:yss/global.dart';
+import 'package:yssqc/common/apis/SearchSalary.dart';
+import 'package:yssqc/common/apis/SignSalary.dart';
+import 'package:yssqc/common/router/router.gr.dart';
+import 'package:yssqc/common/utils.dart';
+import 'package:yssqc/common/widgets/appbarWidget.dart';
+import 'package:yssqc/common/widgets/toast.dart';
+import 'package:yssqc/global.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
-import 'package:yss/model/SearchModel.dart';
-import 'package:yss/model/SignSalaryRequestModel.dart';
-import 'package:yss/model/SignSalaryResponseModel.dart';
+import 'package:yssqc/model/SearchModel.dart';
+import 'package:yssqc/model/SignSalaryRequestModel.dart';
+import 'package:yssqc/model/SignSalaryResponseModel.dart';
 
 class CenterPage extends StatefulWidget {
   @override

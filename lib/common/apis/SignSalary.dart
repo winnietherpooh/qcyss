@@ -3,12 +3,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/SalaryModel.dart';
-import 'package:yss/model/SignSalaryRequestModel.dart';
-import 'package:yss/model/SignSalaryResponseModel.dart';
-import 'package:yss/model/responseModel.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/SalaryModel.dart';
+import 'package:yssqc/model/SignSalaryRequestModel.dart';
+import 'package:yssqc/model/SignSalaryResponseModel.dart';
+import 'package:yssqc/model/responseModel.dart';
 
 class SignSalaryApi {
   /// banner

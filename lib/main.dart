@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/router/router.gr.dart';
-import 'package:yss/global.dart';
+import 'package:yssqc/common/router/router.gr.dart';
+import 'package:yssqc/global.dart';
 
 void main() => Global.init().then((value) => runApp(MyApp()));
 

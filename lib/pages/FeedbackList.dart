@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/apis/Feedback.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/common/widgets/appbarWidget.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/Feedback.dart';
-import 'package:yss/common/router/router.gr.dart';
+import 'package:yssqc/common/apis/Feedback.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/common/widgets/appbarWidget.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/Feedback.dart';
+import 'package:yssqc/common/router/router.gr.dart';
 
 class FeedbackListPage extends StatefulWidget {
   @override

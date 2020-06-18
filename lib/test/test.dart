@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yss/pages/banner.dart';
-import 'package:yss/data/map.dart';
+import 'package:yssqc/pages/banner.dart';
+import 'package:yssqc/data/map.dart';
 
 class TestPage extends StatefulWidget {
   @override

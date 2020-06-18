@@ -4,8 +4,8 @@ import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/common/router/router.gr.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/common/router/router.gr.dart';
 
 Future<bool> toastInfo({
   @required String msg,

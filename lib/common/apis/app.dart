@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yss/common/util/http.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/appUpdate.dart';
+import 'package:yssqc/common/util/http.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/appUpdate.dart';
 
 /// 系统相关
 class AppApi {

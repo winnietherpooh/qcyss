@@ -9,10 +9,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:yss/common/apis/apis.dart';
-import 'package:yss/common/router/router.gr.dart';
-import 'package:yss/common/util/screen.dart';
-import 'package:yss/model/BannerModel.dart';
+import 'package:yssqc/common/apis/apis.dart';
+import 'package:yssqc/common/router/router.gr.dart';
+import 'package:yssqc/common/util/screen.dart';
+import 'package:yssqc/model/BannerModel.dart';
 class BannerPage extends StatefulWidget {
   @override
   _BannerPageState createState() => _BannerPageState();

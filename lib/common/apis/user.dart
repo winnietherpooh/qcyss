@@ -1,8 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:yss/common/util/utils.dart';
-import 'package:yss/global.dart';
-import 'package:yss/model/userModel.dart';
+import 'package:yssqc/common/util/utils.dart';
+import 'package:yssqc/global.dart';
+import 'package:yssqc/model/userModel.dart';
 
 /// 用户
 class UserAPI {
