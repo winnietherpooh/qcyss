@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yssqc/common/apis/Salary.dart';
 import 'package:yssqc/common/util/screen.dart';
 import 'package:yssqc/common/widgets/CustomRadioButton.dart';
 import 'package:yssqc/common/widgets/appbarWidget.dart';
@@ -199,6 +198,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.only(right: sySetWidth(24)),
               child: TextField(
+                textInputAction:TextInputAction.done,
                 controller: myEditController,
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.number,
@@ -251,6 +251,7 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               margin: EdgeInsets.only(right: sySetWidth(24)),
               child: TextField(
+                textInputAction:TextInputAction.done,
                 controller: Controller,
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.number,
@@ -319,6 +320,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.only(right: sySetWidth(24)),
               child: TextField(
+                textInputAction:TextInputAction.done,
                 controller: Controller,
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.number,
