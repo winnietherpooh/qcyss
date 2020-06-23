@@ -366,6 +366,7 @@ class _CenterPageState extends State<CenterPage> {
               color: AppColors.mainColor,
               child: Text(
                 '${value[i].name}',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.mainFontColor,
                   fontSize: sySetFontSize(28),
@@ -379,6 +380,7 @@ class _CenterPageState extends State<CenterPage> {
               color: AppColors.mainFontColor,
               child: Text(
                 '${value[i].value}',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color.fromRGBO(51, 51, 51, 1),
                   fontSize: sySetFontSize(28),
