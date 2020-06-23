@@ -23,7 +23,7 @@ class _NewsPageState extends State<NewsPage> {
   ScrollController _controller = ScrollController();
   bool _flag = true;
   bool _isHadMore = true;
-
+  bool _isShowLoading = false;
   @override
   void initState() {
     super.initState();
@@ -52,6 +52,7 @@ class _NewsPageState extends State<NewsPage> {
         await NewsListApi.getData(context: context, p: this.newsRequestModel.p);
     // print(newsModel.toJson());
     setState(() {
+      _isShowLoading = true;
 //      print(newsModel.mpage);
 //      print(newsModel.page);
       if (newsModel.mpage < this.newsRequestModel.p) {
@@ -185,7 +186,11 @@ class _NewsPageState extends State<NewsPage> {
         },
       );
     } else {
-      list.add(getLoadingWidget());
+      //_isShowLoading
+      list.add(Offstage(
+        child: getLoadingWidget(),
+        offstage: _isShowLoading,
+      ));
     }
 //    return GestureDetector(
 //      child: Column(
