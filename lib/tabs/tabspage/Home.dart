@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _medical = TextEditingController(); //医疗
   var _housingLoans = 0; //住房贷款
   var _housingFund = 0;
-
+  FocusNode blankNode = FocusNode();
   String sqgz = '税前工资5000起征';
 
   ///住房基金
@@ -61,36 +61,41 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBarWidget(context,'优算师',isShowIcon: false),
-      body: ListView(
-        children: <Widget>[
-          BannerPage(),
+      body: GestureDetector(
+        child: ListView(
+          children: <Widget>[
+            BannerPage(),
 //          SizedBox(height: sySetHeight(20),),
-          _getTopTitleWidget('个税计算器（金额最多2位小数）'),
-          _getCenterMsgHadIconWidget('税前工资', '请输入税前工资', sqSalary,1),
-          _getCenterMsgWidthoutIconWidget(
-              '各项社会保险', '请输入各项社会保险金额', _insurance),
-          _getCenterMsgWidthoutIconWidget(
-              '五险一金', '请输入公积金', _accumulationFund),
-          _getTopTitleWidget('专项抵扣'),
-          _getCenterMsgHadButtonListWidget(
-              '子女教育', '请输入人数', this._education, this._educationPercent,
-              ['50%', '100%'], [1, 2],2),
-          _getCenterMsgHadButtonListWithoutLabelWidget(
-              '继续教育', this._adultEducationPercent, ['教育期间', '取证当年'], [1, 2],3),
-          _getTopTitleWidget('教育期间400/月，取证当年300/月', height: 50),
-          _getCenterMsgHadIconWidget('大病医疗', '请输入金额', this._medical,4),
-          _getCenterMsgHadButtonListWithoutLabelWidget(
-              '住房贷款', this._housingLoans, ['50%', '100%'], [1, 2],5),
-          _getCenterMsgHadButtonListWithoutLabelWidget(
-              '住房基金', this._housingFund, ['800', '1000', '1500'], [1, 2, 3],6),
-          _getCenterMsgHadButtonListWithoutLabelWidget(
-              '赡养老人', this._supportingElderly, ['非独生子女', '独生子女'], [1, 2],7),
-          _getTopTitleWidget('独生子女2000，非独生子女自定义', height: 50),
-          SizedBox(height: sySetHeight(20),),
-          _getBottomButton(),
-          SizedBox(height: sySetHeight(20),),
-        ],
-      ),
+            _getTopTitleWidget('个税计算器（金额最多2位小数）'),
+            _getCenterMsgHadIconWidget('税前工资', '请输入税前工资', sqSalary,1),
+            _getCenterMsgWidthoutIconWidget(
+                '各项社会保险', '请输入各项社会保险金额', _insurance),
+            _getCenterMsgWidthoutIconWidget(
+                '五险一金', '请输入公积金', _accumulationFund),
+            _getTopTitleWidget('专项抵扣'),
+            _getCenterMsgHadButtonListWidget(
+                '子女教育', '请输入人数', this._education, this._educationPercent,
+                ['50%', '100%'], [1, 2],2),
+            _getCenterMsgHadButtonListWithoutLabelWidget(
+                '继续教育', this._adultEducationPercent, ['教育期间', '取证当年'], [1, 2],3),
+            _getTopTitleWidget('教育期间400/月，取证当年300/月', height: 50),
+            _getCenterMsgHadIconWidget('大病医疗', '请输入金额', this._medical,4),
+            _getCenterMsgHadButtonListWithoutLabelWidget(
+                '住房贷款', this._housingLoans, ['50%', '100%'], [1, 2],5),
+            _getCenterMsgHadButtonListWithoutLabelWidget(
+                '住房基金', this._housingFund, ['800', '1000', '1500'], [1, 2, 3],6),
+            _getCenterMsgHadButtonListWithoutLabelWidget(
+                '赡养老人', this._supportingElderly, ['非独生子女', '独生子女'], [1, 2],7),
+            _getTopTitleWidget('独生子女2000，非独生子女自定义', height: 50),
+            SizedBox(height: sySetHeight(20),),
+            _getBottomButton(),
+            SizedBox(height: sySetHeight(20),),
+          ],
+        ),
+        onTap: (){
+          FocusScope.of(context).requestFocus(blankNode);
+        },
+      )
     );
   }
 
@@ -320,10 +325,10 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.only(right: sySetWidth(24)),
               child: TextField(
-                textInputAction:TextInputAction.done,
                 controller: Controller,
                 textAlign: TextAlign.right,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.phone,
+                textInputAction:TextInputAction.done,
                 decoration: InputDecoration(
                     hintText: '${floatLabel}',
                     hintStyle: TextStyle(
