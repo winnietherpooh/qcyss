@@ -188,6 +188,14 @@ class _CenterPageState extends State<CenterPage> {
                       sySetWidth(24), sySetHeight(80), 0, 0),
                   width: sySetWidth(110),
                   height: sySetWidth(110),
+                  child: ClipOval(
+
+                    child: Image.network("${Global.profile.userPortrait}",
+                      width: sySetWidth(110),
+                      height: sySetWidth(110),
+                     fit: BoxFit.fill
+                    ),
+                  ),
                   decoration: BoxDecoration(
                     //242
                     border: Border.all(
@@ -197,9 +205,6 @@ class _CenterPageState extends State<CenterPage> {
                     borderRadius: BorderRadius.circular(
                       sySetWidth(55),
                     ),
-                    image: DecorationImage(
-                        image: NetworkImage("${Global.profile.userPortrait}"),
-                        fit: BoxFit.fitWidth),
                   ),
                 ),
                 Container(
