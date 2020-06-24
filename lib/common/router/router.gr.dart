@@ -23,6 +23,7 @@ import 'dart:typed_data';
 import 'package:yssqc/pages/Feedback.dart';
 import 'package:yssqc/pages/FeedbackList.dart';
 import 'package:yssqc/pages/FeedbackInfo.dart';
+import 'package:yssqc/pages/Question.dart';
 
 abstract class Routes {
   static const indexPageRoute = '/';
@@ -37,6 +38,7 @@ abstract class Routes {
   static const feedbackPageRoute = '/feedback-page-route';
   static const feedbackListPageRoute = '/feedback-list-page-route';
   static const feedbackInfoPageRoute = '/feedback-info-page-route';
+  static const questionPageRoute = '/question-page-route';
   static const all = {
     indexPageRoute,
     tabsRoute,
@@ -50,6 +52,7 @@ abstract class Routes {
     feedbackPageRoute,
     feedbackListPageRoute,
     feedbackInfoPageRoute,
+    questionPageRoute,
   };
 }
 
@@ -162,6 +165,11 @@ class AppRouter extends RouterBase {
         return MaterialPageRoute<dynamic>(
           builder: (context) =>
               FeedbackInfoPage(key: typedArgs.key, id: typedArgs.id),
+          settings: settings,
+        );
+      case Routes.questionPageRoute:
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => QuestionPage(),
           settings: settings,
         );
       default:
@@ -315,4 +323,6 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
         Routes.feedbackInfoPageRoute,
         arguments: FeedbackInfoPageArguments(key: key, id: id),
       );
+
+  Future pushQuestionPageRoute() => pushNamed(Routes.questionPageRoute);
 }

@@ -19,7 +19,7 @@ class BannerPage extends StatefulWidget {
 }
 
 class _BannerPageState extends State<BannerPage> {
-  List _dataList;
+  List<bannerItemModel>_dataList;
   @override
   void initState() {
     // TODO: implement initState
@@ -32,7 +32,7 @@ class _BannerPageState extends State<BannerPage> {
       context: context,
     );
     setState(() {
-      this._dataList = bannerItem.data.toList();
+      this._dataList = bannerItem.data;
     });
   }
 
@@ -44,11 +44,27 @@ class _BannerPageState extends State<BannerPage> {
     if(this._dataList != null){
       return Container(
         height: sySetWidth(330),
-        child: new Swiper(
+        child: Swiper(
           itemBuilder: (BuildContext context, int index) {
-            return new Image.network(
-              _dataList[index].img,
-              fit: BoxFit.cover,
+            return InkWell(
+              child: Image.network(
+                _dataList[index].img,
+                fit: BoxFit.cover,
+              ),
+              onTap: (){
+                switch(_dataList[index].sign){
+                  case "1":
+                    ExtendedNavigator.rootNavigator
+                        .pushNewsInfoPageRoute(id: '${_dataList[index].ids}');
+                    break;
+                  case "2":
+                    break;
+                  case "3":
+                    ExtendedNavigator.rootNavigator
+                        .pushNamed(Routes.questionPageRoute);
+                    break;
+                }
+              },
             );
           },
           autoplay: true,
@@ -56,10 +72,13 @@ class _BannerPageState extends State<BannerPage> {
           scrollDirection: Axis.horizontal,
           // pagination: new SwiperPagination(alignment: Alignment.centerRight),
           //control: new SwiperControl(),
-          onTap: (v){   //点击事件
-           ExtendedNavigator.of(context).pushNamed(Routes.loginPageRoute);
-
-          },
+//          onIndexChanged: (index){
+//            print( _dataList[index].img);
+//          },
+//          onTap: (v){   //点击事件
+//           ExtendedNavigator.of(context).pushNamed(Routes.loginPageRoute);
+//
+//          },
         ),
       );
     }else{

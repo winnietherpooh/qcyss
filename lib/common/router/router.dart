@@ -5,6 +5,7 @@ import 'package:yssqc/pages/Feedback.dart';
 import 'package:yssqc/pages/FeedbackInfo.dart';
 import 'package:yssqc/pages/FeedbackList.dart';
 import 'package:yssqc/pages/NewsInfo.dart';
+import 'package:yssqc/pages/Question.dart';
 import 'package:yssqc/pages/SalaryInfo.dart';
 import 'package:yssqc/pages/SetList.dart';
 import 'package:yssqc/pages/Sign.dart';
@@ -49,5 +50,5 @@ class $AppRouter {
 
   FeedbackInfoPage feedbackInfoPageRoute;
 
-
+  QuestionPage questionPageRoute;
 }

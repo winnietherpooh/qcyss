@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/material.dart';
@@ -92,17 +94,17 @@ class HttpUtil {
     dio.interceptors.add(NetCache());
 
     // 在调试模式下需要抓包调试，所以我们使用代理，并禁用HTTPS证书校验
-//    if (!Global.isRelease && PROXY_ENABLE) {
-//      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-//          (client) {
-//        client.findProxy = (uri) {
-//          return "PROXY $PROXY_IP:$PROXY_PORT";
-//        };
-//        //代理工具会提供一个抓包的自签名证书，会通不过证书校验，所以我们禁用证书校验
-//        client.badCertificateCallback =
-//            (X509Certificate cert, String host, int port) => true;
-//      };
-//    }
+    if (!Global.isRelease && PROXY_ENABLE) {
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.findProxy = (uri) {
+          return "PROXY $PROXY_IP:$PROXY_PORT";
+        };
+        //代理工具会提供一个抓包的自签名证书，会通不过证书校验，所以我们禁用证书校验
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
+      };
+    }
 //
 
 
