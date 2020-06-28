@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yssqc/common/apis/Feedback.dart';
 import 'package:yssqc/common/util/utils.dart';
@@ -33,7 +34,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget(context,'反馈'),
+      appBar: getAppBarWidget(context, '反馈'),
       body: _getFeedbackWidget(),
     );
   }
@@ -41,18 +42,17 @@ class _FeedbackPageState extends State<FeedbackPage> {
   //获取整体布局
   _getFeedbackWidget() {
     return Container(
-      child: ListView(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              _getFirstWidget(),
-              _getInputWidget(),
-              _getButtonWidget(),
-            ],
-          ),
-        ],
-      )
-    );
+        child: ListView(
+      children: <Widget>[
+        Column(
+          children: <Widget>[
+            _getFirstWidget(),
+            _getInputWidget(),
+            _getButtonWidget(),
+          ],
+        ),
+      ],
+    ));
   }
 
   _getFirstWidget() {
@@ -166,7 +166,11 @@ class _FeedbackPageState extends State<FeedbackPage> {
       var index = 0;
       widget.textList.forEach((element) {
         var t = DropdownMenuItem(
-          child: Text(element),
+          child: Container(
+            width: sySetWidth(200),
+            alignment: Alignment.center,
+            child: Text(element, overflow: TextOverflow.ellipsis, maxLines: 1),
+          ),
           value: element,
         );
 //        print('index=${index}');
@@ -183,7 +187,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
   }
 
   _submitAll() async {
-
     if (_dropDownValue == null) {
       showError(context, text: '请选择工资类型', times: 1000);
       return;
@@ -192,23 +195,25 @@ class _FeedbackPageState extends State<FeedbackPage> {
       showError(context, text: '请输入您的建议', times: 1000);
       return;
     }
-    showLoading(context,"正在提交");
+    showLoading(context, "正在提交");
     FeedbackRequestEntity feedbackRequestEntity = FeedbackRequestEntity(
-        cid: Global.companyId,
-        wagesText: _dropDownValue,
-        content: _controllerTextField.value.text,
-        times: widget.times,
+      cid: Global.companyId,
+      wagesText: _dropDownValue,
+      content: _controllerTextField.value.text,
+      times: widget.times,
     );
     ResponseModel responseModel = await FeedbackApi.postData(
         context: context, feedbackRequestEntity: feedbackRequestEntity);
-    if(responseModel.error == 200){
+    if (responseModel.error == 200) {
       Navigator.pop(context);
-      showSuccessRoute(context,_gotoCenter,text: responseModel.message,times:500);
-    }else{
+      showSuccessRoute(context, _gotoCenter,
+          text: responseModel.message, times: 500);
+    } else {
       showError(responseModel.message);
     }
   }
-  _gotoCenter(){
+
+  _gotoCenter() {
     ExtendedNavigator.rootNavigator.pushTabsRoute(index: 2);
   }
 }
