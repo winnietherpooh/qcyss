@@ -18,10 +18,11 @@ class SetListPage extends StatefulWidget {
 
 class _SetListPageState extends State<SetListPage> {
   String avatarUrl = Global.profile.userPortrait;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBarWidget(context,'设置'),
+      appBar: getAppBarWidget(context, '设置'),
       body: Column(
         children: <Widget>[
           Container(
@@ -67,7 +68,7 @@ class _SetListPageState extends State<SetListPage> {
                     onPressed: () {
 //                      ExtendedNavigator.rootNavigator
 //                          .pushNamed(Routes.setPassWdPageRoute);
-                      _selectImgChangeAvatar();
+                      _checkNSPhotoLibraryHadPermission();
                     },
                   ),
                 )
@@ -108,10 +109,12 @@ class _SetListPageState extends State<SetListPage> {
                         child: OutlineButton(
                           child: Row(
                             children: <Widget>[
-                              Text('设置密码',style: TextStyle(
-                                fontSize: sySetFontSize(28),
-                                color: Color.fromRGBO(153, 153, 153, 1)
-                              ),),
+                              Text(
+                                '设置密码',
+                                style: TextStyle(
+                                    fontSize: sySetFontSize(28),
+                                    color: Color.fromRGBO(153, 153, 153, 1)),
+                              ),
                               Image.asset(
                                 'images/right.png',
                                 width: sySetWidth(24),
@@ -164,21 +167,37 @@ class _SetListPageState extends State<SetListPage> {
     );
   }
 
+  Future _checkNSPhotoLibraryHadPermission() {
+    if (Platform.isIOS) {
+      if (Permission.camera != PermissionStatus.granted) {
+        var res = Permission.camera.request();
+        if (res.isGranted == PermissionStatus.granted) {
+          _selectImgChangeAvatar();
+        } else {
+          showConfim(
+              context, '你设置不允许访问相册,现在无法使用头像上传功能,请点击确定后设置为允许.'
+              , gotosetting);
+        }
+      }
+    } else {
+      _selectImgChangeAvatar();
+    }
+  }
 
+  gotosetting() {
+    openAppSettings();
+  }
 
   Future _selectImgChangeAvatar() async {
-    if(Permission.camera != PermissionStatus.granted){
-        Permission.camera.request();
-    }
-
     var images = await ImagePicker().getImage(source: ImageSource.gallery);
-    if(images == null){
-      return ;
+    if (images == null) {
+      return;
     }
     showLoading(context, '上传头像中');
-    UploadResponseModel uploadResponseModel = await UploadAvatarApi.uploadImg(context: context,  file: images);
+    UploadResponseModel uploadResponseModel =
+        await UploadAvatarApi.uploadImg(context: context, file: images);
     print(uploadResponseModel.error);
-    if(uploadResponseModel.error == 200){
+    if (uploadResponseModel.error == 200) {
       //更新缓存头像
       Global.profile.userPortrait = uploadResponseModel.data.fileUrl;
       setState(() {
@@ -186,10 +205,9 @@ class _SetListPageState extends State<SetListPage> {
       });
       Navigator.pop(context);
       showSuccess(context);
-    }else{
+    } else {
       Navigator.pop(context);
-      showError(context,text:uploadResponseModel.message);
+      showError(context, text: uploadResponseModel.message);
     }
-
   }
 }

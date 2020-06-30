@@ -43,7 +43,7 @@ void showConfim(context, String notice, Function confirmCallback) {
                   height: 80,
                   alignment: Alignment.center,
                   child: Text(
-                    '请先确认工资',
+                    notice,
                     style: TextStyle(
                       color: Color.fromRGBO(51, 51, 51, 1),
                       fontSize: Theme.of(context).textTheme.bodyText1.fontSize,
