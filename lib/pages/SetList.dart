@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:yssqc/common/apis/uploadAvatar.dart';
 import 'package:yssqc/common/router/router.gr.dart';
 import 'package:yssqc/common/util/screen.dart';
@@ -166,6 +167,9 @@ class _SetListPageState extends State<SetListPage> {
 
 
   Future _selectImgChangeAvatar() async {
+    if(Permission.camera != PermissionStatus.granted){
+        Permission.camera.request();
+    }
 
     var images = await ImagePicker().getImage(source: ImageSource.gallery);
     if(images == null){
