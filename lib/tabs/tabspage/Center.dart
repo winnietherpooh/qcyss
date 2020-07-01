@@ -598,8 +598,9 @@ class _CenterPageState extends State<CenterPage> {
         children: <Widget>[
           _searchTextFiledWidget(1, dateStart, times: TIME_NOW),
           Container(
+            alignment:Alignment.center,
             margin: EdgeInsets.fromLTRB(
-                sySetWidth(12), sySetHeight(0), sySetWidth(12), 0),
+                sySetWidth(26), sySetHeight(0), sySetWidth(0), 0),
             width: sySetWidth(26),
             height: sySetHeight(2),
             child: Image.asset(
