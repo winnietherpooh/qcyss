@@ -168,20 +168,21 @@ class _SetListPageState extends State<SetListPage> {
   }
 
   Future _checkNSPhotoLibraryHadPermission() {
-    if (Platform.isIOS) {
-      if (Permission.camera != PermissionStatus.granted) {
-        var res = Permission.camera.request();
-        if (res.isGranted == PermissionStatus.granted) {
-          _selectImgChangeAvatar();
-        } else {
-          showConfim(
-              context, '你设置不允许访问相册,现在无法使用头像上传功能,请点击确定后设置为允许.'
-              , gotosetting);
-        }
-      }
-    } else {
-      _selectImgChangeAvatar();
-    }
+ //   if (Platform.isIOS) {
+//      if (Permission.camera.isGranted != PermissionStatus.granted) {
+//        var res = Permission.camera.request();
+//        if (res.isGranted == PermissionStatus.granted) {
+//          _selectImgChangeAvatar();
+//        } else {
+//          showConfim(
+//              context, '你设置不允许访问相册,现在无法使用头像上传功能,请点击确定后设置为允许.'
+//              , gotosetting);
+//        }
+//      }
+////    } else {
+////      _selectImgChangeAvatar();
+////    }
+    _selectImgChangeAvatar();
   }
 
   gotosetting() {
