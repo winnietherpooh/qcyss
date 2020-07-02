@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage> {
         houseFund: this._housingFund.toString(),
         supportOld: this._supportingElderly.toString()
     );
-    print(this.sqSalary.value.text);
     ExtendedNavigator.rootNavigator.pushSalaryInfoPageRoute(salaryRequestModel: salaryRequestModel);
   }
 

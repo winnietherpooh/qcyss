@@ -197,7 +197,6 @@ class _SetListPageState extends State<SetListPage> {
     showLoading(context, '上传头像中');
     UploadResponseModel uploadResponseModel =
         await UploadAvatarApi.uploadImg(context: context, file: images);
-    print(uploadResponseModel.error);
     if (uploadResponseModel.error == 200) {
       //更新缓存头像
       Global.profile.userPortrait = uploadResponseModel.data.fileUrl;

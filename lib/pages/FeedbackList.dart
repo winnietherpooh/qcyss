@@ -25,9 +25,6 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
   }
   //1,下拉,2,上拉
   _getFeedbackList({int type=1}) async {
-//    print('方法当前page${page}');
-//    print('方法当前_isHadMore${_isHadMore}');
-//    print('方法当前flag${_flag}');
     if (!_isHadMore) {
       return;
     }
@@ -35,10 +32,6 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
         await FeedbackApi.getData(context: context, p: page);
     if (feedbackResponseModel.error == 200) {
       setState(() {
-
-//        print('方法当前2page${page}');
-//        print('方法当前2_isHadMore${_isHadMore}');
-//        print('方法当前2flag${_flag}');
         if(feedbackResponseModel.mpage < page){
           _isHadMore = false;
           return ;
@@ -65,15 +58,10 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
           _controller.position.maxScrollExtent - 40)  &&
           _isHadMore  && _flag == true ) {
         //开始加载更多
-//        print('下拉监听当前page${page}');
-//        print('下拉监听当前_isHadMore${_isHadMore}');
-//        print('下拉监听当前flag${_flag}');
         _getFeedbackList(type: 2);
         setState(() {
           _flag = false;
         });
-        print('加载更多');
-        // this._getListData();
       }
     });
 
@@ -83,7 +71,6 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
   void deactivate() {
     super.deactivate();
     var bool = ModalRoute.of(context).isCurrent;
-    print("是否返回"+bool.toString());
     if (bool) {
       setState(() {
         page = 1;

@@ -38,7 +38,6 @@ class _NewsPageState extends State<NewsPage> {
         setState(() {
           _flag = false;
         });
-        print('加载更多');
         // this._getListData();
       }
     });
@@ -50,11 +49,8 @@ class _NewsPageState extends State<NewsPage> {
     }
     NewsModel newsModel =
         await NewsListApi.getData(context: context, p: this.newsRequestModel.p);
-    // print(newsModel.toJson());
     setState(() {
       _isShowLoading = true;
-//      print(newsModel.mpage);
-//      print(newsModel.page);
       if (newsModel.mpage < this.newsRequestModel.p) {
         _isHadMore = false;
         return;

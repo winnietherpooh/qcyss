@@ -16,11 +16,8 @@ class _IndexPageState extends State<IndexPage> {
   @override
   void initState() {
     super.initState();
-
-    //if (Global.isRelease == true) {
     if (true) {
       doAppUpdate();
-      print(Global.packageInfo.packageName);
     }
   }
 

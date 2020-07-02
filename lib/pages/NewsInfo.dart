@@ -37,20 +37,17 @@ class _NewsInfoPageState extends State<NewsInfoPage> {
         context: context,
         newsInfoRequestModel: newsInfoRequestModel
     );
-    print(newsInfoModel);
     if(widget.id != null){
       setState(() {
         this._title = newsInfoModel.data.title;
         this._createTime = newsInfoModel.data.time;
         this._content = newsInfoModel.data.content;
-        print(MediaQuery.of(context).size.width);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    print(arguments);
     return Scaffold(
       appBar: getAppBarWidget(context,'新闻详情'),
       body: Container(

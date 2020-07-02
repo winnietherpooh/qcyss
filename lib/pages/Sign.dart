@@ -30,32 +30,6 @@ class _SignPageState extends State<SignPage> {
   GlobalKey repaintWidgetKey = GlobalKey(); // 绘图key值
 
   Uint8List images;
-
-//  Future<String> _getBase64() async {
-//    RenderRepaintBoundary boundary =
-//        repaintWidgetKey.currentContext.findRenderObject();
-//    print(boundary.debugNeedsPaint);
-//    final image =
-//        await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
-//    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-//    Uint8List pngBytes = byteData.buffer.asUint8List();
-//    String bs64 = base64Encode(pngBytes);
-//    String bs64Image = "data:image/png;base64," + bs64;
-//    // print(bs64Image);
-//    return bs64Image;
-//  }
-
-//  _getBase64Png() async {
-//    RenderRepaintBoundary boundary =
-//        repaintWidgetKey.currentContext.findRenderObject();
-//    ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-//    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-//    Uint8List pngBytes = byteData.buffer.asUint8List();
-//    String bs64 = base64Encode(pngBytes);
-//    print(pngBytes);
-//    print(bs64);
-//  }
-
   Future<ByteData> _capturePngToByteData() async {
     try {
       RenderRepaintBoundary boundary =
@@ -70,7 +44,6 @@ class _SignPageState extends State<SignPage> {
       });
       return _byteData;
     } catch (e) {
-      print(e);
     }
     return null;
   }
@@ -209,20 +182,6 @@ class _SignPageState extends State<SignPage> {
                 ),
               ),
             ),
-//            Container(
-//              width: 200,
-//              height: 200,
-//              child: ListView.builder(
-//                itemBuilder: (context, index) {
-//                  return Image.memory(
-//                    images[index],
-//                    fit: BoxFit.cover,
-//                  );
-//                },
-//                itemCount: images.length,
-//                scrollDirection: Axis.horizontal,
-//              ),
-//            )
           ],
         ),
       ),

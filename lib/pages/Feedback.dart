@@ -173,13 +173,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
           ),
           value: element,
         );
-//        print('index=${index}');
-//        if (index == 0) {
-//          setState(() {
-//            _dropDownValue = element;
-//          });
-//          index++;
-//        }
         itemList.add(t);
       });
       return itemList;

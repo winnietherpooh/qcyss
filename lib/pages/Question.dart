@@ -98,9 +98,6 @@ class _QuestionPageState extends State<QuestionPage> {
         postAll.add(postContent);
       });
     }
-    print('========提交前打印开始=========');
-    print(postAll.toString());
-    print('========提交前打印结束=========');
     QuestionSubmitRequestModel questionSubmitRequestModel = QuestionSubmitRequestModel(data: postAll.toString());
     postAll.clear();
     ResponseModel responseModel = await QuestionApi.postData(context: context, questionSubmitRequestModel: questionSubmitRequestModel);

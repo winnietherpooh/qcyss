@@ -70,15 +70,6 @@ class _BannerPageState extends State<BannerPage> {
           autoplay: true,
           itemCount: _dataList.length,
           scrollDirection: Axis.horizontal,
-          // pagination: new SwiperPagination(alignment: Alignment.centerRight),
-          //control: new SwiperControl(),
-//          onIndexChanged: (index){
-//            print( _dataList[index].img);
-//          },
-//          onTap: (v){   //点击事件
-//           ExtendedNavigator.of(context).pushNamed(Routes.loginPageRoute);
-//
-//          },
         ),
       );
     }else{
