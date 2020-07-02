@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -119,6 +120,7 @@ class _SetListPageState extends State<SetListPage> {
                                 'images/right.png',
                                 width: sySetWidth(24),
                                 height: sySetWidth(24),
+                                fit: BoxFit.fill,
                               ),
                             ],
                           ),
@@ -167,22 +169,20 @@ class _SetListPageState extends State<SetListPage> {
     );
   }
 
-  Future _checkNSPhotoLibraryHadPermission() {
- //   if (Platform.isIOS) {
-//      if (Permission.camera.isGranted != PermissionStatus.granted) {
-//        var res = Permission.camera.request();
-//        if (res.isGranted == PermissionStatus.granted) {
-//          _selectImgChangeAvatar();
-//        } else {
-//          showConfim(
-//              context, '你设置不允许访问相册,现在无法使用头像上传功能,请点击确定后设置为允许.'
-//              , gotosetting);
-//        }
-//      }
-////    } else {
-////      _selectImgChangeAvatar();
-////    }
-    _selectImgChangeAvatar();
+  Future _checkNSPhotoLibraryHadPermission()async {
+    if (Platform.isIOS) {
+      var status = await Permission.camera.request();
+      if (status.isDenied == true) {
+        showConfim(
+            context, '你设置不允许访问相册,现在无法使用头像上传功能,请点击确定后设置为允许.'
+            , gotosetting);
+      }else{
+        _selectImgChangeAvatar();
+      }
+    }else{
+      _selectImgChangeAvatar();
+    }
+
   }
 
   gotosetting() {
