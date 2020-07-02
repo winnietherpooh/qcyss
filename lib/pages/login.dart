@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
     }
     UserInfoModel userProfile = userResponseModel.data;
     Global.saveProfile(userProfile);
-    ExtendedNavigator.rootNavigator.pushNamed(Routes.tabsRoute);
+    ExtendedNavigator.rootNavigator.pushReplacementNamed(Routes.tabsRoute);
   }
 
   @override

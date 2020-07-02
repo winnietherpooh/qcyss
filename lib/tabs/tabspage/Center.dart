@@ -21,7 +21,7 @@ class CenterPage extends StatefulWidget {
 
 class _CenterPageState extends State<CenterPage> {
   String _format = 'yyyy-MM';
-  String TIME_NOW = formatDate(DateTime.now(), ['yyyy','mm']);
+  String TIME_NOW = formatDate(DateTime.now(), ['yyyy','-','mm']);
   String MIN_DATETIME = '2018-08-01';
   String MAX_DATETIME =
   formatDate(DateTime.now(), ['yyyy', '-', 'mm', '-', 'dd']);
@@ -47,9 +47,8 @@ class _CenterPageState extends State<CenterPage> {
      dateStart = TextEditingController(text: TIME_NOW);
      dateEnd = TextEditingController(text: TIME_NOW);
     _dateTime = DateTime.parse(INIT_DATETIME);
-    //print(formatDate(DateTime.now(), ['yyyy', '-', 'mm']));
     _getSalaryData();
-    _getSearchData();
+    _getSearchData(false);
   }
 
   _getSalaryData() async {
@@ -72,7 +71,11 @@ class _CenterPageState extends State<CenterPage> {
     });
   }
 
-  _getSearchData() async {
+  _getSearchData(bool flag) async {
+    if(flag == true){
+      showLoading(context, '查询中,请稍后');
+    }
+
     SearchRequestModel searchRequestModel = SearchRequestModel(
         cid: Global.companyId,
         startTime: dateStart.value.text,
@@ -80,9 +83,11 @@ class _CenterPageState extends State<CenterPage> {
         type: _dropDownValue);
     SearchModel searchModel = await SearchSalaryApi.getData(
         context: context, searchRequestModel: searchRequestModel);
-    print(searchModel.data.wagesList);
     if (searchModel.error == 200) {
      setState(() {
+       if(flag == true){
+         Navigator.pop(context);
+       }
        dorpDown = searchModel.data.wagesDropdown;
        wagesList = searchModel.data.wagesList;
      });
@@ -109,32 +114,11 @@ class _CenterPageState extends State<CenterPage> {
       maxDateTime: DateTime.parse(MAX_DATETIME),
       initialDateTime: _dateTime,
       dateFormat: _format,
-      //locale: _locale,
-      // onClose: () {
-      //   print(_dateTime);
-      // },
-      // onCancel: () {
-      //   print(_dateTime);
-      // },
-      // onChange: (dateTime, List<int> index) {
-      //   setState(() {
-      //     _dateTime = dateTime;
-      //     print(_dateTime);
-      //   });
-      // },
       onConfirm: (dateTime, List<int> index) {
-        print(dateTime);
         setState(() {
-          //print(formatDate(dateTime, ['yyyy', '-', 'mm']));
-//          print('=====================================');
-//          print(formatDate(dateTime, ['yyyy', '-', 'mm']).trim() is String);
-//          print('=====================================');
           _dateTime = dateTime;
-//          dateStart = TextEditingController();
-//          dateStart = TextEditingController();
           if (type == 1) {
             dateStart.text = formatDate(dateTime, ['yyyy', '-', 'mm']).trim();
-            //dateStart.text = '2020-05';
           } else {
             dateEnd.text = formatDate(dateTime, ['yyyy', '-', 'mm']).trim();
           }
@@ -647,7 +631,7 @@ class _CenterPageState extends State<CenterPage> {
                       height: sySetWidth(44),
                     ),
                     onTap: () {
-                      _getSearchData();
+                      _getSearchData(true);
                     },
                   ),
                 )
@@ -710,7 +694,6 @@ class _CenterPageState extends State<CenterPage> {
 
   //获取工资奖金列表
   List<Widget> _getSearchAllItem(List<List<WagesList>> basepay) {
-    print(basepay);
     List<Widget> baseWidget = [];
     for (var i = 0; i < basepay.length; i++) {
       var t = Container(
